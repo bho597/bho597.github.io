@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You're Invited</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="hero">
+        <div class="envelope-container" id="envelope">
+            <div class="envelope">
+                <div class="envelope-back"></div>
+                <div class="envelope-flap"></div>
+            </div>
+            <div class="click-text">Click to open</div>
+        </div>
+    </div>
+
+    <div class="main-content" id="mainContent">
+        <div class="content-wrapper">
+            <div class="header">
+                <h1>Sarah <span class="ampersand">&</span> James</h1>
+                <p style="color: #8b7355; font-size: 18px; margin-top: 10px;">are getting married!</p>
+            </div>
+
+            <div class="section">
+                <h2>Save the Date</h2>
+                <div class="details">
+                    <div class="detail-item">
+                        <strong>Date:</strong>
+                        <span>Saturday, June 15th, 2026</span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Time:</strong>
+                        <span>4:00 PM</span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Venue:</strong>
+                        <span>The Garden Estate, 123 Celebration Lane, Your City</span>
+                    </div>
+                    <div class="detail-item">
+                        <strong>Reception:</strong>
+                        <span>Immediately following the ceremony</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Our Story</h2>
+                <p>We met on a rainy Tuesday in a coffee shop, both reaching for the last blueberry muffin. What started as a friendly debate over baked goods turned into hours of conversation, countless adventures, and a love story we can't wait to celebrate with you.</p>
+            </div>
+
+            <div class="section">
+                <h2>RSVP</h2>
+                <form class="rsvp-form" id="rsvpForm">
+                    <div class="form-group">
+                        <label for="name">Full Name(s)</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="guests">Number of Guests</label>
+                        <select id="guests" required>
+                            <option value="">Select...</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="attendance">Will you attend?</label>
+                        <select id="attendance" required>
+                            <option value="">Select...</option>
+                            <option value="yes">Joyfully accepts</option>
+                            <option value="no">Regretfully declines</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="dietary">Dietary Restrictions</label>
+                        <textarea id="dietary" placeholder="Please let us know of any dietary restrictions..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Submit RSVP</button>
+                </form>
+            </div>
+
+            <div class="section">
+                <h2>Registry</h2>
+                <p style="text-align: center;">Your presence is the greatest gift, but if you wish to honor us with a gift, we've registered at:</p>
+                <p style="text-align: center; margin-top: 20px;">
+                    <a href="#" style="color: #8b7355; text-decoration: none; font-weight: 600;">Store Name 1</a> • 
+                    <a href="#" style="color: #8b7355; text-decoration: none; font-weight: 600;">Store Name 2</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
