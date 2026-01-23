@@ -29,6 +29,7 @@ body {
     transition: transform 0.3s ease;
     perspective: 2000px;
     max-width: 100%;
+    transform-style: preserve-3d;
 }
 
 .envelope-container:hover {
@@ -47,48 +48,228 @@ body {
     }
 }
 
+@keyframes fadeInUpFlowers {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .envelope {
     position: relative;
     width: 100%;
     height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 1s ease-out;
 }
 
+/* Flip the entire envelope 180 degrees when clicked */
+.envelope-container.flipped .envelope {
+    transform: rotateY(180deg);
+}
+
+/* Front of envelope (what user sees first) - just the front image */
+.envelope-front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/envelope_front.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    backface-visibility: hidden;
+    z-index: 2;
+}
+
+/* Envelope front text */
+.envelope-text {
+    position: absolute;
+    left: 18%;
+    top: 68%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+    opacity: 0;
+    animation: fadeInText 0.8s ease-out 1.6s forwards;
+    text-align: center;
+    color: #f7f4e8;
+}
+
+.envelope-text .envelope-title {
+    font-size: 48px;
+    margin-bottom: 20px;
+    font-family: 'Mistrully', sans-serif
+}
+
+.envelope-text .date {
+    left: 50%;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 25px;
+    line-height: 1.6;
+}
+
+@keyframes fadeInText {
+    from {
+        opacity: 0;
+        transform: translateY(-50%) translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0);
+    }
+}
+
+/* Stamp on envelope front */
+.stamp {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: -25px;
+    right: 10px;
+    background-image: url('../images/stamp.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 3;
+    opacity: 0;
+    animation: fadeInStamp 0.6s ease-out 1.2s forwards;
+}
+
+/* Postal wave on envelope front */
+.postal-wave {
+    position: absolute;
+    width: 400px;
+    height: 80px;
+    bottom: 200px;
+    right: 25px;
+    background-image: url('../images/postal_wave.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 3;
+    opacity: 0;
+    animation: fadeInStamp 0.6s ease-out 1.4s forwards;
+}
+
+@keyframes fadeInStamp {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Flower decorations on left side of envelope front */
+/* Base styles for all flowers */
+.flowers {
+    position: absolute;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    left: -60px; /* Position to the left of envelope */
+    transition: opacity 0.3s ease;
+}
+
+/* Hide flowers when envelope is flipped or opened */
+.envelope-container.flipped .flowers,
+.envelope-container.opened .flowers {
+    opacity: 0 !important;
+}
+
+.flower-1 {
+    top: 60%;
+    transform: translateY(-50%);
+    width: 256px;
+    height: 320px;
+    top: -98px;
+    left: -108px;
+    background-image: url('../images/flower_1.png');
+    z-index: 1; /* Behind envelope front (z-index: 2) */
+    animation: fadeInUpFlowers 1.2s ease-out 0.5s forwards;
+}
+
+.flower-2 {
+    top: 30%;
+    transform: translateY(-50%);
+    width: 225px;
+    height: 295.5px;
+    top: -100px;
+    left: -160px;
+    background-image: url('../images/flower_2.png');
+    z-index: 0; /* Behind envelope front (z-index: 2) */
+    animation: fadeInUpFlowers 1.2s ease-out 0.7s forwards; /* Slightly delayed */
+}
+
+.flower-3 {
+    top: 45%;
+    transform: translateY(-50%);
+    width: 560px;
+    height: 680px;
+    top: -40px;
+    left: -247px;
+    background-image: url('../images/flower_3.png');
+    z-index: -1; /* In front of envelope front (z-index: 2) but behind seal (z-index: 5) */
+    animation: fadeInUpFlowers 1.2s ease-out 0.9s forwards; /* Most delayed */
+}
+
+/* Back of envelope (revealed after flip) */
 .envelope-back {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image: url('../images/envelope.png');
+    background-image: url('../images/envelope_back.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    transform: rotateY(180deg);
+    backface-visibility: hidden;
+    z-index: 1;
 }
 
+/* Flap - only visible after flip (on the back side) */
 .envelope-flap {
     position: absolute;
-    width: 86.25%;
-    height: 86.25%;
+    width: 86%;
+    height: 86%;
     background-image: url('../images/envelope_flap.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     top: -8px;
-    left: 35px;
+    left: 47px;
     transform-origin: top center;
     transform-style: preserve-3d;
+    transform: rotateY(180deg);
+    /* Start on back side */
     transition: transform 1s ease-out;
     z-index: 3;
     backface-visibility: hidden;
 }
 
-.envelope-flap:hover {
-    transform: rotateX(-10deg);
+/* When flipped, flap becomes visible but closed */
+.envelope-container.flipped .envelope-flap {
+    transform: rotateY(180deg);
+    /* Visible on back, closed */
+    transition-delay: 0s;
 }
 
+/* When opened, flap rotates open */
 .envelope-container.opened .envelope-flap {
-    transform: rotateX(-180deg);
+    transform: rotateY(180deg) rotateX(180deg);
+    /* Keep on back side AND open */
+    transition-delay: 1s;
+    /* Delay opening until after flip */
 }
 
-/* Inside of the flap - since image points UP, we position it at bottom and rotate from bottom */
+/* Inside of the flap */
 .envelope-flap-inside {
     position: absolute;
     width: 86.25%;
@@ -98,19 +279,36 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     bottom: 359.8px;
-    left: 34px;
-    transform-origin: bottom center;  /* Rotate from bottom instead of top */
+    left: 48px;
+    transform-origin: bottom center;
     transform-style: preserve-3d;
-    transform: rotateX(180deg);  /* Start hidden (rotated back) */
+    transform: rotateY(180deg) rotateX(-180deg);
+    /* Start on back side, pointing down (hidden) */
     z-index: 2;
     backface-visibility: hidden;
     transition: transform 1s ease-out;
+    opacity: 0;
+    /* Extra insurance to hide it initially */
 }
 
+/* When flipped, flap inside is positioned but still hidden */
+.envelope-container.flipped .envelope-flap-inside {
+    transform: rotateY(180deg) rotateX(-180deg);
+    /* On back, still pointing down */
+    transition-delay: 0s;
+    opacity: 0;
+}
+
+/* When opened, flap inside becomes visible */
 .envelope-container.opened .envelope-flap-inside {
-    transform: rotateX(0deg);  /* Rotate to visible */
+    transform: rotateY(180deg) rotateX(0deg);
+    /* Keep on back side AND reveal by rotating up */
+    transition-delay: 1s;
+    /* Delay reveal until after flip */
+    opacity: 1;
 }
 
+/* Seal - only visible after flip (on the back side) */
 .seal {
     position: absolute;
     width: 120px;
@@ -119,15 +317,26 @@ body {
     background-size: cover;
     background-position: center;
     top: 70%;
-    left: 48%;
-    transform: translate(-50%, -50%);
+    left: 52%;
+    transform: translate(-50%, -50%) rotateY(180deg);
+    /* Start on back side */
     z-index: 5;
     transition: all 0.8s ease;
+    backface-visibility: hidden;
 }
 
+/* When flipped, seal becomes visible */
+.envelope-container.flipped .seal {
+    transform: translate(-50%, -50%) rotateY(180deg);
+    /* Visible on back */
+}
+
+/* When opened, seal disappears */
 .envelope-container.opened .seal {
-    transform: translate(-50%, -50%) scale(0) rotate(180deg);
+    transform: translate(-50%, -50%) rotateY(180deg) scale(0) rotate(180deg);
     opacity: 0;
+    transition-delay: 1s;
+    /* Delay disappearance until after flip */
 }
 
 .click-text {
@@ -261,7 +470,7 @@ body {
     border: 2px solid #e0e0e0;
     border-radius: 4px;
     font-family: inherit;
-    font-size: 16px; /* Prevents zoom on iOS */
+    font-size: 16px;
 }
 
 .form-group textarea {
@@ -384,6 +593,22 @@ body {
     .content-wrapper {
         padding: 40px 15px;
     }
+    
+    /* Responsive flowers for tablets */
+    .flower-1 {
+        width: 90px;
+        height: 110px;
+    }
+
+    .flower-2 {
+        width: 75px;
+        height: 95px;
+    }
+
+    .flower-3 {
+        width: 105px;
+        height: 130px;
+    }
 }
 
 /* Mobile portrait */
@@ -400,7 +625,6 @@ body {
         perspective: 1200px;
     }
 
-    /* Disable hover effect on mobile */
     .envelope-container:hover {
         transform: scale(1);
     }
@@ -476,6 +700,22 @@ body {
         width: 20px;
         height: 20px;
     }
+    
+    /* Responsive flowers for mobile */
+    .flower-1 {
+        width: 70px;
+        height: 85px;
+    }
+
+    .flower-2 {
+        width: 60px;
+        height: 75px;
+    }
+
+    .flower-3 {
+        width: 80px;
+        height: 100px;
+    }
 }
 
 /* Very small mobile devices */
@@ -511,6 +751,22 @@ body {
         padding: 12px 30px;
         font-size: 15px;
     }
+    
+    /* Extra small flowers */
+    .flower-1 {
+        width: 55px;
+        height: 70px;
+    }
+
+    .flower-2 {
+        width: 50px;
+        height: 60px;
+    }
+
+    .flower-3 {
+        width: 65px;
+        height: 80px;
+    }
 }
 
 /* Landscape mode for mobile */
@@ -528,5 +784,21 @@ body {
 
     .click-text {
         bottom: -30px;
+    }
+    
+    /* Flowers in landscape mode */
+    .flower-1 {
+        width: 80px;
+        height: 100px;
+    }
+
+    .flower-2 {
+        width: 70px;
+        height: 85px;
+    }
+
+    .flower-3 {
+        width: 90px;
+        height: 110px;
     }
 }

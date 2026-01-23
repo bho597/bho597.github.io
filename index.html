@@ -1,19 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>You're Invited</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/mistrully" rel="stylesheet">
 </head>
+
 <body>
     <div class="hero">
         <div class="envelope-container" id="envelope">
+            <!-- Flowers positioned outside envelope div to avoid 3D transform interference -->
+            <div class="flowers flower-1"></div>
+            <div class="flowers flower-2"></div>
+            <div class="flowers flower-3"></div>
+
             <div class="envelope">
+                <div class="envelope-front">
+                    <div class="envelope-text">
+                        <div class="envelope-title">Welcome to our forever</div>
+                        <div class="date">08 . 21 . 2026
+                        </div>
+                    </div>
+                    <div class="stamp"></div>
+                    <div class="postal-wave"></div>
+                </div>
                 <div class="envelope-back"></div>
                 <div class="envelope-flap"></div>
+                <div class="envelope-flap-inside"></div>
+                <div class="seal"></div>
             </div>
-            <div class="click-text">Click to open</div>
+            <div class="click-text">CLICK TO OPEN</div>
         </div>
     </div>
 
@@ -48,7 +71,9 @@
 
             <div class="section">
                 <h2>Our Story</h2>
-                <p>We met on a rainy Tuesday in a coffee shop, both reaching for the last blueberry muffin. What started as a friendly debate over baked goods turned into hours of conversation, countless adventures, and a love story we can't wait to celebrate with you.</p>
+                <p>We met on a rainy Tuesday in a coffee shop, both reaching for the last blueberry muffin. What started
+                    as a friendly debate over baked goods turned into hours of conversation, countless adventures, and a
+                    love story we can't wait to celebrate with you.</p>
             </div>
 
             <div class="section">
@@ -82,7 +107,8 @@
                     </div>
                     <div class="form-group">
                         <label for="dietary">Dietary Restrictions</label>
-                        <textarea id="dietary" placeholder="Please let us know of any dietary restrictions..."></textarea>
+                        <textarea id="dietary"
+                            placeholder="Please let us know of any dietary restrictions..."></textarea>
                     </div>
                     <button type="submit" class="submit-btn">Submit RSVP</button>
                 </form>
@@ -90,15 +116,24 @@
 
             <div class="section">
                 <h2>Registry</h2>
-                <p style="text-align: center;">Your presence is the greatest gift, but if you wish to honor us with a gift, we've registered at:</p>
+                <p style="text-align: center;">Your presence is the greatest gift, but if you wish to honor us with a
+                    gift, we've registered at:</p>
                 <p style="text-align: center; margin-top: 20px;">
-                    <a href="#" style="color: #8b7355; text-decoration: none; font-weight: 600;">Store Name 1</a> • 
+                    <a href="#" style="color: #8b7355; text-decoration: none; font-weight: 600;">Store Name 1</a> •
                     <a href="#" style="color: #8b7355; text-decoration: none; font-weight: 600;">Store Name 2</a>
                 </p>
             </div>
         </div>
     </div>
 
+    <!-- Floating reset button -->
+    <button id="resetButton" class="reset-btn" title="View envelope animation again">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2" />
+        </svg>
+    </button>
+
     <script src="js/script.js"></script>
 </body>
+
 </html>

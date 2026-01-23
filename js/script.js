@@ -1,16 +1,56 @@
 const envelope = document.getElementById('envelope');
 const mainContent = document.getElementById('mainContent');
 const rsvpForm = document.getElementById('rsvpForm');
+const hero = document.querySelector('.hero');
+const resetButton = document.getElementById('resetButton');
+
+// Check if envelope has been opened before
+const hasOpenedEnvelope = localStorage.getItem('envelopeOpened');
+
+if (hasOpenedEnvelope === 'true') {
+    // Skip animation and go straight to content
+    hero.style.display = 'none';
+    mainContent.classList.add('visible');
+    // Show reset button immediately if envelope was already opened
+    resetButton.classList.add('show');
+}
 
 envelope.addEventListener('click', function() {
-    envelope.classList.add('opened');
-    setTimeout(() => {
-        mainContent.classList.add('visible');
-    }, 400);
+    // Only trigger animation if not already started
+    if (!this.classList.contains('flipped')) {
+        // Stage 1: Flip the envelope to show the back
+        this.classList.add('flipped');
+        
+        // Stage 2: After flip completes (1s), open the flap
+        setTimeout(() => {
+            this.classList.add('opened');
+        }, 1000);
+        
+        // Save that envelope has been opened
+        localStorage.setItem('envelopeOpened', 'true');
+        
+        // Stage 3: Show main content after flap opens (total: 1s flip + 1s flap opening + 400ms delay)
+        // UNCOMMENT THIS SECTION when you're ready to show the content
+        /*
+        setTimeout(() => {
+            mainContent.classList.add('visible');
+            // Show reset button after content appears
+            setTimeout(() => {
+                resetButton.classList.add('show');
+            }, 600);
+        }, 2400);
+        */
+    }
 });
 
 rsvpForm.addEventListener('submit', function(e) {
     e.preventDefault();
     alert('Thank you for your RSVP! We\'ll send you a confirmation email soon.');
     rsvpForm.reset();
+});
+
+// Reset button to view animation again
+resetButton.addEventListener('click', function() {
+    localStorage.removeItem('envelopeOpened');
+    location.reload();
 });
