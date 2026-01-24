@@ -395,7 +395,7 @@ body {
 /* When opened, flap rotates open */
 .envelope-container.opened .envelope-flap {
     transform: rotateY(180deg) rotateX(180deg);
-    transition-delay: 1s;
+    transition-delay: 1.5s;
 }
 
 /* Inside of the flap */
@@ -427,7 +427,7 @@ body {
 .envelope-container.opened .envelope-flap-inside {
     opacity: 1;
     transform: translateX(-50%) rotateY(180deg) rotateX(0deg);
-    transition-delay: 1s;
+    transition-delay: 1.5s;
 }
 
 /* Seal - only visible after flip (on the back side) */
@@ -450,7 +450,7 @@ body {
 
     z-index: 10;
     opacity: 1;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.4s ease;
 }
 
 /* When opened, seal disappears */
