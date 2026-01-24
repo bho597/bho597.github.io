@@ -13,11 +13,16 @@ if (hasOpenedEnvelope === 'true') {
     mainContent.classList.add('visible');
     // Show reset button immediately if envelope was already opened
     resetButton.classList.add('show');
+} else {
+    // Enable clicking after all front-side animations complete (2 seconds)
+    setTimeout(() => {
+        envelope.classList.add('ready');
+    }, 2000);
 }
 
 envelope.addEventListener('click', function() {
-    // Only trigger animation if not already started
-    if (!this.classList.contains('flipped')) {
+    // Only trigger animation if not already started and if ready
+    if (!this.classList.contains('flipped') && this.classList.contains('ready')) {
         // Stage 1: Flip the envelope to show the back
         this.classList.add('flipped');
         
