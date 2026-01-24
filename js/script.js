@@ -35,16 +35,13 @@ envelope.addEventListener('click', function() {
         localStorage.setItem('envelopeOpened', 'true');
         
         // Stage 3: Show main content after flap opens (total: 1s flip + 1s flap opening + 400ms delay)
-        // UNCOMMENT THIS SECTION when you're ready to show the content
-        /*
-        setTimeout(() => {
-            mainContent.classList.add('visible');
-            // Show reset button after content appears
-            setTimeout(() => {
-                resetButton.classList.add('show');
-            }, 600);
-        }, 2400);
-        */
+        // setTimeout(() => {
+        //     mainContent.classList.add('visible');
+        //     // Show reset button after content appears
+        //     setTimeout(() => {
+        //         resetButton.classList.add('show');
+        //     }, 600);
+        // }, 2400);
     }
 });
 
