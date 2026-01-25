@@ -5,20 +5,20 @@ const hero = document.querySelector('.hero');
 const resetButton = document.getElementById('resetButton');
 
 // Check if envelope has been opened before
-const hasOpenedEnvelope = localStorage.getItem('envelopeOpened');
+// const hasOpenedEnvelope = localStorage.getItem('envelopeOpened');
 
-if (hasOpenedEnvelope === 'true') {
-    // Skip animation and go straight to content
-    hero.style.display = 'none';
-    mainContent.classList.add('visible');
-    // Show reset button immediately if envelope was already opened
-    resetButton.classList.add('show');
-} else {
-    // Enable clicking after all front-side animations complete (2 seconds)
-    setTimeout(() => {
-        envelope.classList.add('ready');
-    }, 2000);
-}
+// if (hasOpenedEnvelope === 'true') {
+//     // Skip animation and go straight to content
+//     hero.style.display = 'none';
+//     mainContent.classList.add('visible');
+//     // Show reset button immediately if envelope was already opened
+//     resetButton.classList.add('show');
+// } else {
+//     // Enable clicking after all front-side animations complete (2 seconds)
+setTimeout(() => {
+    envelope.classList.add('ready');
+}, 2000);
+// }
 
 envelope.addEventListener('click', function() {
     // Only trigger animation if not already started and if ready
@@ -35,21 +35,16 @@ envelope.addEventListener('click', function() {
         localStorage.setItem('envelopeOpened', 'true');
         
         // Stage 3: Show main content after flap opens (total: 1s flip + 1s flap opening + 400ms delay)
-        // setTimeout(() => {
-        //     mainContent.classList.add('visible');
-        //     // Show reset button after content appears
-        //     setTimeout(() => {
-        //         resetButton.classList.add('show');
-        //     }, 600);
-        // }, 2400);
+        setTimeout(() => {
+            mainContent.classList.add('visible');
+            // Show reset button after content appears
+            setTimeout(() => {
+                resetButton.classList.add('show');
+            }, 600);
+        }, 2400);
     }
 });
 
-rsvpForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert('Thank you for your RSVP! We\'ll send you a confirmation email soon.');
-    rsvpForm.reset();
-});
 
 // Reset button to view animation again
 resetButton.addEventListener('click', function() {
