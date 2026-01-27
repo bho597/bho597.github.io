@@ -1,0 +1,26 @@
+.flowers-container.opened,
+.flower-1-container.opened {
+    opacity: 1;
+    animation: flowersReappear 1s ease-out forwards;
+}
+
+.flowers-container.opened .flowers,
+.flower-1-container.opened .flower-1 {
+    opacity: 1;
+}
+
+/* Make sure flower-1 is visible initially (before flip) */
+.flower-1-container .flower-1 {
+    position: absolute;
+    width: 380px;
+    height: 475px;
+    top: 23%;
+    left: 69%;
+    background-image: url('../images/flower_1.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 1; /* Changed from 0 to 1 */
+    transform: scale(0.98);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}

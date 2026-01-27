@@ -15,54 +15,72 @@
 
 <body>
     <div class="hero">
-        <div class="envelope-container" id="envelope">
-            <!-- Flowers positioned outside envelope div to avoid 3D transform interference -->
+
+        <!-- Flowers container moved OUTSIDE envelope-container -->
+        <div class="flower-1-container">
             <div class="flowers flower-1"></div>
+        </div>
+
+        <div class="flowers-container">
             <div class="flowers flower-2"></div>
             <div class="flowers flower-3"></div>
+        </div>
+        
+        <div class="save-the-date-container">
+            <div class="save-the-date-image image-1"></div>
+        </div>
+        
+        <div class="additional-images-container">
+            <div class="additional-image image-1"></div>
+            <div class="additional-image image-2"></div>
+            <div class="additional-image image-3"></div>
+        </div>     
 
+        <div class="envelope-container" id="envelope">
             <div class="envelope">
                 <div class="envelope-front">
                     <div class="envelope-text">
                         <div class="envelope-title">Welcome to our forever</div>
-                        <div class="date">08 . 21 . 2026
-                        </div>
+                        <div class="date">08 . 21 . 2026</div>
                     </div>
                     <div class="stamp"></div>
                     <div class="postal-wave"></div>
                 </div>
 
-                <!-- Split envelope back into bottom and top -->
                 <div class="envelope-back-bottom"></div>
-
                 <div class="envelope-back-top">
                     <div class="seal"></div>
                 </div>
 
                 <div class="envelope-flap"></div>
                 <div class="envelope-flap-inside"></div>
-
             </div>
+
+            <div class="photos-container" id="photosContainer">
+                <div class="photo" style="background-image: url('../images/photo1.png');"></div>
+                <div class="photo" style="background-image: url('../images/photo2.png');"></div>
+                <div class="photo" style="background-image: url('../images/photo3.png');"></div>
+                <div class="photo" style="background-image: url('../images/photo4.png');"></div>
+                <div class="photo" style="background-image: url('../images/photo5.png');"></div>
+            </div>
+
+            <div class="info-card-container" id="infoCardContainer">
+                <div class="info-card" style="background-image: url('../images/info_card.png');"></div>
+            </div>
+
             <div class="click-text">CLICK TO OPEN</div>
         </div>
 
-        <!-- Photos container moved outside envelope-container to escape 3D context -->
-        <!-- <div class="photos-container" id="photosContainer">
-            <div class="photo" style="background-image: url('../images/photo1.png');"></div>
-            <div class="photo" style="background-image: url('../images/photo2.png');"></div>
-            <div class="photo" style="background-image: url('../images/photo3.png');"></div>
-            <div class="photo" style="background-image: url('../images/photo4.png');"></div>
-            <div class="photo" style="background-image: url('../images/photo5.png');"></div>
-            <div class="photo" style="background-image: url('../images/photo6.png');"></div>
-            <div class="photo" style="background-image: url('../images/photo7.png');"></div>
-        </div> -->
+    </div>
 
-        <!-- Floating reset button -->
-        <button id="resetButton" class="reset-btn" title="View envelope animation again">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2" />
-            </svg>
-        </button>
+
+
+    <!-- Floating reset button -->
+    <button id="resetButton" class="reset-btn" title="View envelope animation again">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2" />
+        </svg>
+    </button>
 
     </div>
 

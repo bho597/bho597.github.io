@@ -3,51 +3,50 @@ const mainContent = document.getElementById('mainContent');
 const rsvpForm = document.getElementById('rsvpForm');
 const hero = document.querySelector('.hero');
 const resetButton = document.getElementById('resetButton');
+const flowersContainer = document.querySelector('.flowers-container');
+const flower1Container = document.querySelector('.flower-1-container');
+const saveTheDateContainer = document.querySelector('.save-the-date-container');
+const additionalImagesContainer = document.querySelector('.additional-images-container');
 
-// Check if envelope has been opened before
-// const hasOpenedEnvelope = localStorage.getItem('envelopeOpened');
-
-// if (hasOpenedEnvelope === 'true') {
-//     // Skip animation and go straight to content
-//     hero.style.display = 'none';
-//     mainContent.classList.add('visible');
-//     // Show reset button immediately if envelope was already opened
-//     resetButton.classList.add('show');
-// } else {
-//     // Enable clicking after all front-side animations complete (2 seconds)
 setTimeout(() => {
     envelope.classList.add('ready');
 }, 2000);
-// }
 
-envelope.addEventListener('click', function() {
-    // Only trigger animation if not already started and if ready
+envelope.addEventListener('click', function () {
     if (!this.classList.contains('flipped') && this.classList.contains('ready')) {
-        // Stage 1: Flip the envelope to show the back
+        // Stage 1: Flip envelope (immediate)
         this.classList.add('flipped');
-        
-        // Stage 2: After flip completes (1s), open the flap
+
+        if (flowersContainer) flowersContainer.classList.add('flipped');
+        if (flower1Container) flower1Container.classList.add('flipped');
+        if (saveTheDateContainer) saveTheDateContainer.classList.add('flipped');
+        if (additionalImagesContainer) additionalImagesContainer.classList.add('flipped');
+
+        // Stage 2: Open flap (NORMAL timing)
         setTimeout(() => {
             this.classList.add('opened');
         }, 1000);
-        
-        // Save that envelope has been opened
-        localStorage.setItem('envelopeOpened', 'true');
-        
-        // Stage 3: Show main content after flap opens (total: 1s flip + 1s flap opening + 400ms delay)
+
+        // Stage 3: Photos animate automatically via CSS (.opened on envelope)
+
+        // Stage 4: Flowers and images reappear AFTER photos finish
         setTimeout(() => {
-            mainContent.classList.add('visible');
-            // Show reset button after content appears
-            setTimeout(() => {
-                resetButton.classList.add('show');
-            }, 600);
-        }, 2400);
+            if (flowersContainer) flowersContainer.classList.add('opened');
+            if (flower1Container) flower1Container.classList.add('opened');
+            if (saveTheDateContainer) saveTheDateContainer.classList.add('show');
+            if (additionalImagesContainer) additionalImagesContainer.classList.add('show');
+        }, 5500);
+
+        localStorage.setItem('envelopeOpened', 'true');
+
+        // Stage 5: Show reset button AFTER all animations complete
+        setTimeout(() => {
+            resetButton.classList.add('show');
+        }, 7000); // 5500ms (flowers appear) + 1500ms (flower fade-in animation completes)
     }
 });
 
-
-// Reset button to view animation again
-resetButton.addEventListener('click', function() {
+resetButton.addEventListener('click', function () {
     localStorage.removeItem('envelopeOpened');
     location.reload();
 });
