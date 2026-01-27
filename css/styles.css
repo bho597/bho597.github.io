@@ -974,3 +974,583 @@ body {
         transform: rotate(360deg) translateY(0);
     }
 }
+
+/* ========================================
+   MOBILE RESPONSIVE STYLES
+   ======================================== */
+
+/* Tablets and smaller desktops (1024px and below) */
+@media (max-width: 1024px) {
+    .envelope-container {
+        width: 700px;
+        height: 420px;
+    }
+
+    .envelope {
+        width: 560px;
+        height: 336px;
+    }
+
+    .envelope-flap {
+        left: 43px;
+    }
+
+    .seal {
+        width: 84px;
+        height: 84px;
+    }
+
+    .stamp {
+        width: 175px;
+        height: 175px;
+        top: -21px;
+        right: 17px;
+    }
+
+    .postal-wave {
+        width: 350px;
+        height: 70px;
+        bottom: 192px;
+        right: 17px;
+    }
+
+    .envelope-text .envelope-title {
+        font-size: 35px;
+    }
+
+    .envelope-text .date {
+        font-size: 17.5px;
+    }
+
+    /* Scale down containers proportionally */
+    .flowers-container,
+    .flower-1-container,
+    .save-the-date-container,
+    .additional-images-container {
+        width: 1120px;
+        height: 672px;
+    }
+
+    /* Scale flowers */
+    .flower-1-container .flower-1 {
+        width: 308px;
+        height: 385px;
+        top: 42px;
+        left: 174px;
+    }
+
+    .flower-1-container.opened .flower-1 {
+        width: 266px;
+        height: 332px;
+        top: -14px;
+        left: 784px;
+    }
+
+    .flowers-container .flower-2 {
+        width: 266px;
+        height: 332px;
+        top: 69px;
+        left: 114px;
+    }
+
+    .flowers-container .flower-3 {
+        width: 560px;
+        height: 595px;
+        top: 101px;
+        left: 30px;
+    }
+
+    /* Scale save-the-date */
+    .save-the-date-container .image-1 {
+        width: 266px;
+        height: 266px;
+        top: -49px;
+        left: -14px;
+    }
+
+    /* Scale additional images */
+    .additional-images-container .image-1 {
+        width: 119px;
+        height: 119px;
+        top: 119px;
+        left: 497px;
+    }
+
+    .additional-images-container .image-2 {
+        width: 210px;
+        height: 210px;
+        top: 224px;
+        left: 997px;
+    }
+
+    .additional-images-container .image-3 {
+        width: 245px;
+        height: 168px;
+        top: 560px;
+        left: 826px;
+    }
+
+    /* Scale photos container */
+    .photos-container {
+        width: 1120px;
+        height: 672px;
+    }
+
+    /* Scale info card container */
+    .info-card-container {
+        width: 1120px;
+        height: 672px;
+    }
+}
+
+/* Mobile landscape and small tablets (768px and below) */
+@media (max-width: 768px) {
+    .hero {
+        padding: 50px 15px;
+    }
+
+    .envelope-container {
+        width: 500px;
+        height: 300px;
+    }
+
+    .envelope {
+        width: 400px;
+        height: 240px;
+    }
+
+    .envelope-flap {
+        left: 31px;
+    }
+
+    .seal {
+        width: 60px;
+        height: 60px;
+    }
+
+    .stamp {
+        width: 125px;
+        height: 125px;
+        top: -15px;
+        right: 12px;
+    }
+
+    .postal-wave {
+        width: 250px;
+        height: 50px;
+        bottom: 137px;
+        right: 12px;
+    }
+
+    .envelope-text .envelope-title {
+        font-size: 25px;
+        margin-bottom: 10px;
+    }
+
+    .envelope-text .date {
+        font-size: 12.5px;
+    }
+
+    .click-text {
+        font-size: 16px;
+        bottom: -40px;
+    }
+
+    /* Scale down containers */
+    .flowers-container,
+    .flower-1-container,
+    .save-the-date-container,
+    .additional-images-container {
+        width: 800px;
+        height: 480px;
+    }
+
+    /* Scale flowers */
+    .flower-1-container .flower-1 {
+        width: 220px;
+        height: 275px;
+        top: 30px;
+        left: 124px;
+    }
+
+    .flower-1-container.opened .flower-1 {
+        width: 190px;
+        height: 237px;
+        top: -10px;
+        left: 560px;
+    }
+
+    .flowers-container .flower-2 {
+        width: 190px;
+        height: 237px;
+        top: 49px;
+        left: 82px;
+    }
+
+    .flowers-container .flower-3 {
+        width: 400px;
+        height: 425px;
+        top: 72px;
+        left: 22px;
+    }
+
+    /* Scale save-the-date */
+    .save-the-date-container .image-1 {
+        width: 190px;
+        height: 190px;
+        top: -35px;
+        left: -10px;
+    }
+
+    /* Scale additional images */
+    .additional-images-container .image-1 {
+        width: 85px;
+        height: 85px;
+        top: 85px;
+        left: 355px;
+    }
+
+    .additional-images-container .image-2 {
+        width: 150px;
+        height: 150px;
+        top: 160px;
+        left: 712px;
+    }
+
+    .additional-images-container .image-3 {
+        width: 175px;
+        height: 120px;
+        top: 400px;
+        left: 590px;
+    }
+
+    /* Scale photos container */
+    .photos-container {
+        width: 800px;
+        height: 480px;
+    }
+
+    /* Scale info card container */
+    .info-card-container {
+        width: 800px;
+        height: 480px;
+    }
+
+    .reset-btn {
+        width: 45px;
+        height: 45px;
+        bottom: 15px;
+        right: 15px;
+    }
+
+    .reset-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* Mobile portrait (600px and below) */
+@media (max-width: 600px) {
+    .hero {
+        padding: 30px 10px;
+    }
+
+    .envelope-container {
+        width: 90vw;
+        max-width: 400px;
+        height: calc(90vw * 0.6);
+        max-height: 240px;
+    }
+
+    .envelope-container:hover {
+        transform: scale(1); /* Disable hover on mobile */
+    }
+
+    .envelope {
+        width: 320px;
+        height: 192px;
+    }
+
+    .envelope-flap {
+        left: 25px;
+    }
+
+    .seal {
+        width: 48px;
+        height: 48px;
+    }
+
+    .stamp {
+        width: 100px;
+        height: 100px;
+        top: -12px;
+        right: 10px;
+    }
+
+    .postal-wave {
+        width: 200px;
+        height: 40px;
+        bottom: 110px;
+        right: 10px;
+    }
+
+    .envelope-text {
+        left: 22.5%;
+        top: 68%;
+    }
+
+    .envelope-text .envelope-title {
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
+
+    .envelope-text .date {
+        font-size: 10px;
+    }
+
+    .click-text {
+        font-size: 14px;
+        bottom: -35px;
+    }
+
+    /* Scale down containers */
+    .flowers-container,
+    .flower-1-container,
+    .save-the-date-container,
+    .additional-images-container {
+        width: 640px;
+        height: 384px;
+    }
+
+    /* Scale flowers */
+    .flower-1-container .flower-1 {
+        width: 176px;
+        height: 220px;
+        top: 24px;
+        left: 99px;
+    }
+
+    .flower-1-container.opened .flower-1 {
+        width: 152px;
+        height: 190px;
+        top: -8px;
+        left: 448px;
+    }
+
+    .flowers-container .flower-2 {
+        width: 152px;
+        height: 190px;
+        top: 39px;
+        left: 65px;
+    }
+
+    .flowers-container .flower-3 {
+        width: 320px;
+        height: 340px;
+        top: 58px;
+        left: 17px;
+    }
+
+    /* Scale save-the-date */
+    .save-the-date-container .image-1 {
+        width: 152px;
+        height: 152px;
+        top: -28px;
+        left: -8px;
+    }
+
+    /* Scale additional images */
+    .additional-images-container .image-1 {
+        width: 68px;
+        height: 68px;
+        top: 68px;
+        left: 284px;
+    }
+
+    .additional-images-container .image-2 {
+        width: 120px;
+        height: 120px;
+        top: 128px;
+        left: 570px;
+    }
+
+    .additional-images-container .image-3 {
+        width: 140px;
+        height: 96px;
+        top: 320px;
+        left: 472px;
+    }
+
+    /* Scale photos container */
+    .photos-container {
+        width: 640px;
+        height: 384px;
+    }
+
+    /* Scale info card container */
+    .info-card-container {
+        width: 640px;
+        height: 384px;
+    }
+
+    .reset-btn {
+        width: 40px;
+        height: 40px;
+        bottom: 12px;
+        right: 12px;
+    }
+
+    .reset-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+/* Very small mobile devices (375px and below) */
+@media (max-width: 375px) {
+    .envelope-container {
+        width: 95vw;
+        height: calc(95vw * 0.6);
+    }
+
+    .envelope {
+        width: 280px;
+        height: 168px;
+    }
+
+    .envelope-flap {
+        left: 22px;
+    }
+
+    .seal {
+        width: 42px;
+        height: 42px;
+    }
+
+    .stamp {
+        width: 87px;
+        height: 87px;
+        top: -10px;
+        right: 9px;
+    }
+
+    .postal-wave {
+        width: 175px;
+        height: 35px;
+        bottom: 96px;
+        right: 9px;
+    }
+
+    .envelope-text .envelope-title {
+        font-size: 17px;
+        margin-bottom: 6px;
+    }
+
+    .envelope-text .date {
+        font-size: 9px;
+    }
+
+    .click-text {
+        font-size: 12px;
+        bottom: -30px;
+    }
+
+    /* Scale down containers */
+    .flowers-container,
+    .flower-1-container,
+    .save-the-date-container,
+    .additional-images-container {
+        width: 560px;
+        height: 336px;
+    }
+
+    /* Scale flowers */
+    .flower-1-container .flower-1 {
+        width: 154px;
+        height: 192px;
+        top: 21px;
+        left: 87px;
+    }
+
+    .flower-1-container.opened .flower-1 {
+        width: 133px;
+        height: 166px;
+        top: -7px;
+        left: 392px;
+    }
+
+    .flowers-container .flower-2 {
+        width: 133px;
+        height: 166px;
+        top: 34px;
+        left: 57px;
+    }
+
+    .flowers-container .flower-3 {
+        width: 280px;
+        height: 297px;
+        top: 51px;
+        left: 15px;
+    }
+
+    /* Scale save-the-date */
+    .save-the-date-container .image-1 {
+        width: 133px;
+        height: 133px;
+        top: -24px;
+        left: -7px;
+    }
+
+    /* Scale additional images */
+    .additional-images-container .image-1 {
+        width: 59px;
+        height: 59px;
+        top: 59px;
+        left: 248px;
+    }
+
+    .additional-images-container .image-2 {
+        width: 105px;
+        height: 105px;
+        top: 112px;
+        left: 499px;
+    }
+
+    .additional-images-container .image-3 {
+        width: 122px;
+        height: 84px;
+        top: 280px;
+        left: 413px;
+    }
+
+    /* Scale photos container */
+    .photos-container {
+        width: 560px;
+        height: 336px;
+    }
+
+    /* Scale info card container */
+    .info-card-container {
+        width: 560px;
+        height: 336px;
+    }
+}
+
+/* Landscape mode for mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero {
+        min-height: auto;
+        padding: 20px 15px;
+    }
+
+    .envelope-container {
+        width: 60vh;
+        height: 36vh;
+        max-width: 500px;
+    }
+
+    .click-text {
+        bottom: -25px;
+        font-size: 12px;
+    }
+}
