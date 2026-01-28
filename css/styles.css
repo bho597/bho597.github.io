@@ -302,10 +302,8 @@ body {
     transition-delay: 0.9s;
 }
 
-@supports (-webkit-backdrop-filter: blur(1px)) {
-    .seal {
-        transform: translate(-50%, -50%) rotateY(180deg) translateZ(8px);
-    }
+.envelope.flipped .seal {
+    opacity: 1;
 }
 
 /* ========================================
