@@ -16,8 +16,7 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     min-height: 100vh;
-    overflow-x: hidden;
-    overflow-y: hidden;
+    overflow: hidden;
     height: 100vh;
 }
 
@@ -42,8 +41,8 @@ body {
 
 .envelope-container {
     position: relative;
-    width: 1000px;
-    height: 700px;
+    width: 500px;
+    height: 350px;
     max-width: 100%;
     display: flex;
     align-items: center;
@@ -91,8 +90,8 @@ body {
 
 .envelope {
     position: relative;
-    width: 800px;
-    height: 480px;
+    width: 500px;
+    height: 300px;
     transform-style: preserve-3d;
     overflow: visible !important;
     transition: transform 1s ease-out;
@@ -110,19 +109,27 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
+    top: 0;
+    left: 0;
     background-image: url('../images/envelope_front.png');
-    background-size: cover;
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     backface-visibility: hidden;
     z-index: 2;
+    opacity: 0;
+    transition: opacity 0.8s ease-out 0.4s;
+}
+
+.envelope-front.visible {
+    opacity: 1;
 }
 
 /* Front text */
 .envelope-text {
     position: absolute;
-    left: 22.5%;
-    top: 68%;
+    left: 24%;
+    top: 60%;
     transform: translate(-50%, -50%);
     text-align: center;
     color: #f7f4e8;
@@ -133,24 +140,24 @@ body {
 
 .envelope-text .envelope-title {
     font-family: 'Mistrully', sans-serif;
-    font-size: 50px;
+    font-size: 35px;
     margin-bottom: 20px;
 }
 
 .envelope-text .date {
     font-family: 'Quicksand', sans-serif;
-    font-size: 25px;
+    font-size: 18px;
     line-height: 1.6;
-    left: 50%;
 }
 
 /* Stamp */
 .stamp {
     position: absolute;
-    width: 250px;
-    height: 250px;
-    top: -30px;
-    right: 25px;
+    width: 27%;
+    height: auto;
+    aspect-ratio: 1/1;
+    top: -5%;
+    right: 5%;
     background-image: url('../images/stamp.png');
     background-size: contain;
     background-position: center;
@@ -163,10 +170,10 @@ body {
 /* Postal wave */
 .postal-wave {
     position: absolute;
-    width: 500px;
-    height: 100px;
-    bottom: 275px;
-    right: 25px;
+    width: 62.5%;
+    height: 12.5%;
+    top: 21%;
+    right: -1%;
     background-image: url('../images/postal_wave.png');
     background-size: contain;
     background-position: center;
@@ -182,11 +189,12 @@ body {
 
 .envelope-back-bottom {
     position: absolute;
-    width: 100%;
+    width: 91.5%;
     height: 100%;
     bottom: 0;
+    left: 0;
     background-image: url('../images/envelope_back_bottom.png');
-    background-size: cover;
+    background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
     transform: rotateY(180deg);
@@ -196,11 +204,12 @@ body {
 
 .envelope-back-top {
     position: absolute;
-    width: 100%;
+    width: 92%;
     height: 100%;
-    top: 1px;
+    top: 0.125%;
+    left: -1%;
     background-image: url('../images/envelope_back_top.png');
-    background-size: cover;
+    background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
     transform: rotateY(180deg);
@@ -214,11 +223,12 @@ body {
 
 .envelope-flap {
     position: absolute;
-    width: 86.4%;
-    height: 86.4%;
-    left: 62px;
+    width: 94.5%;
+    height: 80%;
+    left: -1%;
+    top: 0;
     background-image: url('../images/envelope_flap.png');
-    background-size: cover;
+    background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
     transform-origin: top center;
@@ -242,17 +252,16 @@ body {
 /* Flap inside */
 .envelope-flap-inside {
     position: absolute;
-    width: 88%;
-    height: 88%;
-    left: 7.4%;
-    bottom: 100%;
+    width: 93%;
+    height: 70%;
+    left: -.5%;
+    top: 0%;
     background-image: url('../images/envelope_flap_inside.png');
-    background-size: contain;
+    background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
-    transform-origin: bottom center;
+    transform-origin: top center;
     transform-style: preserve-3d;
-    transform: rotateY(180deg) rotateX(-180deg);
     backface-visibility: hidden;
     opacity: 0;
     z-index: 2;
@@ -260,7 +269,6 @@ body {
 
 .envelope-container.flipped .envelope-flap-inside {
     opacity: 0;
-    transform: rotateY(180deg) rotateX(-180deg);
 }
 
 .envelope-container.opened .envelope-flap-inside {
@@ -274,16 +282,17 @@ body {
 
 .seal {
     position: absolute;
-    width: 120px;
-    height: 120px;
+    width: 20%;
+    height: auto;
+    aspect-ratio: 1/1;
     top: 72%;
     left: 48%;
     background-image: url('../images/seal.png');
-    background-size: cover;
+    background-size: contain;
     background-position: center;
-    transform: translate(-50%, -50%) translateZ(2px);
+    background-repeat: no-repeat;
+    transform: translate(-50%, -50%);
     backface-visibility: hidden;
-    transform-style: preserve-3d;
     opacity: 1;
     z-index: 10;
     transition: opacity 0.4s ease;
@@ -292,12 +301,6 @@ body {
 .envelope-container.opened .seal {
     opacity: 0;
     transition-delay: 0.9s;
-}
-
-@supports (-webkit-backdrop-filter: blur(1px)) {
-    .seal {
-        transform: translate(-50%, -50%) rotateY(180deg) translateZ(8px);
-    }
 }
 
 /* ========================================
@@ -322,34 +325,33 @@ body {
     animation: flowersReappear 1s ease-out forwards;
 }
 
-
 .flowers-container.opened .flowers,
 .flower-1-container.opened .flower-1 {
     opacity: 1;
 }
 
 .flower-1-container.opened .flower-1 {
-    width: 380px;
-    height: 475px;
-    top: -20px;
-    left: 1120px;
+    width: 250px;
+    height: 313px;
+    top: 18%;
+    left: 65%;
     transition: opacity 1s ease-out;
 }
 
 /* Make sure flower-1 is visible initially (before flip) */
 .flower-1-container .flower-1 {
     position: absolute;
-    width: 440px;
-    height: 550px;
-    top: 60px;
-    left: 248px;
+    width: 260px;
+    height: 325px;
+    top: 24%;
+    left: 29.75%;
     background-image: url('../images/flower_1.png');
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     opacity: 0;
     transform: scale(0.98);
-    transition: all 1s ease-out;
+    transition: opacity 1s ease-out;
     animation: fadeInUpFlowers 1.2s ease-out 0.5s forwards;
 }
 
@@ -377,20 +379,20 @@ body {
 }
 
 .flowers-container .flower-2 {
-    width: 380px;
-    height: 475px;
-    top: 98px;
-    left: 163px;
+    width: 240px;
+    height: 300px;
+    top: 25%;
+    left: 25.9%;
     background-image: url('../images/flower_2.png');
     animation: fadeInUpFlowers 1.2s ease-out 0.7s forwards;
     z-index: 2;
 }
 
 .flowers-container .flower-3 {
-    width: 800px;
-    height: 850px;
-    top: 145px;
-    left: 43px;
+    width: 530px;
+    height: 563px;
+    top: 28%;
+    left: 20.3%;
     background-image: url('../images/flower_3.png');
     animation: fadeInUpFlowers 1.2s ease-out 0.9s forwards;
     z-index: 1;
@@ -496,7 +498,6 @@ body {
     opacity: 0;
     z-index: 6;
     transition: opacity 0.1s ease 3s;
-    /* ADD 1.5s delay here */
 }
 
 .envelope-container.opened .info-card-container {
@@ -517,7 +518,6 @@ body {
     opacity: 0;
     transform: rotate(0deg);
     filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
-    /* FIXED - removed malformed transition */
     transition: all 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
     transition-delay: 4s;
 }
@@ -525,7 +525,6 @@ body {
 .envelope-container.opened .info-card-container .info-card {
     opacity: 1;
     animation: arcMotionInfoCard 2s linear 3s forwards;
-    /* Disable transition after animation completes */
     transition: none;
 }
 
@@ -533,7 +532,6 @@ body {
    SAVE THE DATE
    ======================================== */
 
-/* Container for save-the-date (behind flowers) */
 .save-the-date-container {
     position: absolute;
     top: 50%;
@@ -543,16 +541,14 @@ body {
     transform: translate(-50%, -50%);
     pointer-events: none;
     opacity: 0;
-    z-index:-1; /* Behind flowers */
+    z-index: -1;
     transition: opacity 1s ease-out;
 }
 
-/* Hide when envelope flips */
 .save-the-date-container.flipped {
     opacity: 0;
 }
 
-/* Show when opened */
 .save-the-date-container.show {
     opacity: 1;
 }
@@ -565,12 +561,11 @@ body {
     opacity: 0;
 }
 
-/* Position save-the-date image */
 .save-the-date-container .image-1 {
-    width: 380px;
-    height: 380px;
-    top: -70px;
-    left: -20px;
+    width: 300px;
+    height: 300px;
+    top: 15%;
+    left: 12%;
     background-image: url('../images/save_the_date.png');
     animation: fadeInUpFlowers 1.2s ease-out 0s forwards;
 }
@@ -579,7 +574,6 @@ body {
    ADDITIONAL IMAGES
    ======================================== */
 
-/* Container for additional images (in front of flowers) */
 .additional-images-container {
     position: absolute;
     top: 50%;
@@ -589,16 +583,14 @@ body {
     transform: translate(-50%, -50%);
     pointer-events: none;
     opacity: 0;
-    z-index: 11; /* In front of flowers */
+    z-index: 11;
     transition: opacity 1s ease-out;
 }
 
-/* Hide when envelope flips */
 .additional-images-container.flipped {
     opacity: 0;
 }
 
-/* Show when opened */
 .additional-images-container.show {
     opacity: 1;
 }
@@ -611,30 +603,29 @@ body {
     opacity: 0;
 }
 
-/* Position each additional image */
 .additional-images-container .image-1 {
-    width: 170px;
-    height: 170px;
-    top: 170px;
-    left: 710px;
+    width: 120px;
+    height: 120px;
+    top: 30%;
+    left: 47%;
     background-image: url('../images/additional_image_1.png');
     animation: fadeInUpFlowers 1.2s ease-out 0.2s forwards;
 }
 
 .additional-images-container .image-2 {
-    width: 300px;
-    height: 300px;
-    top: 320px;
-    left: 1425px;
+    width: 250px;
+    height: 250px;
+    top: 37%;
+    right: 4%;
     background-image: url('../images/additional_image_2.png');
     animation: fadeInUpFlowers 1.2s ease-out 0.4s forwards;
 }
 
 .additional-images-container .image-3 {
-    width: 350px;
-    height: 240px;
-    top: 800px;
-    left: 1180px;
+    width: 250px;
+    height: 172px;
+    bottom: 8%;
+    right: 16%;
     background-image: url('../images/additional_image_3.png');
     animation: fadeInUpFlowers 1.2s ease-out 0.4s forwards;
 }
@@ -646,8 +637,8 @@ body {
 /* Click text */
 .click-text {
     position: absolute;
-    bottom: 30px;
-    left: 47%;
+    bottom: -20%;
+    left: 50%;
     font-family: 'Quicksand', sans-serif;
     font-size: 25px;
     white-space: nowrap;
@@ -664,8 +655,8 @@ body {
 /* Reset button */
 .reset-btn {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 5%;
+    right: 3%;
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -707,7 +698,6 @@ body {
         opacity: 0;
         transform: translateY(150px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
@@ -719,7 +709,6 @@ body {
         opacity: 0;
         transform: translateY(50px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
@@ -731,7 +720,6 @@ body {
         opacity: 0;
         transform: translateY(-50%) translateX(-20px);
     }
-
     to {
         opacity: 1;
         transform: translateY(-50%) translateX(0);
@@ -743,7 +731,6 @@ body {
         opacity: 0;
         transform: scale(0.8);
     }
-
     to {
         opacity: 1;
         transform: scale(1);
@@ -754,7 +741,6 @@ body {
     from {
         opacity: 0;
     }
-
     to {
         opacity: 1;
     }
@@ -762,15 +748,14 @@ body {
 
 @keyframes flapInsideOpen {
     0% {
-        transform: rotateY(180deg) rotateX(-180deg) translateY(0);
+        transform: rotateX(0deg);
     }
-
     5% {
-        transform: rotateY(180deg) rotateX(-171deg) translateY(34px);
+        transform: rotateX(-10deg);
     }
 
     100% {
-        transform: rotateY(180deg) rotateX(0deg) translateY(35px);
+        transform: rotateX(-180deg);
     }
 }
 
@@ -778,19 +763,15 @@ body {
     0% {
         opacity: 0;
     }
-
     100% {
         opacity: 0.7;
     }
 }
 
 @keyframes pulse {
-
-    0%,
-    100% {
+    0%, 100% {
         opacity: 0.7;
     }
-
     50% {
         opacity: 1;
     }
@@ -800,7 +781,6 @@ body {
     0% {
         opacity: 0.7;
     }
-
     100% {
         opacity: 0;
     }
@@ -816,20 +796,18 @@ body {
         margin: -30px 0 0 -30px;
         transform: rotate(0deg) translateY(0);
     }
-
     50% {
-        width: 250px;
-        height: 187.5px;
-        top: -10%;
-        left: 38%;
+        width: 170px;
+        height: 127.5px;
+        top: 10%;
+        left: 43%;
         transform: rotate(172.5deg);
     }
-
     100% {
-        width: 460px;
-        height: 345px;
-        top: 1.5%;
-        left: 26%;
+        width: 300px;
+        height: 225px;
+        top: 20%;
+        left: 36%;
         margin: 0;
         transform: rotate(345deg) translateY(0);
     }
@@ -844,20 +822,18 @@ body {
         margin: -30px 0 0 -30px;
         transform: rotate(0deg) translateY(0);
     }
-
     50% {
-        width: 320px;
-        height: 240px;
-        top: -10%;
-        left: 21.5%;
+        width: 210px;
+        height: 157.5px;
+        top: 10%;
+        left: 30.5%;
         transform: rotate(180deg);
     }
-
     100% {
-        width: 600px;
-        height: 450px;
-        top: 50%;
-        left: -7%;
+        width: 380px;
+        height: 285px;
+        top: 52%;
+        left: 11%;
         margin: 0;
         transform: rotate(360deg) translateY(0);
     }
@@ -872,20 +848,18 @@ body {
         margin: -30px 0 0 -30px;
         transform: rotate(0deg) translateY(0);
     }
-
     50% {
-        width: 270px;
-        height: 202.5px;
-        top: -10%;
-        left: 37%;
+        width: 180px;
+        height: 135px;
+        top: 10%;
+        left: 42.5%;
         transform: rotate(175deg);
     }
-
     100% {
-        width: 500px;
-        height: 375px;
-        top: 50%;
-        left: 24%;
+        width: 320px;
+        height: 240px;
+        top: 51%;
+        left: 35%;
         margin: 0;
         transform: rotate(350deg) translateY(0);
     }
@@ -900,20 +874,18 @@ body {
         margin: -30px 0 0 -30px;
         transform: rotate(0deg) translateY(0);
     }
-
     50% {
-        width: 290px;
-        height: 217.5px;
-        top: -10%;
-        left: 62.5%;
+        width: 210px;
+        height: 157.5px;
+        top: 10%;
+        left: 59.5%;
         transform: rotate(190deg);
     }
-
     100% {
-        width: 540px;
-        height: 405px;
+        width: 380px;
+        height: 285px;
         top: 52.5%;
-        left: 75%;
+        left: 69%;
         margin: 0;
         transform: rotate(380deg) translateY(0);
     }
@@ -928,7 +900,6 @@ body {
         margin: -30px 0 0 -30px;
         transform: rotate(0deg) translateY(0);
     }
-
     50% {
         width: 290px;
         height: 217.5px;
@@ -936,12 +907,11 @@ body {
         left: 57.5%;
         transform: rotate(180deg);
     }
-
     100% {
-        width: 540px;
-        height: 405px;
-        top: 10%;
-        left: 75%;
+        width: 367px;
+        height: 275px;
+        top: 22%;
+        left: 69%;
         margin: 0;
         transform: rotate(360deg) translateY(0);
     }
@@ -956,20 +926,18 @@ body {
         margin: -30px 0 0 -30px;
         transform: rotate(0deg) translateY(0);
     }
-
     50% {
-        width: 470px;
-        height: 340px;
+        width: 345px;
+        height: 250px;
         top: -600px;
         left: -90px;
         transform: rotate(180deg);
     }
-
     100% {
-        width: 900px;
-        height: 650px;
-        top: -220px;
-        left: -200px;
+        width: 650px;
+        height: 470px;
+        top: -17%;
+        left: -10%;
         margin: 0;
         transform: rotate(360deg) translateY(0);
     }
@@ -989,29 +957,6 @@ body {
     .envelope {
         width: 560px;
         height: 336px;
-    }
-
-    .envelope-flap {
-        left: 43px;
-    }
-
-    .seal {
-        width: 84px;
-        height: 84px;
-    }
-
-    .stamp {
-        width: 175px;
-        height: 175px;
-        top: -21px;
-        right: 17px;
-    }
-
-    .postal-wave {
-        width: 350px;
-        height: 70px;
-        bottom: 192px;
-        right: 17px;
     }
 
     .envelope-text .envelope-title {
@@ -1117,29 +1062,6 @@ body {
     .envelope {
         width: 400px;
         height: 240px;
-    }
-
-    .envelope-flap {
-        left: 31px;
-    }
-
-    .seal {
-        width: 60px;
-        height: 60px;
-    }
-
-    .stamp {
-        width: 125px;
-        height: 125px;
-        top: -15px;
-        right: 12px;
-    }
-
-    .postal-wave {
-        width: 250px;
-        height: 50px;
-        bottom: 137px;
-        right: 12px;
     }
 
     .envelope-text .envelope-title {
@@ -1263,40 +1185,12 @@ body {
     }
 
     .envelope-container:hover {
-        transform: scale(1); /* Disable hover on mobile */
+        transform: scale(1);
     }
 
     .envelope {
         width: 320px;
         height: 192px;
-    }
-
-    .envelope-flap {
-        left: 25px;
-    }
-
-    .seal {
-        width: 48px;
-        height: 48px;
-    }
-
-    .stamp {
-        width: 100px;
-        height: 100px;
-        top: -12px;
-        right: 10px;
-    }
-
-    .postal-wave {
-        width: 200px;
-        height: 40px;
-        bottom: 110px;
-        right: 10px;
-    }
-
-    .envelope-text {
-        left: 22.5%;
-        top: 68%;
     }
 
     .envelope-text .envelope-title {
@@ -1416,29 +1310,6 @@ body {
     .envelope {
         width: 280px;
         height: 168px;
-    }
-
-    .envelope-flap {
-        left: 22px;
-    }
-
-    .seal {
-        width: 42px;
-        height: 42px;
-    }
-
-    .stamp {
-        width: 87px;
-        height: 87px;
-        top: -10px;
-        right: 9px;
-    }
-
-    .postal-wave {
-        width: 175px;
-        height: 35px;
-        bottom: 96px;
-        right: 9px;
     }
 
     .envelope-text .envelope-title {
