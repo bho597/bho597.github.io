@@ -8,6 +8,54 @@ const flower1Container = document.querySelector('.flower-1-container');
 const saveTheDateContainer = document.querySelector('.save-the-date-container');
 const additionalImagesContainer = document.querySelector('.additional-images-container');
 
+// ==============================
+// ZOOM FUNCTIONALITY (SAFE ZONE)
+// ==============================
+
+const zoomRoot = document.getElementById('zoom-root');
+let zoomLevel = 1;
+const MIN_ZOOM = 0.85;
+const MAX_ZOOM = 1.6;
+
+function applyZoom() {
+    if (!zoomRoot) return;
+    zoomRoot.style.transform = `scale(${zoomLevel})`;
+}
+
+// Optional: keyboard zoom (Cmd/Ctrl + / -)
+document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '=')) {
+        e.preventDefault();
+        zoomLevel = Math.min(MAX_ZOOM, zoomLevel + 0.1);
+        applyZoom();
+    }
+    if ((e.ctrlKey || e.metaKey) && e.key === '-') {
+        e.preventDefault();
+        zoomLevel = Math.max(MIN_ZOOM, zoomLevel - 0.1);
+        applyZoom();
+    }
+});
+
+window.addEventListener(
+    'wheel',
+    (e) => {
+        if (e.ctrlKey) {
+            e.preventDefault();
+
+            const ZOOM_STEP = 0.08;
+
+            if (e.deltaY < 0) {
+                zoomLevel = Math.min(MAX_ZOOM, zoomLevel + ZOOM_STEP);
+            } else {
+                zoomLevel = Math.max(MIN_ZOOM, zoomLevel - ZOOM_STEP);
+            }
+
+            applyZoom();
+        }
+    },
+    { passive: false }
+);
+
 // Add visible class to envelope-front on page load
 setTimeout(() => {
     const envelopeFront = document.querySelector('.envelope-front');

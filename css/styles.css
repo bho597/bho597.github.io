@@ -1430,3 +1430,7 @@ body {
         font-size: 12px;
     }
 }
+
+#zoom-root {
+    transform-origin: center center;
+}
