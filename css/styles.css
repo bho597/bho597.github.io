@@ -1972,7 +1972,7 @@ body {
     /* Scale factor: 600/1440 = 0.417x */
     
     .hero {
-        padding: 40px 15px;
+        padding: 30px 15px;
     }
 
     .envelope-container {
@@ -2251,15 +2251,15 @@ body {
     }
 
     .reset-btn {
-        width: 21px;   /* 50 * 0.417 */
-        height: 21px;  /* 50 * 0.417 */
+        width: 32px;   /* 50 * 0.417 */
+        height: 32px;  /* 50 * 0.417 */
         bottom: 15px;
         right: 15px;
     }
 
     .reset-btn svg {
-        width: 10px;   /* 23 * 0.417 */
-        height: 10px;  /* 23 * 0.417 */
+        width: 15px;   /* 23 * 0.417 */
+        height: 15px;  /* 23 * 0.417 */
     }
 }
 
@@ -2272,7 +2272,7 @@ body {
     /* Scale factor: 480/1440 = 0.333x */
     
     .hero {
-        padding: 30px 10px;
+        padding: 25px 10px;
     }
 
     .envelope-container {
@@ -2546,15 +2546,15 @@ body {
     }
 
     .reset-btn {
-        width: 17px;   /* 50 * 0.333 */
-        height: 17px;  /* 50 * 0.333 */
+        width: 28px;   /* 50 * 0.333 */
+        height: 28px;  /* 50 * 0.333 */
         bottom: 12px;
         right: 12px;
     }
 
     .reset-btn svg {
-        width: 8px;    /* 23 * 0.333 */
-        height: 8px;   /* 23 * 0.333 */
+        width: 13px;    /* 23 * 0.333 */
+        height: 13px;   /* 23 * 0.333 */
     }
 }
 
@@ -2848,15 +2848,15 @@ body {
     }
 
     .reset-btn {
-        width: 28px;   /* 50 * 0.555 */
-        height: 28px;  /* 50 * 0.555 */
+        width: 38px;   /* 50 * 0.555 */
+        height: 38px;  /* 50 * 0.555 */
         bottom: 12px;
         right: 12px;
     }
 
     .reset-btn svg {
-        width: 13px;   /* 23 * 0.555 */
-        height: 13px;  /* 23 * 0.555 */
+        width: 18px;   /* 23 * 0.555 */
+        height: 18px;  /* 23 * 0.555 */
     }
 }
 
