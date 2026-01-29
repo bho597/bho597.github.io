@@ -1022,6 +1022,12 @@ body {
         /* 23 * 1.333 */
     }
 
+    /* Scale seal */
+    .seal {
+        width: 120px;  /* 90 * 1.333 */
+        height: 120px; /* 90 * 1.333 */
+    }
+
     /* Scale all containers proportionally */
     .flowers-container,
     .flower-1-container,
@@ -1399,6 +1405,12 @@ body {
         font-size: 20px; /* 23 * 0.889 */
     }
 
+    /* Scale seal */
+    .seal {
+        width: 80px;   /* 90 * 0.889 */
+        height: 80px;  /* 90 * 0.889 */
+    }
+
     /* Scale all containers proportionally */
     .flowers-container,
     .flower-1-container,
@@ -1689,6 +1701,12 @@ body {
     .click-text {
         font-size: 14px; /* 23 * 0.625 */
         bottom: -40px;
+    }
+
+    /* Scale seal */
+    .seal {
+        width: 56px;   /* 90 * 0.625 */
+        height: 56px;  /* 90 * 0.625 */
     }
 
     /* Scale all containers */
@@ -1986,6 +2004,12 @@ body {
         bottom: -30px;
     }
 
+    /* Scale seal */
+    .seal {
+        width: 38px;   /* 90 * 0.417 */
+        height: 38px;  /* 90 * 0.417 */
+    }
+
     /* Scale all containers */
     .flowers-container,
     .flower-1-container,
@@ -2273,6 +2297,12 @@ body {
     .click-text {
         font-size: 8px;  /* 23 * 0.333 */
         bottom: -24px;
+    }
+
+    /* Scale seal */
+    .seal {
+        width: 30px;   /* 90 * 0.333 */
+        height: 30px;  /* 90 * 0.333 */
     }
 
     /* Scale all containers */
@@ -2571,6 +2601,7 @@ body {
         bottom: -28px;
     }
 
+    /* Scale seal */
     .seal {
         width: 50px;   /* 90 * 0.555 */
         height: 50px;  /* 90 * 0.555 */
@@ -2829,67 +2860,6 @@ body {
     }
 }
 
-
-/* ========================================
-   BREAKPOINT INDICATOR (Development Only)
-   Remove this section in production
-   ======================================== */
-
-body::before {
-    content: "BASE: 1440x768 Desktop";
-    position: fixed;
-    top: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 10px 20px;
-    font-family: monospace;
-    font-size: 14px;
-    z-index: 99999;
-    border-radius: 0 0 8px 0;
-}
-
-@media (min-width: 1920px) {
-    body::before {
-        content: "LARGE MONITOR: 1920px+ (×1.33)";
-        background: rgba(76, 175, 80, 0.9);
-    }
-}
-
-@media (max-width: 1439px) and (min-width: 1024px) {
-    body::before {
-        content: "MEDIUM DESKTOP: 1024px-1439px (×0.89)";
-        background: rgba(3, 169, 244, 0.9);
-    }
-}
-
-@media (max-width: 1023px) {
-    body::before {
-        content: "TABLET: 768px-1023px (×0.63)";
-        background: rgba(33, 150, 243, 0.9);
-    }
-}
-
-@media (max-width: 767px) {
-    body::before {
-        content: "MOBILE: 375px-767px (×0.42)";
-        background: rgba(255, 152, 0, 0.9);
-    }
-}
-
-@media (max-width: 440px) {
-    body::before {
-        content: "SMALL MOBILE: <375px (×0.33)";
-        background: rgba(244, 67, 54, 0.9);
-    }
-}
-
-@media (max-height: 600px) and (orientation: landscape) {
-    body::before {
-        content: "LANDSCAPE MODE (Mobile/Tablet)";
-        background: rgba(156, 39, 176, 0.9);
-    }
-}
 
 /* Zoom container for potential future use */
 #zoom-root {
