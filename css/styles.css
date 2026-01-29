@@ -2017,7 +2017,7 @@ body {
     .additional-images-container,
     .photos-container,
     .info-card-container {
-        width: 667px;  /* 1600 * 0.417 */
+        width: min(667px, 100vw);
         height: 400px; /* 960 * 0.417 */
     }
 
@@ -2312,7 +2312,7 @@ body {
     .additional-images-container,
     .photos-container,
     .info-card-container {
-        width: 533px;  /* 1600 * 0.333 */
+        width: min(533px, 100vw);
         height: 320px; /* 960 * 0.333 */
     }
 
