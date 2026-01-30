@@ -1406,17 +1406,13 @@ body {
     }
 }
 
-/* Zoom container for potential future use */
-#zoom-root {
-    transform-origin: center center;
-}
 
-/* ========================================
-   BREAKPOINT INDICATOR (Development Only)
+
+/*   BREAKPOINT INDICATOR (Development Only)
    Remove this section in production
    ======================================== */
 body::before {
-    content: "DESKTOP: 1024px+ Static (Fixed Positions)";
+    content: "DESKTOP: 1440px+ Static (Fixed Positions)";
     position: fixed;
     top: 0;
     left: 0;
@@ -1430,60 +1426,73 @@ body::before {
     pointer-events: none;
 }
 
-@media (min-width: 768px) and (max-width: 1023px) and (orientation: portrait) {
+/* Very short landscape (check first for priority) */
+@media (max-height: 450px) and (orientation: landscape) {
     body::before {
-        content: "TABLET PORTRAIT: 768px-1023px Scrollable";
-        background: rgba(33, 150, 243, 0.9);
+        content: "VERY SHORT LANDSCAPE: <450px height";
+        background: rgba(123, 31, 162, 0.9) !important;
     }
 }
 
-@media (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {
-    body::before {
-        content: "TABLET LANDSCAPE: 768px-1023px Scrollable";
-        background: rgba(156, 39, 176, 0.9);
-    }
-}
-
-@media (min-width: 480px) and (max-width: 767px) and (orientation: portrait) {
-    body::before {
-        content: "MOBILE LARGE: 480px-767px Scrollable";
-        background: rgba(255, 152, 0, 0.9);
-    }
-}
-
-@media (min-width: 480px) and (max-width: 767px) and (orientation: landscape) {
-    body::before {
-        content: "MOBILE LANDSCAPE: 480px-767px Scrollable";
-        background: rgba(233, 30, 99, 0.9);
-    }
-}
-
-@media (max-width: 479px) and (orientation: portrait) {
-    body::before {
-        content: "MOBILE: 320px-479px Scrollable";
-        background: rgba(244, 67, 54, 0.9);
-    }
-}
-
-@media (max-width: 479px) and (orientation: landscape) {
-    body::before {
-        content: "MOBILE LANDSCAPE: <479px Scrollable";
-        background: rgba(233, 30, 99, 0.9);
-    }
-}
-
+/* Small mobile */
 @media (max-width: 374px) {
     body::before {
         content: "SMALL MOBILE: <375px Scrollable";
-        background: rgba(183, 28, 28, 0.9);
+        background: rgba(183, 28, 28, 0.9) !important;
         font-size: 12px;
         padding: 8px 16px;
     }
 }
 
-@media (max-height: 450px) and (orientation: landscape) {
+/* Mobile portrait */
+@media (min-width: 375px) and (max-width: 479px) and (orientation: portrait) {
     body::before {
-        content: "VERY SHORT LANDSCAPE: <450px height";
-        background: rgba(123, 31, 162, 0.9);
+        content: "MOBILE: 375px-479px Scrollable";
+        background: rgba(244, 67, 54, 0.9) !important;
     }
+}
+
+/* Mobile landscape */
+@media (min-width: 375px) and (max-width: 767px) and (orientation: landscape) {
+    body::before {
+        content: "MOBILE LANDSCAPE: 375px-767px Scrollable";
+        background: rgba(233, 30, 99, 0.9) !important;
+    }
+}
+
+/* Mobile large portrait */
+@media (min-width: 480px) and (max-width: 767px) and (orientation: portrait) {
+    body::before {
+        content: "MOBILE LARGE: 480px-767px Scrollable";
+        background: rgba(255, 152, 0, 0.9) !important;
+    }
+}
+
+/* Tablet portrait */
+@media (min-width: 768px) and (max-width: 1023px) and (orientation: portrait) {
+    body::before {
+        content: "TABLET PORTRAIT: 768px-1023px Scrollable";
+        background: rgba(33, 150, 243, 0.9) !important;
+    }
+}
+
+/* Tablet landscape */
+@media (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {
+    body::before {
+        content: "TABLET LANDSCAPE: 768px-1023px Scrollable";
+        background: rgba(156, 39, 176, 0.9) !important;
+    }
+}
+
+/* Base desktop */
+@media (min-width: 1024px) and (max-width: 1439px) {
+    body::before {
+        content: "BASE: 1024px-1439px Scrollable";
+        background: rgba(233, 30, 99, 0.9) !important;
+    }
+}
+
+/* Zoom container for potential future use */
+#zoom-root {
+    transform-origin: center center;
 }
