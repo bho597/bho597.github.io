@@ -16,8 +16,19 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     min-height: 100vh;
-    overflow: hidden;
-    height: 100vh;
+    /* overflow and height will be controlled by media queries */
+}
+
+/* ========================================
+   DESKTOP BASE STYLES (1024px+)
+   Static, no-scroll layout
+   ======================================== */
+
+@media (min-width: 1024px) {
+    body {
+        overflow: hidden;
+        height: 100vh;
+    }
 }
 
 /* ========================================
@@ -90,8 +101,8 @@ body {
 
 .envelope {
     position: relative;
-    width: 500px;
-    height: 300px;
+    width: 350px;
+    height: 210px;
     transform-style: preserve-3d;
     overflow: visible !important;
     transition: transform 1s ease-out;
@@ -128,7 +139,7 @@ body {
 /* Front text */
 .envelope-text {
     position: absolute;
-    left: 24%;
+    left: 22%;
     top: 60%;
     transform: translate(-50%, -50%);
     text-align: center;
@@ -140,24 +151,24 @@ body {
 
 .envelope-text .envelope-title {
     font-family: 'Mistrully', sans-serif;
-    font-size: 35px;
+    font-size: 26px;
     margin-bottom: 20px;
 }
 
 .envelope-text .date {
     font-family: 'Quicksand', sans-serif;
-    font-size: 18px;
+    font-size: 14px;
     line-height: 1.6;
 }
 
 /* Stamp */
 .stamp {
     position: absolute;
-    width: 27%;
+    width: 20%;
     height: auto;
     aspect-ratio: 1/1;
-    top: -5%;
-    right: 5%;
+    top: 3%;
+    right: 10%;
     background-image: url('../images/stamp.png');
     background-size: contain;
     background-position: center;
@@ -252,9 +263,9 @@ body {
 /* Flap inside */
 .envelope-flap-inside {
     position: absolute;
-    width: 93%;
+    width: 92.5%;
     height: 70%;
-    left: -.5%;
+    left: 0%;
     top: 0%;
     background-image: url('../images/envelope_flap_inside.png');
     background-size: 100% 100%;
@@ -282,17 +293,14 @@ body {
 
 .seal {
     position: absolute;
-    width: 90px;
-    height: 90px;
-
+    width: 70px;
+    height: 70px;
     top: 84%;
     left: 50%;
     transform: translate(-50%, -50%);
-
     background-image: url('../images/seal.png');
     background-size: cover;
     background-position: center;
-
     opacity: 0;
     pointer-events: none;
     backface-visibility: hidden;
@@ -340,18 +348,18 @@ body {
 .flower-1-container.opened .flower-1 {
     width: 250px;
     height: 313px;
-    top: 18%;
-    left: 65%;
+    top: 20%;
+    left: 59%;
     transition: opacity 1s ease-out;
 }
 
 /* Make sure flower-1 is visible initially (before flip) */
 .flower-1-container .flower-1 {
     position: absolute;
-    width: 260px;
-    height: 325px;
-    top: 24%;
-    left: 29.75%;
+    width: 180px;
+    height: 225px;
+    top: 31%;
+    left: 35.75%;
     background-image: url('../images/flower_1.png');
     background-size: contain;
     background-position: center;
@@ -386,20 +394,20 @@ body {
 }
 
 .flowers-container .flower-2 {
-    width: 240px;
-    height: 300px;
-    top: 25%;
-    left: 25.9%;
+    width: 184px;
+    height: 203px;
+    top: 33%;
+    left: 32.4%;
     background-image: url('../images/flower_2.png');
     animation: fadeInUpFlowers 1.2s ease-out 0.7s forwards;
     z-index: 2;
 }
 
 .flowers-container .flower-3 {
-    width: 530px;
-    height: 563px;
-    top: 28%;
-    left: 20.3%;
+    width: 405px;
+    height: 430px;
+    top: 34%;
+    left: 28.2%;
     background-image: url('../images/flower_3.png');
     animation: fadeInUpFlowers 1.2s ease-out 0.9s forwards;
     z-index: 1;
@@ -499,8 +507,8 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 100vw;
-    height: 100vh;
+    width: 1600px;
+    height: 960px;
     pointer-events: none;
     opacity: 0;
     z-index: 6;
@@ -569,10 +577,10 @@ body {
 }
 
 .save-the-date-container .image-1 {
-    width: 300px;
-    height: 300px;
-    top: 15%;
-    left: 12%;
+    width: 250px;
+    height: 250px;
+    top: 17%;
+    left: 20%;
     background-image: url('../images/save_the_date.png');
     animation: fadeInUpFlowers 1.2s ease-out 0s forwards;
 }
@@ -611,28 +619,28 @@ body {
 }
 
 .additional-images-container .image-1 {
-    width: 120px;
-    height: 120px;
-    top: 30%;
-    left: 47%;
+    width: 100px;
+    height: 100px;
+    top: 35%;
+    left: 48%;
     background-image: url('../images/additional_image_1.png');
     animation: fadeInUpFlowers 1.2s ease-out 0.2s forwards;
 }
 
 .additional-images-container .image-2 {
-    width: 250px;
-    height: 250px;
-    top: 37%;
-    right: 4%;
+    width: 225px;
+    height: 225px;
+    top: 38%;
+    right: 16%;
     background-image: url('../images/additional_image_2.png');
     animation: fadeInUpFlowers 1.2s ease-out 0.4s forwards;
 }
 
 .additional-images-container .image-3 {
-    width: 250px;
-    height: 172px;
-    bottom: 8%;
-    right: 16%;
+    width: 200px;
+    height: 138px;
+    bottom: 15%;
+    right: 23%;
     background-image: url('../images/additional_image_3.png');
     animation: fadeInUpFlowers 1.2s ease-out 0.4s forwards;
 }
@@ -644,10 +652,10 @@ body {
 /* Click text */
 .click-text {
     position: absolute;
-    bottom: -20%;
+    bottom: -10%;
     left: 50%;
     font-family: 'Quicksand', sans-serif;
-    font-size: 25px;
+    font-size: 22px;
     white-space: nowrap;
     opacity: 0;
     transform: translateX(-50%);
@@ -705,7 +713,6 @@ body {
         opacity: 0;
         transform: translateY(150px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
@@ -717,7 +724,6 @@ body {
         opacity: 0;
         transform: translateY(50px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
@@ -729,7 +735,6 @@ body {
         opacity: 0;
         transform: translateY(-50%) translateX(-20px);
     }
-
     to {
         opacity: 1;
         transform: translateY(-50%) translateX(0);
@@ -741,7 +746,6 @@ body {
         opacity: 0;
         transform: scale(0.8);
     }
-
     to {
         opacity: 1;
         transform: scale(1);
@@ -752,7 +756,6 @@ body {
     from {
         opacity: 0;
     }
-
     to {
         opacity: 1;
     }
@@ -762,11 +765,9 @@ body {
     0% {
         transform: rotateX(0deg);
     }
-
     5% {
         transform: rotateX(-10deg);
     }
-
     100% {
         transform: rotateX(-180deg);
     }
@@ -776,19 +777,15 @@ body {
     0% {
         opacity: 0;
     }
-
     100% {
         opacity: 0.7;
     }
 }
 
 @keyframes pulse {
-
-    0%,
-    100% {
+    0%, 100% {
         opacity: 0.7;
     }
-
     50% {
         opacity: 1;
     }
@@ -798,7 +795,6 @@ body {
     0% {
         opacity: 0.7;
     }
-
     100% {
         opacity: 0;
     }
@@ -814,20 +810,18 @@ body {
         margin: -30px 0 0 -30px;
         transform: rotate(0deg) translateY(0);
     }
-
     50% {
-        width: 170px;
-        height: 127.5px;
+        width: 145px;
+        height: 109px;
         top: 10%;
-        left: 43%;
+        left: 44.25%;
         transform: rotate(172.5deg);
     }
-
     100% {
-        width: 300px;
-        height: 225px;
-        top: 20%;
-        left: 36%;
+        width: 250px;
+        height: 188px;
+        top: 26%;
+        left: 38.5%;
         margin: 0;
         transform: rotate(345deg) translateY(0);
     }
@@ -842,20 +836,18 @@ body {
         margin: -30px 0 0 -30px;
         transform: rotate(0deg) translateY(0);
     }
-
     50% {
-        width: 210px;
-        height: 157.5px;
+        width: 195px;
+        height: 146.5px;
         top: 10%;
-        left: 30.5%;
+        left: 33%;
         transform: rotate(180deg);
     }
-
     100% {
-        width: 380px;
-        height: 285px;
+        width: 350px;
+        height: 263px;
         top: 52%;
-        left: 11%;
+        left: 18%;
         margin: 0;
         transform: rotate(360deg) translateY(0);
     }
@@ -870,7 +862,6 @@ body {
         margin: -30px 0 0 -30px;
         transform: rotate(0deg) translateY(0);
     }
-
     50% {
         width: 180px;
         height: 135px;
@@ -878,12 +869,11 @@ body {
         left: 42.5%;
         transform: rotate(175deg);
     }
-
     100% {
-        width: 320px;
-        height: 240px;
+        width: 270px;
+        height: 203px;
         top: 51%;
-        left: 35%;
+        left: 38%;
         margin: 0;
         transform: rotate(350deg) translateY(0);
     }
@@ -898,20 +888,18 @@ body {
         margin: -30px 0 0 -30px;
         transform: rotate(0deg) translateY(0);
     }
-
     50% {
-        width: 210px;
-        height: 157.5px;
+        width: 170px;
+        height: 127.5px;
         top: 10%;
-        left: 59.5%;
+        left: 57.5%;
         transform: rotate(190deg);
     }
-
     100% {
-        width: 380px;
-        height: 285px;
+        width: 300px;
+        height: 225px;
         top: 52.5%;
-        left: 69%;
+        left: 65%;
         margin: 0;
         transform: rotate(380deg) translateY(0);
     }
@@ -926,20 +914,18 @@ body {
         margin: -30px 0 0 -30px;
         transform: rotate(0deg) translateY(0);
     }
-
     50% {
-        width: 290px;
-        height: 217.5px;
+        width: 185px;
+        height: 138.5px;
         top: -10%;
-        left: 57.5%;
+        left: 57%;
         transform: rotate(180deg);
     }
-
     100% {
-        width: 367px;
-        height: 275px;
-        top: 22%;
-        left: 69%;
+        width: 330px;
+        height: 247px;
+        top: 25%;
+        left: 64%;
         margin: 0;
         transform: rotate(360deg) translateY(0);
     }
@@ -954,7 +940,6 @@ body {
         margin: -30px 0 0 -30px;
         transform: rotate(0deg) translateY(0);
     }
-
     50% {
         width: 345px;
         height: 250px;
@@ -962,12 +947,11 @@ body {
         left: -90px;
         transform: rotate(180deg);
     }
-
     100% {
-        width: 650px;
-        height: 470px;
-        top: -17%;
-        left: -10%;
+        width: 500px;
+        height: 362px;
+        top: -10%;
+        left: -6%;
         margin: 0;
         transform: rotate(360deg) translateY(0);
     }
@@ -975,1893 +959,531 @@ body {
 
 /* ========================================
    STRATEGIC RESPONSIVE BREAKPOINTS
-   Desktop-First Approach
+   Mobile: Scrollable Long-Form Layout
+   Desktop: Static No-Scroll Layout
+   
+   Base Design: 1024px+ (Fixed pixel positions)
+   Elements are static and don't scale with browser size
+   Mobile Breakpoints: 480px, 768px
    ======================================== */
-
-/* 
-   BASE STYLES ABOVE = Desktop (1440x768)
-   This is your primary design resolution
-   All styles above are optimized for 1440px width
-*/
 
 /* ========================================
-   1. LARGE MONITORS (1920px+)
-   2K, 4K, and Ultra-Wide Displays
-   Scale up from 1440px base
+   DESKTOP (1024px+)
+   Static, No-Scroll Layout
+   Fixed pixel positions - elements don't scale with browser
    ======================================== */
 
-@media (min-width: 1920px) {
-    /* Scale factor: 1920/1440 = 1.333x */
-
-    .envelope-container {
-        width: 667px;
-        /* 500 * 1.333 */
-        height: 467px;
-        /* 350 * 1.333 */
+@media (min-width: 1024px) {
+    body {
+        overflow: hidden;
+        height: 100vh;
     }
 
-    .envelope {
-        width: 667px;
-        /* 500 * 1.333 */
-        height: 400px;
-        /* 300 * 1.333 */
-    }
-
-    .envelope-text .envelope-title {
-        font-size: 47px;
-        /* 35 * 1.333 */
-    }
-
-    .envelope-text .date {
-        font-size: 23px;
-        /* 17 * 1.333 */
-    }
-
-    .click-text {
-        font-size: 31px;
-        /* 23 * 1.333 */
-    }
-
-    /* Scale seal */
-    .seal {
-        width: 120px;  /* 90 * 1.333 */
-        height: 120px; /* 90 * 1.333 */
-    }
-
-    /* Scale all containers proportionally */
-    .flowers-container,
-    .flower-1-container,
-    .save-the-date-container,
-    .additional-images-container,
-    .photos-container,
-    .info-card-container {
-        width: 2133px;
-        /* 1600 * 1.333 */
-        height: 1280px;
-        /* 960 * 1.333 */
-    }
-
-    /* Scale flowers proportionally */
-    .flower-1-container .flower-1 {
-        width: 347px;
-        /* 260 * 1.333 */
-        height: 433px;
-        /* 325 * 1.333 */
-        top: 308px;
-        /* 231 * 1.333 */
-        left: 636px;
-        /* 477 * 1.333 */
-    }
-
-    .flower-1-container.opened .flower-1 {
-        width: 400px;
-        /* 250 * 1.333 */
-        height: 500px;
-        /* 312 * 1.333 */
-        top: 180px;
-        /* 173 * 1.333 */
-        left: 1387px;
-        /* 1040 * 1.333 */
-    }
-
-    .flowers-container .flower-2 {
-        width: 320px;
-        /* 240 * 1.333 */
-        height: 400px;
-        /* 300 * 1.333 */
-        top: 320px;
-        /* 240 * 1.333 */
-        left: 552px;
-        /* 414 * 1.333 */
-    }
-
-    .flowers-container .flower-3 {
-        width: 707px;
-        /* 530 * 1.333 */
-        height: 751px;
-        /* 563 * 1.333 */
-        top: 359px;
-        /* 269 * 1.333 */
-        left: 433px;
-        /* 325 * 1.333 */
-    }
-
-    /* Scale save-the-date */
-    .save-the-date-container .image-1 {
-        width: 400px;
-        /* 300 * 1.333 */
-        height: 400px;
-        /* 300 * 1.333 */
-        top: 192px;
-        /* 144 * 1.333 */
-        left: 256px;
-        /* 192 * 1.333 */
-    }
-
-    /* Scale additional images */
-    .additional-images-container .image-1 {
-        width: 160px;
-        /* 120 * 1.333 */
-        height: 160px;
-        /* 120 * 1.333 */
-        top: 384px;
-        /* 288 * 1.333 */
-        left: 1030px;
-        /* 752 * 1.333 */
-    }
-
-    .additional-images-container .image-2 {
-        width: 333px;
-        /* 250 * 1.333 */
-        height: 333px;
-        /* 250 * 1.333 */
-        top: 473px;
-        /* 355 * 1.333 */
-        right: 85px;
-        /* 64 * 1.333 */
-    }
-
-    .additional-images-container .image-3 {
-        width: 333px;
-        /* 250 * 1.333 */
-        height: 229px;
-        /* 172 * 1.333 */
-        bottom: 102px;
-        /* 77 * 1.333 */
-        right: 341px;
-        /* 256 * 1.333 */
-    }
-
-    /* Scale photos - override animation end states */
-    .photo {
-        /* Initial state scaled */
-        width: 53px;
-        /* 40 * 1.333 */
-        height: 40px;
-        /* 30 * 1.333 */
-    }
-
-    /* Override animation keyframes for large monitors */
-    @keyframes arcMotion1 {
-        0% {
-            width: 53px;
-            /* 40 * 1.333 */
-            height: 40px;
-            /* 30 * 1.333 */
-            top: 50%;
-            left: 50%;
-            margin: -40px 0 0 -40px;
-            transform: rotate(0deg) translateY(0);
-        }
-
-        50% {
-            width: 227px;
-            /* 170 * 1.333 */
-            height: 170px;
-            /* 127.5 * 1.333 */
-            top: 10%;
-            left: 43%;
-            transform: rotate(172.5deg);
-        }
-
-        100% {
-            width: 400px;
-            /* 300 * 1.333 */
-            height: 300px;
-            /* 225 * 1.333 */
-            top: 20%;
-            left: 36%;
-            margin: 0;
-            transform: rotate(345deg) translateY(0);
-        }
-    }
-
-    @keyframes arcMotion2 {
-        0% {
-            width: 53px;
-            /* 40 * 1.333 */
-            height: 40px;
-            /* 30 * 1.333 */
-            top: 50%;
-            left: 50%;
-            margin: -40px 0 0 -40px;
-            transform: rotate(0deg) translateY(0);
-        }
-
-        50% {
-            width: 280px;
-            /* 210 * 1.333 */
-            height: 210px;
-            /* 157.5 * 1.333 */
-            top: 10%;
-            left: 30.5%;
-            transform: rotate(180deg);
-        }
-
-        100% {
-            width: 507px;
-            /* 380 * 1.333 */
-            height: 380px;
-            /* 285 * 1.333 */
-            top: 52%;
-            left: 11%;
-            margin: 0;
-            transform: rotate(360deg) translateY(0);
-        }
-    }
-
-    @keyframes arcMotion3 {
-        0% {
-            width: 53px;
-            /* 40 * 1.333 */
-            height: 40px;
-            /* 30 * 1.333 */
-            top: 50%;
-            left: 50%;
-            margin: -40px 0 0 -40px;
-            transform: rotate(0deg) translateY(0);
-        }
-
-        50% {
-            width: 251.5px;
-            /* 180 * 1.333 */
-            height: 188.5px;
-            /* 135 * 1.333 */
-            top: 10%;
-            left: 42.5%;
-            transform: rotate(175deg);
-        }
-
-        100% {
-            width: 450px;
-            /* 320 * 1.333 */
-            height: 337px;
-            /* 240 * 1.333 */
-            top: 51%;
-            left: 35%;
-            margin: 0;
-            transform: rotate(350deg) translateY(0);
-        }
-    }
-
-    @keyframes arcMotion4 {
-        0% {
-            width: 53px;
-            /* 40 * 1.333 */
-            height: 40px;
-            /* 30 * 1.333 */
-            top: 50%;
-            left: 50%;
-            margin: -40px 0 0 -40px;
-            transform: rotate(0deg) translateY(0);
-        }
-
-        50% {
-            width: 280px;
-            /* 210 * 1.333 */
-            height: 210px;
-            /* 157.5 * 1.333 */
-            top: 10%;
-            left: 61%;
-            transform: rotate(190deg);
-        }
-
-        100% {
-            width: 507px;
-            /* 380 * 1.333 */
-            height: 380px;
-            /* 285 * 1.333 */
-            top: 52.5%;
-            left: 72%;
-            margin: 0;
-            transform: rotate(380deg) translateY(0);
-        }
-    }
-
-    @keyframes arcMotion5 {
-        0% {
-            width: 53px;
-            /* 40 * 1.333 */
-            height: 40px;
-            /* 30 * 1.333 */
-            top: 50%;
-            left: 50%;
-            margin: -40px 0 0 -40px;
-            transform: rotate(0deg) translateY(0);
-        }
-
-        50% {
-            width: 387px;
-            /* 290 * 1.333 */
-            height: 290px;
-            /* 217.5 * 1.333 */
-            top: -10%;
-            left: 61%;
-            transform: rotate(180deg);
-        }
-
-        100% {
-            width: 489px;
-            /* 367 * 1.333 */
-            height: 367px;
-            /* 275 * 1.333 */
-            top: 22%;
-            left: 72%;
-            margin: 0;
-            transform: rotate(360deg) translateY(0);
-        }
-    }
-
-    /* Scale info card - override animation */
-    .info-card {
-        width: 53px;
-        /* 40 * 1.333 */
-        height: 40px;
-        /* 30 * 1.333 */
-    }
-
-    @keyframes arcMotionInfoCard {
-        0% {
-            width: 53px;
-            /* 40 * 1.333 */
-            height: 40px;
-            /* 30 * 1.333 */
-            top: -93px;
-            /* -70 * 1.333 */
-            left: 27px;
-            /* 20 * 1.333 */
-            margin: -40px 0 0 -40px;
-            transform: rotate(0deg) translateY(0);
-        }
-
-        50% {
-            width: 460px;
-            /* 345 * 1.333 */
-            height: 333px;
-            /* 250 * 1.333 */
-            top: -800px;
-            /* -600 * 1.333 */
-            left: -120px;
-            /* -90 * 1.333 */
-            transform: rotate(180deg);
-        }
-
-        100% {
-            width: 867px;
-            /* 650 * 1.333 */
-            height: 627px;
-            /* 470 * 1.333 */
-            top: -14%;
-            left: -7%;
-            margin: 0;
-            transform: rotate(360deg) translateY(0);
-        }
-    }
-
-
-    .reset-btn {
-        width: 67px;
-        /* 50 * 1.333 */
-        height: 67px;
-        /* 50 * 1.333 */
-    }
-
-    .reset-btn svg {
-        width: 31px;
-        /* 23 * 1.333 */
-        height: 31px;
-        /* 23 * 1.333 */
-    }
+    /* All desktop styles use the base CSS values */
+    /* Elements stay at fixed pixel positions regardless of browser size */
+    /* No scaling applied - envelope and decorations maintain exact spacing */
 }
 
 /* ========================================
-   2. MEDIUM DESKTOP (1024px - 1439px)
-   Standard Laptops and Smaller Monitors
-   Scale down from 1440px base
+   TABLET PORTRAIT & LANDSCAPE (768px - 1023px)
+   Scrollable Layout - Reposition for Vertical Flow
+   Design at: 768px minimum
    ======================================== */
 
-@media (max-width: 1439px) and (min-width: 1024px) {
-    /* Scale factor: 1280/1440 = 0.889x (using 1280 as midpoint) */
-    
-    .envelope-container {
-        width: 444px;  /* 500 * 0.889 */
-        height: 311px; /* 350 * 0.889 */
+@media (min-width: 768px) and (max-width: 1023px) {
+    body {
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: auto;
+        min-height: 100vh;
     }
 
-    .envelope {
-        width: 444px;  /* 500 * 0.889 */
-        height: 267px; /* 300 * 0.889 */
-    }
-
-    .envelope-text .envelope-title {
-        font-size: 31px; /* 35 * 0.889 */
-    }
-
-    .envelope-text .date {
-        font-size: 15px; /* 17 * 0.889 */
-    }
-
-    .click-text {
-        font-size: 20px; /* 23 * 0.889 */
-    }
-
-    /* Scale seal */
-    .seal {
-        width: 80px;   /* 90 * 0.889 */
-        height: 80px;  /* 90 * 0.889 */
-    }
-
-    /* Scale all containers proportionally */
-    .flowers-container,
-    .flower-1-container,
-    .save-the-date-container,
-    .additional-images-container,
-    .photos-container,
-    .info-card-container {
-        width: 1422px; /* 1600 * 0.889 */
-        height: 853px;  /* 960 * 0.889 */
-    }
-
-    /* Scale flowers */
-    .flower-1-container .flower-1 {
-        width: 231px;  /* 260 * 0.889 */
-        height: 289px; /* 325 * 0.889 */
-        top: 205px;    /* 231 * 0.889 */
-        left: 424px;   /* 477 * 0.889 */
-    }
-
-    .flower-1-container.opened .flower-1 {
-        width: 270px;  /* 250 * 0.889 */
-        height: 337px; /* 312 * 0.889 */
-        top: 120px;    /* 173 * 0.889 */
-        left: 925px;   /* 1040 * 0.889 */
-    }
-
-    .flowers-container .flower-2 {
-        width: 213px;  /* 240 * 0.889 */
-        height: 267px; /* 300 * 0.889 */
-        top: 213px;    /* 240 * 0.889 */
-        left: 368px;   /* 414 * 0.889 */
-    }
-
-    .flowers-container .flower-3 {
-        width: 471px;  /* 530 * 0.889 */
-        height: 500px; /* 563 * 0.889 */
-        top: 239px;    /* 269 * 0.889 */
-        left: 289px;   /* 325 * 0.889 */
-    }
-
-    /* Scale save-the-date */
-    .save-the-date-container .image-1 {
-        width: 267px;  /* 300 * 0.889 */
-        height: 267px; /* 300 * 0.889 */
-        top: 128px;    /* 144 * 0.889 */
-        left: 171px;   /* 192 * 0.889 */
-    }
-
-    /* Scale additional images */
-    .additional-images-container .image-1 {
-        width: 120px;  /* 120 * 0.889 */
-        height: 120px; /* 120 * 0.889 */
-        top: 256px;    /* 288 * 0.889 */
-        left: 675px;   /* 752 * 0.889 */
-    }
-
-    .additional-images-container .image-2 {
-        width: 222px;  /* 250 * 0.889 */
-        height: 222px; /* 250 * 0.889 */
-        top: 316px;    /* 355 * 0.889 */
-        right: 57px;   /* 64 * 0.889 */
-    }
-
-    .additional-images-container .image-3 {
-        width: 250px;  /* 250 * 0.889 */
-        height: 172px; /* 172 * 0.889 */
-        bottom: 68px;  /* 77 * 0.889 */
-        right: 210px;  /* 256 * 0.889 */
-    }
-
-    /* Scale photos - override animation end states */
-    .photo {
-        /* Initial state scaled */
-        width: 36px;   /* 40 * 0.889 */
-        height: 27px;  /* 30 * 0.889 */
-    }
-
-    /* Override animation keyframes for medium desktop */
-    @keyframes arcMotion1 {
-        0% {
-            width: 36px;   /* 40 * 0.889 */
-            height: 27px;  /* 30 * 0.889 */
-            top: 50%;
-            left: 50%;
-            margin: -27px 0 0 -27px;
-            transform: rotate(0deg) translateY(0);
-        }
-        50% {
-            width: 168px;  /* 170 * 0.889 */
-            height: 126px; /* 127.5 * 0.889 */
-            top: 10%;
-            left: 42.5%;
-            transform: rotate(172.5deg);
-        }
-        100% {
-            width: 300px;  /* 300 * 0.889 */
-            height: 225px; /* 225 * 0.889 */
-            top: 20%;
-            left: 35%;
-            margin: 0;
-            transform: rotate(345deg) translateY(0);
-        }
-    }
-
-    @keyframes arcMotion2 {
-        0% {
-            width: 36px;   /* 40 * 0.889 */
-            height: 27px;  /* 30 * 0.889 */
-            top: 50%;
-            left: 50%;
-            margin: -27px 0 0 -27px;
-            transform: rotate(0deg) translateY(0);
-        }
-        50% {
-            width: 187px;  /* 210 * 0.889 */
-            height: 140px; /* 157.5 * 0.889 */
-            top: 10%;
-            left: 30.5%;
-            transform: rotate(180deg);
-        }
-        100% {
-            width: 338px;  /* 380 * 0.889 */
-            height: 253px; /* 285 * 0.889 */
-            top: 52%;
-            left: 11%;
-            margin: 0;
-            transform: rotate(360deg) translateY(0);
-        }
-    }
-
-    @keyframes arcMotion3 {
-        0% {
-            width: 36px;   /* 40 * 0.889 */
-            height: 27px;  /* 30 * 0.889 */
-            top: 50%;
-            left: 50%;
-            margin: -27px 0 0 -27px;
-            transform: rotate(0deg) translateY(0);
-        }
-        50% {
-            width: 180.5px;  /* 180 * 0.889 */
-            height: 135.5px; /* 135 * 0.889 */
-            top: 10%;
-            left: 42.25%;
-            transform: rotate(175deg);
-        }
-        100% {
-            width: 325px;  /* 320 * 0.889 */
-            height: 244px; /* 240 * 0.889 */
-            top: 51%;
-            left: 34.5%;
-            margin: 0;
-            transform: rotate(350deg) translateY(0);
-        }
-    }
-
-    @keyframes arcMotion4 {
-        0% {
-            width: 36px;   /* 40 * 0.889 */
-            height: 27px;  /* 30 * 0.889 */
-            top: 50%;
-            left: 50%;
-            margin: -27px 0 0 -27px;
-            transform: rotate(0deg) translateY(0);
-        }
-        50% {
-            width: 193px;  /* 210 * 0.889 */
-            height: 144.5px; /* 157.5 * 0.889 */
-            top: 10%;
-            left: 61%;
-            transform: rotate(190deg);
-        }
-        100% {
-            width: 350px;  /* 380 * 0.889 */
-            height: 262px; /* 285 * 0.889 */
-            top: 53%;
-            left: 72%;
-            margin: 0;
-            transform: rotate(380deg) translateY(0);
-        }
-    }
-
-    @keyframes arcMotion5 {
-        0% {
-            width: 36px;   /* 40 * 0.889 */
-            height: 27px;  /* 30 * 0.889 */
-            top: 50%;
-            left: 50%;
-            margin: -27px 0 0 -27px;
-            transform: rotate(0deg) translateY(0);
-        }
-        50% {
-            width: 193px;  /* 290 * 0.889 */
-            height: 144.5px; /* 217.5 * 0.889 */
-            top: -10%;
-            left: 60.5%;
-            transform: rotate(180deg);
-        }
-        100% {
-            width: 350px;  /* 367 * 0.889 */
-            height: 262px; /* 275 * 0.889 */
-            top: 22%;
-            left: 71%;
-            margin: 0;
-            transform: rotate(360deg) translateY(0);
-        }
-    }
-
-    /* Scale info card - override animation */
-    .info-card {
-        width: 36px;   /* 40 * 0.889 */
-        height: 27px;  /* 30 * 0.889 */
-    }
-
-    @keyframes arcMotionInfoCard {
-        0% {
-            width: 36px;   /* 40 * 0.889 */
-            height: 27px;  /* 30 * 0.889 */
-            top: -62px;    /* -70 * 0.889 */
-            left: 18px;    /* 20 * 0.889 */
-            margin: -27px 0 0 -27px;
-            transform: rotate(0deg) translateY(0);
-        }
-        50% {
-            width: 307px;  /* 345 * 0.889 */
-            height: 222px; /* 250 * 0.889 */
-            top: -533px;   /* -600 * 0.889 */
-            left: -80px;   /* -90 * 0.889 */
-            transform: rotate(180deg);
-        }
-        100% {
-            width: 578px;  /* 650 * 0.889 */
-            height: 418px; /* 470 * 0.889 */
-            top: -13%;
-            left: -7%;
-            margin: 0;
-            transform: rotate(360deg) translateY(0);
-        }
-    }
-
-    .reset-btn {
-        width: 44px;   /* 50 * 0.889 */
-        height: 44px;  /* 50 * 0.889 */
-    }
-
-    .reset-btn svg {
-        width: 20px;   /* 23 * 0.889 */
-        height: 20px;  /* 23 * 0.889 */
-    }
-}
-
-/* ========================================
-   3. TABLETS (768px - 1023px)
-   iPad, Android Tablets (Portrait & Landscape)
-   ======================================== */
-
-@media (max-width: 1023px) {
-    /* Scale factor: 900/1440 = 0.625x */
-    
     .hero {
+        min-height: auto;
         padding: 60px 20px;
+        /* Remove centering for scrollable layout */
+        display: block;
     }
 
     .envelope-container {
-        width: 313px;  /* 500 * 0.625 */
-        height: 219px; /* 350 * 0.625 */
+        width: 380px;
+        height: 266px;
+        margin: 0 auto 40px;
     }
 
-    /* Reduce hover effect on tablets */
-    .envelope-container:hover {
-        transform: scale(1.02);
-    }
-
-    .envelope {
-        width: 313px;  /* 500 * 0.625 */
-        height: 188px; /* 300 * 0.625 */
-    }
-
-    .envelope-text .envelope-title {
-        font-size: 22px; /* 35 * 0.625 */
-        margin-bottom: 10px;
-    }
-
-    .envelope-text .date {
-        font-size: 11px; /* 17 * 0.625 */
-    }
-
-    .click-text {
-        font-size: 14px; /* 23 * 0.625 */
-        bottom: -40px;
-    }
-
-    /* Scale seal */
-    .seal {
-        width: 56px;   /* 90 * 0.625 */
-        height: 56px;  /* 90 * 0.625 */
-    }
-
-    /* Scale all containers */
-    .flowers-container,
-    .flower-1-container,
-    .save-the-date-container,
-    .additional-images-container,
-    .photos-container,
-    .info-card-container {
-        width: 1000px; /* 1600 * 0.625 */
-        height: 600px; /* 960 * 0.625 */
-    }
-
-    /* Scale flowers */
-    .flower-1-container .flower-1 {
-        width: 163px;  /* 260 * 0.625 */
-        height: 203px; /* 325 * 0.625 */
-        top: 144px;    /* 231 * 0.625 */
-        left: 298px;   /* 477 * 0.625 */
-    }
-
-    .flower-1-container.opened .flower-1 {
-        width: 200px;  /* 250 * 0.625 */
-        height: 250px; /* 312 * 0.625 */
-        top: 80px;    /* 173 * 0.625 */
-        left: 640px;   /* 1040 * 0.625 */
-    }
-
-    .flowers-container .flower-2 {
-        width: 150px;  /* 240 * 0.625 */
-        height: 188px; /* 300 * 0.625 */
-        top: 150px;    /* 240 * 0.625 */
-        left: 259px;   /* 414 * 0.625 */
-    }
-
-    .flowers-container .flower-3 {
-        width: 331px;  /* 530 * 0.625 */
-        height: 352px; /* 563 * 0.625 */
-        top: 168px;    /* 269 * 0.625 */
-        left: 203px;   /* 325 * 0.625 */
-    }
-
-    /* Scale save-the-date */
-    .save-the-date-container .image-1 {
-        width: 188px;  /* 300 * 0.625 */
-        height: 188px; /* 300 * 0.625 */
-        top: 90px;     /* 144 * 0.625 */
-        left: 120px;   /* 192 * 0.625 */
-    }
-
-    /* Scale additional images */
-    .additional-images-container .image-1 {
-        width: 75px;   /* 120 * 0.625 */
-        height: 75px;  /* 120 * 0.625 */
-        top: 180px;    /* 288 * 0.625 */
-        left: 475px;   /* 752 * 0.625 */
-    }
-
-    .additional-images-container .image-2 {
-        width: 156px;  /* 250 * 0.625 */
-        height: 156px; /* 250 * 0.625 */
-        top: 222px;    /* 355 * 0.625 */
-        right: 40px;   /* 64 * 0.625 */
-    }
-
-    .additional-images-container .image-3 {
-        width: 170px;  /* 250 * 0.625 */
-        height: 118px; /* 172 * 0.625 */
-        bottom: 48px;  /* 77 * 0.625 */
-        right: 160px;  /* 256 * 0.625 */
-    }
-
-    /* Scale photos - override animation end states */
-    .photo {
-        /* Initial state scaled */
-        width: 25px;   /* 40 * 0.625 */
-        height: 19px;  /* 30 * 0.625 */
-    }
-
-    /* Override animation keyframes for tablets */
-    @keyframes arcMotion1 {
-        0% {
-            width: 25px;   /* 40 * 0.625 */
-            height: 19px;  /* 30 * 0.625 */
-            top: 50%;
-            left: 50%;
-            margin: -19px 0 0 -19px;
-            transform: rotate(0deg) translateY(0);
-        }
-        50% {
-            width: 106px;  /* 170 * 0.625 */
-            height: 80px;  /* 127.5 * 0.625 */
-            top: 10%;
-            left: 43%;
-            transform: rotate(172.5deg);
-        }
-        100% {
-            width: 200px;  /* 300 * 0.625 */
-            height: 150px; /* 225 * 0.625 */
-            top: 20%;
-            left: 35%;
-            margin: 0;
-            transform: rotate(345deg) translateY(0);
-        }
-    }
-
-    @keyframes arcMotion2 {
-        0% {
-            width: 25px;   /* 40 * 0.625 */
-            height: 19px;  /* 30 * 0.625 */
-            top: 50%;
-            left: 50%;
-            margin: -19px 0 0 -19px;
-            transform: rotate(0deg) translateY(0);
-        }
-        50% {
-            width: 131px;  /* 210 * 0.625 */
-            height: 98px;  /* 157.5 * 0.625 */
-            top: 10%;
-            left: 30.5%;
-            transform: rotate(180deg);
-        }
-        100% {
-            width: 238px;  /* 380 * 0.625 */
-            height: 178px; /* 285 * 0.625 */
-            top: 52%;
-            left: 11%;
-            margin: 0;
-            transform: rotate(360deg) translateY(0);
-        }
-    }
-
-    @keyframes arcMotion3 {
-        0% {
-            width: 25px;   /* 40 * 0.625 */
-            height: 19px;  /* 30 * 0.625 */
-            top: 50%;
-            left: 50%;
-            margin: -19px 0 0 -19px;
-            transform: rotate(0deg) translateY(0);
-        }
-        50% {
-            width: 113px;  /* 180 * 0.625 */
-            height: 122.5px;  /* 135 * 0.625 */
-            top: 10%;
-            left: 42%;
-            transform: rotate(175deg);
-        }
-        100% {
-            width: 220px;  /* 320 * 0.625 */
-            height: 165px; /* 240 * 0.625 */
-            top: 51%;
-            left: 34%;
-            margin: 0;
-            transform: rotate(350deg) translateY(0);
-        }
-    }
-
-    @keyframes arcMotion4 {
-        0% {
-            width: 25px;   /* 40 * 0.625 */
-            height: 19px;  /* 30 * 0.625 */
-            top: 50%;
-            left: 50%;
-            margin: -19px 0 0 -19px;
-            transform: rotate(0deg) translateY(0);
-        }
-        50% {
-            width: 137.5px;  /* 210 * 0.625 */
-            height: 103px;  /* 157.5 * 0.625 */
-            top: 10%;
-            left: 60.5%;
-            transform: rotate(190deg);
-        }
-        100% {
-            width: 250px;  /* 380 * 0.625 */
-            height: 187px; /* 285 * 0.625 */
-            top: 52.5%;
-            left: 71%;
-            margin: 0;
-            transform: rotate(380deg) translateY(0);
-        }
-    }
-
-    @keyframes arcMotion5 {
-        0% {
-            width: 25px;   /* 40 * 0.625 */
-            height: 19px;  /* 30 * 0.625 */
-            top: 50%;
-            left: 50%;
-            margin: -19px 0 0 -19px;
-            transform: rotate(0deg) translateY(0);
-        }
-        50% {
-            width: 137.5px;  /* 290 * 0.625 */
-            height: 103.5px; /* 217.5 * 0.625 */
-            top: -10%;
-            left: 60.25%;
-            transform: rotate(180deg);
-        }
-        100% {
-            width: 250px;  /* 367 * 0.625 */
-            height: 188px; /* 275 * 0.625 */
-            top: 22%;
-            left: 70.5%;
-            margin: 0;
-            transform: rotate(360deg) translateY(0);
-        }
-    }
-
-    /* Scale info card - override animation */
-    .info-card {
-        width: 25px;   /* 40 * 0.625 */
-        height: 19px;  /* 30 * 0.625 */
-    }
-
-    @keyframes arcMotionInfoCard {
-        0% {
-            width: 25px;   /* 40 * 0.625 */
-            height: 19px;  /* 30 * 0.625 */
-            top: -44px;    /* -70 * 0.625 */
-            left: 13px;    /* 20 * 0.625 */
-            margin: -19px 0 0 -19px;
-            transform: rotate(0deg) translateY(0);
-        }
-        50% {
-            width: 215.5px;  /* 345 * 0.625 */
-            height: 156.5px; /* 250 * 0.625 */
-            top: -375px;   /* -600 * 0.625 */
-            left: -56px;   /* -90 * 0.625 */
-            transform: rotate(180deg);
-        }
-        100% {
-            width: 406px;  /* 650 * 0.625 */
-            height: 294px; /* 470 * 0.625 */
-            top: -13%;
-            left: -8%;
-            margin: 0;
-            transform: rotate(360deg) translateY(0);
-        }
-    }
-
-    .reset-btn {
-        width: 31px;   /* 50 * 0.625 */
-        height: 31px;  /* 50 * 0.625 */
-        bottom: 20px;
-        right: 20px;
-    }
-
-    .reset-btn svg {
-        width: 14px;   /* 23 * 0.625 */
-        height: 14px;  /* 23 * 0.625 */
-    }
-}
-
-
-/* ========================================
-   4. MOBILE (Portrait) - 375px - 767px
-   Phones in Portrait Mode
-   ======================================== */
-
-@media (max-width: 864px) {
-    /* Scale factor: 600/1440 = 0.417x */
-    
-    .hero {
-        padding: 30px 15px;
-    }
-
-    .envelope-container {
-        width: 208px;  /* 500 * 0.417 */
-        height: 146px; /* 350 * 0.417 */
-    }
-
-    /* No hover effect on mobile */
+    /* Disable hover on touch devices */
     .envelope-container:hover {
         transform: none;
     }
 
     .envelope {
-        width: 208px;  /* 500 * 0.417 */
-        height: 125px; /* 300 * 0.417 */
+        width: 380px;
+        height: 228px;
     }
 
     .envelope-text .envelope-title {
-        font-size: 15px; /* 35 * 0.417 */
-        margin-bottom: 6px;
+        font-size: 27px;
+        margin-bottom: 12px;
     }
 
     .envelope-text .date {
-        font-size: 7px;  /* 17 * 0.417 */
+        font-size: 14px;
     }
 
     .click-text {
-        font-size: 10px; /* 23 * 0.417 */
+        font-size: 18px;
         bottom: -30px;
     }
 
-    /* Scale seal */
     .seal {
-        width: 38px;   /* 90 * 0.417 */
-        height: 38px;  /* 90 * 0.417 */
+        width: 68px;
+        height: 68px;
     }
 
-    /* Scale all containers */
+    /* 
+       FOR MOBILE/TABLET SCROLLABLE LAYOUTS:
+       You'll need to reposition these containers from absolute to relative/static
+       and stack them vertically. This is where you'll do your custom layout.
+       
+       Example approach:
+    */
+    
+    .flowers-container,
+    .flower-1-container,
+    .save-the-date-container,
+    .additional-images-container {
+        /* Change from absolute centering to relative positioning */
+        position: relative;
+        width: 100%;
+        max-width: 600px;
+        height: auto;
+        transform: none;
+        top: auto;
+        left: auto;
+        margin: 40px auto;
+    }
+
+    .photos-container,
+    .info-card-container {
+        /* These might become sections that scroll into view */
+        position: relative;
+        width: 100%;
+        max-width: 600px;
+        height: auto;
+        transform: none;
+        margin: 40px auto;
+    }
+
+    /* Reset photo/card positioning for vertical layout */
+    .photo,
+    .info-card {
+        /* You'll reposition these in your custom mobile layout */
+        position: static;
+        display: inline-block;
+        margin: 20px;
+    }
+
+    .reset-btn {
+        width: 45px;
+        height: 45px;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .reset-btn svg {
+        width: 21px;
+        height: 21px;
+    }
+}
+
+/* ========================================
+   MOBILE LANDSCAPE (480px - 767px)
+   Scrollable Layout
+   Design at: 480px minimum
+   ======================================== */
+
+@media (min-width: 480px) and (max-width: 767px) {
+    body {
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .hero {
+        min-height: auto;
+        padding: 40px 20px;
+        display: block;
+    }
+
+    .envelope-container {
+        width: 320px;
+        height: 224px;
+        margin: 0 auto 30px;
+    }
+
+    .envelope-container:hover {
+        transform: none;
+    }
+
+    .envelope {
+        width: 320px;
+        height: 192px;
+    }
+
+    .envelope-text .envelope-title {
+        font-size: 23px;
+        margin-bottom: 10px;
+    }
+
+    .envelope-text .date {
+        font-size: 12px;
+    }
+
+    .click-text {
+        font-size: 15px;
+        bottom: -25px;
+    }
+
+    .seal {
+        width: 58px;
+        height: 58px;
+    }
+
+    /* Convert to scrollable vertical layout */
     .flowers-container,
     .flower-1-container,
     .save-the-date-container,
     .additional-images-container,
     .photos-container,
     .info-card-container {
-        width: min(667px, 100vw);
-        height: 400px; /* 960 * 0.417 */
-    }
-
-    /* Scale flowers */
-    .flower-1-container .flower-1 {
-        width: 108px;  /* 260 * 0.417 */
-        height: 136px; /* 325 * 0.417 */
-        top: 96px;     /* 231 * 0.417 */
-        left: 199px;   /* 477 * 0.417 */
-    }
-
-    .flower-1-container.opened .flower-1 {
-        width: 130px;  /* 250 * 0.417 */
-        height: 163px; /* 312 * 0.417 */
-        top: 50px;     /* 173 * 0.417 */
-        left: 434px;   /* 1040 * 0.417 */
-    }
-
-    .flowers-container .flower-2 {
-        width: 100px;  /* 240 * 0.417 */
-        height: 125px; /* 300 * 0.417 */
-        top: 100px;    /* 240 * 0.417 */
-        left: 173px;   /* 414 * 0.417 */
-    }
-
-    .flowers-container .flower-3 {
-        width: 221px;  /* 530 * 0.417 */
-        height: 235px; /* 563 * 0.417 */
-        top: 112px;    /* 269 * 0.417 */
-        left: 136px;   /* 325 * 0.417 */
-    }
-
-    /* Scale save-the-date */
-    .save-the-date-container .image-1 {
-        width: 125px;  /* 300 * 0.417 */
-        height: 125px; /* 300 * 0.417 */
-        top: 60px;     /* 144 * 0.417 */
-        left: 80px;    /* 192 * 0.417 */
-    }
-
-    /* Scale additional images */
-    .additional-images-container .image-1 {
-        width: 60px;   /* 120 * 0.417 */
-        height: 60px;  /* 120 * 0.417 */
-        top: 120px;    /* 288 * 0.417 */
-        left: 316px;   /* 752 * 0.417 */
-    }
-
-    .additional-images-container .image-2 {
-        width: 104px;  /* 250 * 0.417 */
-        height: 104px; /* 250 * 0.417 */
-        top: 148px;    /* 355 * 0.417 */
-        right: 27px;   /* 64 * 0.417 */
-    }
-
-    .additional-images-container .image-3 {
-        width: 120px;  /* 250 * 0.417 */
-        height: 83px;  /* 172 * 0.417 */
-        bottom: 32px;  /* 77 * 0.417 */
-        right: 90px;  /* 256 * 0.417 */
-    }
-
-    /* Scale photos - override animation end states */
-    .photo {
-        /* Initial state scaled */
-        width: 17px;   /* 40 * 0.417 */
-        height: 13px;  /* 30 * 0.417 */
-    }
-
-    /* Override animation keyframes for mobile */
-    @keyframes arcMotion1 {
-        0% {
-            width: 17px;   /* 40 * 0.417 */
-            height: 13px;  /* 30 * 0.417 */
-            top: 50%;
-            left: 50%;
-            margin: -13px 0 0 -13px;
-            transform: rotate(0deg) translateY(0);
-        }
-        50% {
-            width: 71px;   /* 170 * 0.417 */
-            height: 53px;  /* 127.5 * 0.417 */
-            top: 10%;
-            left: 42.5%;
-            transform: rotate(172.5deg);
-        }
-        100% {
-            width: 140px;  /* 300 * 0.417 */
-            height: 105px;  /* 225 * 0.417 */
-            top: 20%;
-            left: 35%;
-            margin: 0;
-            transform: rotate(345deg) translateY(0);
-        }
-    }
-
-    @keyframes arcMotion2 {
-        0% {
-            width: 17px;   /* 40 * 0.417 */
-            height: 13px;  /* 30 * 0.417 */
-            top: 50%;
-            left: 50%;
-            margin: -13px 0 0 -13px;
-            transform: rotate(0deg) translateY(0);
-        }
-        50% {
-            width: 88px;   /* 210 * 0.417 */
-            height: 66px;  /* 157.5 * 0.417 */
-            top: 10%;
-            left: 30.5%;
-            transform: rotate(180deg);
-        }
-        100% {
-            width: 158px;  /* 380 * 0.417 */
-            height: 119px; /* 285 * 0.417 */
-            top: 52%;
-            left: 11%;
-            margin: 0;
-            transform: rotate(360deg) translateY(0);
-        }
-    }
-
-    @keyframes arcMotion3 {
-        0% {
-            width: 17px;   /* 40 * 0.417 */
-            height: 13px;  /* 30 * 0.417 */
-            top: 50%;
-            left: 50%;
-            margin: -13px 0 0 -13px;
-            transform: rotate(0deg) translateY(0);
-        }
-        50% {
-            width: 83.5px;   /* 180 * 0.417 */
-            height: 63px;  /* 135 * 0.417 */
-            top: 10%;
-            left: 42.25%;
-            transform: rotate(175deg);
-        }
-        100% {
-            width: 150px;  /* 320 * 0.417 */
-            height: 113px; /* 240 * 0.417 */
-            top: 51%;
-            left: 34.5%;
-            margin: 0;
-            transform: rotate(350deg) translateY(0);
-        }
-    }
-
-    @keyframes arcMotion4 {
-        0% {
-            width: 17px;   /* 40 * 0.417 */
-            height: 13px;  /* 30 * 0.417 */
-            top: 50%;
-            left: 50%;
-            margin: -13px 0 0 -13px;
-            transform: rotate(0deg) translateY(0);
-        }
-        50% {
-            width: 88px;   /* 210 * 0.417 */
-            height: 66px;  /* 157.5 * 0.417 */
-            top: 10%;
-            left: 61%;
-            transform: rotate(190deg);
-        }
-        100% {
-            width: 158px;  /* 380 * 0.417 */
-            height: 119px; /* 285 * 0.417 */
-            top: 52.5%;
-            left: 72%;
-            margin: 0;
-            transform: rotate(380deg) translateY(0);
-        }
-    }
-
-    @keyframes arcMotion5 {
-        0% {
-            width: 17px;   /* 40 * 0.417 */
-            height: 13px;  /* 30 * 0.417 */
-            top: 50%;
-            left: 50%;
-            margin: -13px 0 0 -13px;
-            transform: rotate(0deg) translateY(0);
-        }
-        50% {
-            width: 121px;  /* 290 * 0.417 */
-            height: 91px;  /* 217.5 * 0.417 */
-            top: -10%;
-            left: 57.5%;
-            transform: rotate(180deg);
-        }
-        100% {
-            width: 153px;  /* 367 * 0.417 */
-            height: 115px; /* 275 * 0.417 */
-            top: 22%;
-            left: 69%;
-            margin: 0;
-            transform: rotate(360deg) translateY(0);
-        }
-    }
-
-    /* Scale info card - override animation */
-    .info-card {
-        width: 17px;   /* 40 * 0.417 */
-        height: 13px;  /* 30 * 0.417 */
-    }
-
-    @keyframes arcMotionInfoCard {
-        0% {
-            width: 17px;   /* 40 * 0.417 */
-            height: 13px;  /* 30 * 0.417 */
-            top: -29px;    /* -70 * 0.417 */
-            left: 8px;     /* 20 * 0.417 */
-            margin: -13px 0 0 -13px;
-            transform: rotate(0deg) translateY(0);
-        }
-        50% {
-            width: 144px;  /* 345 * 0.417 */
-            height: 104px; /* 250 * 0.417 */
-            top: -250px;   /* -600 * 0.417 */
-            left: -38px;   /* -90 * 0.417 */
-            transform: rotate(180deg);
-        }
-        100% {
-            width: 271px;  /* 650 * 0.417 */
-            height: 196px; /* 470 * 0.417 */
-            top: -13.5%;
-            left: -7%;
-            margin: 0;
-            transform: rotate(360deg) translateY(0);
-        }
+        position: relative;
+        width: 100%;
+        max-width: 450px;
+        height: auto;
+        transform: none;
+        top: auto;
+        left: auto;
+        margin: 30px auto;
     }
 
     .reset-btn {
-        width: 32px;   /* 50 * 0.417 */
-        height: 32px;  /* 50 * 0.417 */
+        width: 40px;
+        height: 40px;
         bottom: 15px;
         right: 15px;
     }
 
     .reset-btn svg {
-        width: 15px;   /* 23 * 0.417 */
-        height: 15px;  /* 23 * 0.417 */
+        width: 18px;
+        height: 18px;
     }
 }
 
 /* ========================================
-   5. SMALL MOBILE (Portrait) - Below 375px
-   Compact Phones (iPhone SE, etc.)
+   MOBILE PORTRAIT (320px - 479px)
+   Scrollable Long-Form Layout
+   Design at: 320px minimum
    ======================================== */
 
-@media (max-width: 439px) {
-    /* Scale factor: 480/1440 = 0.333x */
-    
-    .hero {
-        padding: 25px 10px;
-    }
-
-    .envelope-container {
-        width: 167px;  /* 500 * 0.333 */
-        height: 117px; /* 350 * 0.333 */
-    }
-
-    .envelope {
-        width: 167px;  /* 500 * 0.333 */
-        height: 100px; /* 300 * 0.333 */
-    }
-
-    .envelope-text .envelope-title {
-        font-size: 12px; /* 35 * 0.333 */
-        margin-bottom: 4px;
-    }
-
-    .envelope-text .date {
-        font-size: 6px;  /* 17 * 0.333 */
-    }
-
-    .click-text {
-        font-size: 8px;  /* 23 * 0.333 */
-        bottom: -24px;
-    }
-
-    /* Scale seal */
-    .seal {
-        width: 30px;   /* 90 * 0.333 */
-        height: 30px;  /* 90 * 0.333 */
-    }
-
-    /* Scale all containers */
-    .flowers-container,
-    .flower-1-container,
-    .save-the-date-container,
-    .additional-images-container,
-    .photos-container,
-    .info-card-container {
-        width: min(533px, 100vw);
-        height: 320px; /* 960 * 0.333 */
-    }
-
-    /* Scale flowers */
-    .flower-1-container .flower-1 {
-        width: 87px;   /* 260 * 0.333 */
-        height: 108px; /* 325 * 0.333 */
-        top: 77px;     /* 231 * 0.333 */
-        left: 159px;   /* 477 * 0.333 */
-    }
-
-    .flower-1-container.opened .flower-1 {
-        width: 83px;   /* 250 * 0.333 */
-        height: 104px; /* 312 * 0.333 */
-        top: 58px;     /* 173 * 0.333 */
-        left: 346px;   /* 1040 * 0.333 */
-    }
-
-    .flowers-container .flower-2 {
-        width: 80px;   /* 240 * 0.333 */
-        height: 100px; /* 300 * 0.333 */
-        top: 80px;     /* 240 * 0.333 */
-        left: 138px;   /* 414 * 0.333 */
-    }
-
-    .flowers-container .flower-3 {
-        width: 177px;  /* 530 * 0.333 */
-        height: 187px; /* 563 * 0.333 */
-        top: 90px;     /* 269 * 0.333 */
-        left: 108px;   /* 325 * 0.333 */
-    }
-
-    /* Scale save-the-date */
-    .save-the-date-container .image-1 {
-        width: 100px;  /* 300 * 0.333 */
-        height: 100px; /* 300 * 0.333 */
-        top: 48px;     /* 144 * 0.333 */
-        left: 64px;    /* 192 * 0.333 */
-    }
-
-    /* Scale additional images */
-    .additional-images-container .image-1 {
-        width: 45px;   /* 120 * 0.333 */
-        height: 45px;  /* 120 * 0.333 */
-        top: 96px;     /* 288 * 0.333 */
-        left: 251px;   /* 752 * 0.333 */
-    }
-
-    .additional-images-container .image-2 {
-        width: 90px;   /* 250 * 0.333 */
-        height: 90px;  /* 250 * 0.333 */
-        top: 118px;    /* 355 * 0.333 */
-        right: 40px;   /* 64 * 0.333 */
-    }
-
-    .additional-images-container .image-3 {
-        width: 90px;   /* 250 * 0.333 */
-        height: 62px;  /* 172 * 0.333 */
-        bottom: 30px;  /* 77 * 0.333 */
-        right: 100px;   /* 256 * 0.333 */
-    }
-
-    /* Scale photos - override animation end states */
-    .photo {
-        /* Initial state scaled */
-        width: 13px;   /* 40 * 0.333 */
-        height: 10px;  /* 30 * 0.333 */
-    }
-
-    /* Override animation keyframes for small mobile */
-    @keyframes arcMotion1 {
-        0% {
-            width: 13px;   /* 40 * 0.333 */
-            height: 10px;  /* 30 * 0.333 */
-            top: 50%;
-            left: 50%;
-            margin: -10px 0 0 -10px;
-            transform: rotate(0deg) translateY(0);
-        }
-        50% {
-            width: 57px;   /* 170 * 0.333 */
-            height: 42px;  /* 127.5 * 0.333 */
-            top: 10%;
-            left: 43.25%;
-            transform: rotate(172.5deg);
-        }
-        100% {
-            width: 110px;  /* 300 * 0.333 */
-            height: 83px;  /* 225 * 0.333 */
-            top: 20%;
-            left: 34.5%;
-            margin: 0;
-            transform: rotate(345deg) translateY(0);
-        }
-    }
-
-    @keyframes arcMotion2 {
-        0% {
-            width: 13px;   /* 40 * 0.333 */
-            height: 10px;  /* 30 * 0.333 */
-            top: 50%;
-            left: 50%;
-            margin: -10px 0 0 -10px;
-            transform: rotate(0deg) translateY(0);
-        }
-        50% {
-            width: 70px;   /* 210 * 0.333 */
-            height: 52px;  /* 157.5 * 0.333 */
-            top: 10%;
-            left: 30.5%;
-            transform: rotate(180deg);
-        }
-        100% {
-            width: 127px;  /* 380 * 0.333 */
-            height: 95px;  /* 285 * 0.333 */
-            top: 52%;
-            left: 11%;
-            margin: 0;
-            transform: rotate(360deg) translateY(0);
-        }
-    }
-
-    @keyframes arcMotion3 {
-        0% {
-            width: 13px;   /* 40 * 0.333 */
-            height: 10px;  /* 30 * 0.333 */
-            top: 50%;
-            left: 50%;
-            margin: -10px 0 0 -10px;
-            transform: rotate(0deg) translateY(0);
-        }
-        50% {
-            width: 60px;   /* 180 * 0.333 */
-            height: 45px;  /* 135 * 0.333 */
-            top: 10%;
-            left: 42.5%;
-            transform: rotate(175deg);
-        }
-        100% {
-            width: 107px;  /* 320 * 0.333 */
-            height: 80px;  /* 240 * 0.333 */
-            top: 51%;
-            left: 35%;
-            margin: 0;
-            transform: rotate(350deg) translateY(0);
-        }
-    }
-
-    @keyframes arcMotion4 {
-        0% {
-            width: 13px;   /* 40 * 0.333 */
-            height: 10px;  /* 30 * 0.333 */
-            top: 50%;
-            left: 50%;
-            margin: -10px 0 0 -10px;
-            transform: rotate(0deg) translateY(0);
-        }
-        50% {
-            width: 70px;   /* 210 * 0.333 */
-            height: 52px;  /* 157.5 * 0.333 */
-            top: 10%;
-            left: 59.5%;
-            transform: rotate(190deg);
-        }
-        100% {
-            width: 127px;  /* 380 * 0.333 */
-            height: 95px;  /* 285 * 0.333 */
-            top: 52.5%;
-            left: 68%;
-            margin: 0;
-            transform: rotate(380deg) translateY(0);
-        }
-    }
-
-    @keyframes arcMotion5 {
-        0% {
-            width: 13px;   /* 40 * 0.333 */
-            height: 10px;  /* 30 * 0.333 */
-            top: 50%;
-            left: 50%;
-            margin: -10px 0 0 -10px;
-            transform: rotate(0deg) translateY(0);
-        }
-        50% {
-            width: 97px;   /* 290 * 0.333 */
-            height: 72px;  /* 217.5 * 0.333 */
-            top: -10%;
-            left: 57.5%;
-            transform: rotate(180deg);
-        }
-        100% {
-            width: 122px;  /* 367 * 0.333 */
-            height: 92px;  /* 275 * 0.333 */
-            top: 22%;
-            left: 68%;
-            margin: 0;
-            transform: rotate(360deg) translateY(0);
-        }
-    }
-
-    /* Scale info card - override animation */
-    .info-card {
-        width: 13px;   /* 40 * 0.333 */
-        height: 10px;  /* 30 * 0.333 */
-    }
-
-    @keyframes arcMotionInfoCard {
-        0% {
-            width: 13px;   /* 40 * 0.333 */
-            height: 10px;  /* 30 * 0.333 */
-            top: -23px;    /* -70 * 0.333 */
-            left: 7px;     /* 20 * 0.333 */
-            margin: -10px 0 0 -10px;
-            transform: rotate(0deg) translateY(0);
-        }
-        50% {
-            width: 101.5px;  /* 345 * 0.333 */
-            height: 73.5px;  /* 250 * 0.333 */
-            top: -200px;   /* -600 * 0.333 */
-            left: -30px;   /* -90 * 0.333 */
-            transform: rotate(180deg);
-        }
-        100% {
-            width: 190px;  /* 650 * 0.333 */
-            height: 137px; /* 470 * 0.333 */
-            top: -13%;
-            left: -7%;
-            margin: 0;
-            transform: rotate(360deg) translateY(0);
-        }
-    }
-
-    .reset-btn {
-        width: 28px;   /* 50 * 0.333 */
-        height: 28px;  /* 50 * 0.333 */
-        bottom: 12px;
-        right: 12px;
-    }
-
-    .reset-btn svg {
-        width: 13px;    /* 23 * 0.333 */
-        height: 13px;   /* 23 * 0.333 */
-    }
-}
-
-
-/* ========================================
-   6. LANDSCAPE MODE (Mobile & Tablet)
-   Phones and Tablets in Landscape Orientation
-   ======================================== */
-
-@media (max-height: 600px) and (orientation: landscape) {
-    /* Scale factor: 800/1440 = 0.555x */
-    
-    .hero {
+@media (max-width: 479px) {
+    body {
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: auto;
         min-height: 100vh;
-        height: 100vh;
-        padding: 0 15px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        /* Mobile gets scrollable background */
+        background-attachment: scroll;
+    }
+
+    .hero {
+        min-height: auto;
+        padding: 30px 15px;
+        display: block;
     }
 
     .envelope-container {
-        width: 278px;  /* 500 * 0.555 */
-        height: 194px; /* 350 * 0.555 */
-        margin: 0 auto;
+        width: 280px;
+        height: 196px;
+        margin: 0 auto 30px;
+    }
+
+    .envelope-container:hover {
+        transform: none;
     }
 
     .envelope {
-        width: 278px;  /* 500 * 0.555 */
-        height: 167px; /* 300 * 0.555 */
+        width: 280px;
+        height: 168px;
     }
 
     .envelope-text .envelope-title {
-        font-size: 19px; /* 35 * 0.555 */
+        font-size: 20px;
         margin-bottom: 8px;
     }
 
     .envelope-text .date {
-        font-size: 9px;  /* 17 * 0.555 */
+        font-size: 10px;
     }
 
     .click-text {
-        font-size: 13px; /* 23 * 0.555 */
-        bottom: -28px;
+        font-size: 13px;
+        bottom: -25px;
     }
 
-    /* Scale seal */
     .seal {
-        width: 50px;   /* 90 * 0.555 */
-        height: 50px;  /* 90 * 0.555 */
+        width: 50px;
+        height: 50px;
     }
 
-    /* Scale all containers */
+    /* 
+       MOBILE SCROLLABLE LAYOUT
+       Convert all absolute positioned containers to flow vertically
+       This is where you'll build your custom mobile experience
+    */
+    
     .flowers-container,
     .flower-1-container,
     .save-the-date-container,
-    .additional-images-container,
-    .photos-container,
-    .info-card-container {
-        width: 888px;  /* 1600 * 0.555 */
-        height: 533px; /* 960 * 0.555 */
+    .additional-images-container {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        min-height: 200px;
+        transform: none;
+        top: auto;
+        left: auto;
+        margin: 30px auto;
+        padding: 20px;
     }
 
-    /* Scale flowers */
-    .flower-1-container .flower-1 {
-        width: 144px;  /* 260 * 0.555 */
-        height: 180px; /* 325 * 0.555 */
-        top: 128px;    /* 231 * 0.555 */
-        left: 265px;   /* 477 * 0.555 */
-    }
-
-    .flower-1-container.opened .flower-1 {
-        width: 139px;  /* 250 * 0.555 */
-        height: 173px; /* 312 * 0.555 */
-        top: 96px;     /* 173 * 0.555 */
-        left: 577px;   /* 1040 * 0.555 */
-    }
-
-    .flowers-container .flower-2 {
-        width: 133px;  /* 240 * 0.555 */
-        height: 167px; /* 300 * 0.555 */
-        top: 133px;    /* 240 * 0.555 */
-        left: 230px;   /* 414 * 0.555 */
-    }
-
+    /* Reposition flowers for vertical mobile layout */
+    .flower-1-container .flower-1,
+    .flowers-container .flower-2,
     .flowers-container .flower-3 {
-        width: 294px;  /* 530 * 0.555 */
-        height: 312px; /* 563 * 0.555 */
-        top: 149px;    /* 269 * 0.555 */
-        left: 180px;   /* 325 * 0.555 */
+        position: relative;
+        width: 80%;
+        height: auto;
+        max-width: 200px;
+        top: auto;
+        left: auto;
+        right: auto;
+        margin: 15px auto;
+        display: block;
     }
 
-    /* Scale save-the-date */
     .save-the-date-container .image-1 {
-        width: 167px;  /* 300 * 0.555 */
-        height: 167px; /* 300 * 0.555 */
-        top: 80px;     /* 144 * 0.555 */
-        left: 107px;   /* 192 * 0.555 */
+        position: relative;
+        width: 70%;
+        max-width: 250px;
+        height: auto;
+        top: auto;
+        left: auto;
+        margin: 20px auto;
+        display: block;
     }
 
-    /* Scale additional images */
-    .additional-images-container .image-1 {
-        width: 67px;   /* 120 * 0.555 */
-        height: 67px;  /* 120 * 0.555 */
-        top: 160px;    /* 288 * 0.555 */
-        left: 417px;   /* 752 * 0.555 */
-    }
-
-    .additional-images-container .image-2 {
-        width: 139px;  /* 250 * 0.555 */
-        height: 139px; /* 250 * 0.555 */
-        top: 197px;    /* 355 * 0.555 */
-        right: 36px;   /* 64 * 0.555 */
-    }
-
+    .additional-images-container .image-1,
+    .additional-images-container .image-2,
     .additional-images-container .image-3 {
-        width: 139px;  /* 250 * 0.555 */
-        height: 95px;  /* 172 * 0.555 */
-        bottom: 43px;  /* 77 * 0.555 */
-        right: 142px;  /* 256 * 0.555 */
+        position: relative;
+        width: 70%;
+        max-width: 200px;
+        height: auto;
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        margin: 15px auto;
+        display: block;
     }
 
-    /* Scale photos - override animation end states */
+    /* Photos section - convert to vertical scroll section */
+    .photos-container {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        transform: none;
+        margin: 40px auto;
+        padding: 20px 15px;
+    }
+
     .photo {
-        /* Initial state scaled */
-        width: 22px;   /* 40 * 0.555 */
-        height: 17px;  /* 30 * 0.555 */
+        position: relative;
+        width: 90%;
+        max-width: 300px;
+        height: auto;
+        aspect-ratio: 4/3;
+        top: auto;
+        left: auto;
+        margin: 20px auto;
+        display: block;
+        transform: none !important;
+        /* Disable complex animations on mobile */
+        animation: none !important;
     }
 
-    /* Override animation keyframes for landscape */
-    @keyframes arcMotion1 {
-        0% {
-            width: 22px;   /* 40 * 0.555 */
-            height: 17px;  /* 30 * 0.555 */
-            top: 50%;
-            left: 50%;
-            margin: -17px 0 0 -17px;
-            transform: rotate(0deg) translateY(0);
-        }
-        50% {
-            width: 94px;   /* 170 * 0.555 */
-            height: 71px;  /* 127.5 * 0.555 */
-            top: 10%;
-            left: 43%;
-            transform: rotate(172.5deg);
-        }
-        100% {
-            width: 167px;  /* 300 * 0.555 */
-            height: 125px; /* 225 * 0.555 */
-            top: 20%;
-            left: 36%;
-            margin: 0;
-            transform: rotate(345deg) translateY(0);
-        }
+    .envelope-container.opened .photos-container .photo {
+        /* Simple fade in instead of arc motion */
+        animation: simpleFadeIn 0.8s ease-out forwards !important;
     }
 
-    @keyframes arcMotion2 {
-        0% {
-            width: 22px;   /* 40 * 0.555 */
-            height: 17px;  /* 30 * 0.555 */
-            top: 50%;
-            left: 50%;
-            margin: -17px 0 0 -17px;
-            transform: rotate(0deg) translateY(0);
-        }
-        50% {
-            width: 117px;  /* 210 * 0.555 */
-            height: 87px;  /* 157.5 * 0.555 */
-            top: 10%;
-            left: 30.5%;
-            transform: rotate(180deg);
-        }
-        100% {
-            width: 211px;  /* 380 * 0.555 */
-            height: 158px; /* 285 * 0.555 */
-            top: 52%;
-            left: 11%;
-            margin: 0;
-            transform: rotate(360deg) translateY(0);
-        }
+    .photo:nth-child(1) { animation-delay: 0.2s !important; }
+    .photo:nth-child(2) { animation-delay: 0.4s !important; }
+    .photo:nth-child(3) { animation-delay: 0.6s !important; }
+    .photo:nth-child(4) { animation-delay: 0.8s !important; }
+    .photo:nth-child(5) { animation-delay: 1s !important; }
+
+    /* Info card section */
+    .info-card-container {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        transform: none;
+        margin: 40px auto;
+        padding: 20px 15px;
     }
 
-    @keyframes arcMotion3 {
-        0% {
-            width: 22px;   /* 40 * 0.555 */
-            height: 17px;  /* 30 * 0.555 */
-            top: 50%;
-            left: 50%;
-            margin: -17px 0 0 -17px;
-            transform: rotate(0deg) translateY(0);
-        }
-        50% {
-            width: 100px;  /* 180 * 0.555 */
-            height: 75px;  /* 135 * 0.555 */
-            top: 10%;
-            left: 42.5%;
-            transform: rotate(175deg);
-        }
-        100% {
-            width: 178px;  /* 320 * 0.555 */
-            height: 133px; /* 240 * 0.555 */
-            top: 51%;
-            left: 35%;
-            margin: 0;
-            transform: rotate(350deg) translateY(0);
-        }
-    }
-
-    @keyframes arcMotion4 {
-        0% {
-            width: 22px;   /* 40 * 0.555 */
-            height: 17px;  /* 30 * 0.555 */
-            top: 50%;
-            left: 50%;
-            margin: -17px 0 0 -17px;
-            transform: rotate(0deg) translateY(0);
-        }
-        50% {
-            width: 117px;  /* 210 * 0.555 */
-            height: 87px;  /* 157.5 * 0.555 */
-            top: 10%;
-            left: 60%;
-            transform: rotate(190deg);
-        }
-        100% {
-            width: 211px;  /* 380 * 0.555 */
-            height: 158px; /* 285 * 0.555 */
-            top: 52.5%;
-            left: 70%;
-            margin: 0;
-            transform: rotate(380deg) translateY(0);
-        }
-    }
-
-    @keyframes arcMotion5 {
-        0% {
-            width: 22px;   /* 40 * 0.555 */
-            height: 17px;  /* 30 * 0.555 */
-            top: 50%;
-            left: 50%;
-            margin: -17px 0 0 -17px;
-            transform: rotate(0deg) translateY(0);
-        }
-        50% {
-            width: 161px;  /* 290 * 0.555 */
-            height: 121px; /* 217.5 * 0.555 */
-            top: -10%;
-            left: 58%;
-            transform: rotate(180deg);
-        }
-        100% {
-            width: 204px;  /* 367 * 0.555 */
-            height: 153px; /* 275 * 0.555 */
-            top: 22%;
-            left: 69%;
-            margin: 0;
-            transform: rotate(360deg) translateY(0);
-        }
-    }
-
-    /* Scale info card - override animation */
     .info-card {
-        width: 22px;   /* 40 * 0.555 */
-        height: 17px;  /* 30 * 0.555 */
-    }
-
-    @keyframes arcMotionInfoCard {
-        0% {
-            width: 22px;   /* 40 * 0.555 */
-            height: 17px;  /* 30 * 0.555 */
-            top: -39px;    /* -70 * 0.555 */
-            left: 11px;    /* 20 * 0.555 */
-            margin: -17px 0 0 -17px;
-            transform: rotate(0deg) translateY(0);
-        }
-        50% {
-            width: 191px;  /* 345 * 0.555 */
-            height: 139px; /* 250 * 0.555 */
-            top: -333px;   /* -600 * 0.555 */
-            left: -50px;   /* -90 * 0.555 */
-            transform: rotate(180deg);
-        }
-        100% {
-            width: 361px;  /* 650 * 0.555 */
-            height: 261px; /* 470 * 0.555 */
-            top: -15%;
-            left: -8%;
-            margin: 0;
-            transform: rotate(360deg) translateY(0);
-        }
+        position: relative;
+        width: 90%;
+        max-width: 350px;
+        height: auto;
+        aspect-ratio: 650/470;
+        top: auto;
+        left: auto;
+        margin: 20px auto;
+        display: block;
+        transform: none !important;
+        animation: simpleFadeIn 0.8s ease-out forwards !important;
     }
 
     .reset-btn {
-        width: 38px;   /* 50 * 0.555 */
-        height: 38px;  /* 50 * 0.555 */
-        bottom: 12px;
-        right: 12px;
+        width: 36px;
+        height: 36px;
+        bottom: 15px;
+        right: 15px;
     }
 
     .reset-btn svg {
-        width: 18px;   /* 23 * 0.555 */
-        height: 18px;  /* 23 * 0.555 */
+        width: 17px;
+        height: 17px;
     }
 }
 
+/* ========================================
+   MOBILE-SPECIFIC ANIMATIONS
+   Simple animations for scrollable layout
+   ======================================== */
+
+@media (max-width: 1023px) {
+    /* Simple fade-in for mobile instead of complex arcs */
+    @keyframes simpleFadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Disable complex desktop animations on mobile */
+    @keyframes arcMotion1,
+    @keyframes arcMotion2,
+    @keyframes arcMotion3,
+    @keyframes arcMotion4,
+    @keyframes arcMotion5,
+    @keyframes arcMotionInfoCard {
+        0%, 100% {
+            /* Keep elements in place on mobile */
+            position: relative;
+        }
+    }
+}
 
 /* Zoom container for potential future use */
 #zoom-root {
     transform-origin: center center;
+}
+
+/* ========================================
+   BREAKPOINT INDICATOR (Development Only)
+   Remove this section in production
+   ======================================== */
+body::before {
+    content: "DESKTOP: 1024px+ Static (Fixed Positions)";
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(76, 175, 80, 0.9);
+    color: white;
+    padding: 10px 20px;
+    font-family: monospace;
+    font-size: 14px;
+    z-index: 99999;
+    border-radius: 0 0 8px 0;
+    pointer-events: none;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) and (orientation: portrait) {
+    body::before {
+        content: "TABLET PORTRAIT: 768px-1023px Scrollable";
+        background: rgba(33, 150, 243, 0.9);
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {
+    body::before {
+        content: "TABLET LANDSCAPE: 768px-1023px Scrollable";
+        background: rgba(156, 39, 176, 0.9);
+    }
+}
+
+@media (min-width: 480px) and (max-width: 767px) and (orientation: portrait) {
+    body::before {
+        content: "MOBILE LARGE: 480px-767px Scrollable";
+        background: rgba(255, 152, 0, 0.9);
+    }
+}
+
+@media (min-width: 480px) and (max-width: 767px) and (orientation: landscape) {
+    body::before {
+        content: "MOBILE LANDSCAPE: 480px-767px Scrollable";
+        background: rgba(233, 30, 99, 0.9);
+    }
+}
+
+@media (max-width: 479px) and (orientation: portrait) {
+    body::before {
+        content: "MOBILE: 320px-479px Scrollable";
+        background: rgba(244, 67, 54, 0.9);
+    }
+}
+
+@media (max-width: 479px) and (orientation: landscape) {
+    body::before {
+        content: "MOBILE LANDSCAPE: <479px Scrollable";
+        background: rgba(233, 30, 99, 0.9);
+    }
+}
+
+@media (max-width: 374px) {
+    body::before {
+        content: "SMALL MOBILE: <375px Scrollable";
+        background: rgba(183, 28, 28, 0.9);
+        font-size: 12px;
+        padding: 8px 16px;
+    }
+}
+
+@media (max-height: 450px) and (orientation: landscape) {
+    body::before {
+        content: "VERY SHORT LANDSCAPE: <450px height";
+        background: rgba(123, 31, 162, 0.9);
+    }
 }
