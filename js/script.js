@@ -12,7 +12,6 @@ const additionalImagesContainer = document.querySelector('.additional-images-con
 // SCALE-TO-FIT FUNCTIONALITY
 // ==============================
 
-
 function scaleToFit() {
     // Your design's base dimensions (adjust these to match your design)
     const baseWidth = 1024;
@@ -23,12 +22,16 @@ function scaleToFit() {
     const scaleY = window.innerHeight / baseHeight;
     
     // Use the smaller scale to fit everything in view
-    // Change to just scaleX if you only want width-based scaling
     const scale = Math.min(scaleX, scaleY);
     
-    // Apply the scale to body
-    document.body.style.setProperty('--zoom-level', scale);
-
+    // Apply the scale to zoom-root instead of body
+    const zoomRoot = document.getElementById('zoom-root');
+    if (zoomRoot) {
+        zoomRoot.style.transform = `scale(${scale})`;
+    }
+    
+    // Store for CSS variable (optional, for any CSS that needs it)
+    document.documentElement.style.setProperty('--zoom-level', scale);
 }
 
 // Scale on load and resize
@@ -53,16 +56,49 @@ const MAX_ZOOM = 1.6;
 
 function applyZoom() {
     if (!zoomRoot) return;
-    zoomRoot.style.transform = `scale(${zoomLevel})`;
+    
+    // Get the current scale from scaleToFit
+    const baseScale = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--zoom-level') || 1);
+    
+    // Apply both the base scale and zoom level
+    const combinedScale = baseScale * zoomLevel;
+    zoomRoot.style.transform = `scale(${combinedScale})`;
     
     if (zoomLevel > 1) {
         // Enable scrolling when zoomed in
         document.documentElement.style.overflow = 'auto';
         document.body.style.overflow = 'visible';
+        
+        // Remove flexbox centering to allow scrolling
+        document.body.style.display = 'block';
+        document.body.style.position = 'relative';
+        
+        // Center the zoom-root manually for scrolling
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+        const contentWidth = 1024 * combinedScale;
+        const contentHeight = 768 * combinedScale;
+        
+        const leftOffset = Math.max(0, (windowWidth - contentWidth) / 2);
+        const topOffset = Math.max(0, (windowHeight - contentHeight) / 2);
+        
+        zoomRoot.style.position = 'absolute';
+        zoomRoot.style.left = `${leftOffset}px`;
+        zoomRoot.style.top = `${topOffset}px`;
+        
     } else {
-        // At normal zoom - disable scrolling and reset position
+        // At normal zoom - restore centering with flexbox
         document.documentElement.style.overflow = 'hidden';
-        document.body.style.overflow = 'visible';
+        document.body.style.overflow = 'hidden';
+        document.body.style.display = 'flex';
+        document.body.style.position = 'relative';
+        
+        // Reset position to let flexbox handle centering
+        zoomRoot.style.position = 'relative';
+        zoomRoot.style.left = 'auto';
+        zoomRoot.style.top = 'auto';
+        
+        // Reset scroll position
         window.scrollTo(0, 0);
     }
     
