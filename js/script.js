@@ -2,7 +2,7 @@ const envelope = document.getElementById('envelope');
 const mainContent = document.getElementById('mainContent');
 const rsvpForm = document.getElementById('rsvpForm');
 const hero = document.querySelector('.hero');
-const resetButton = document.getElementById('resetButton');
+let resetButton = document.getElementById('resetButton');
 const flowersContainer = document.querySelector('.flowers-container');
 const flower1Container = document.querySelector('.flower-1-container');
 const saveTheDateContainer = document.querySelector('.save-the-date-container');
@@ -11,6 +11,7 @@ const additionalImagesContainer = document.querySelector('.additional-images-con
 // ==============================
 // SCALE-TO-FIT FUNCTIONALITY
 // ==============================
+
 
 function scaleToFit() {
     // Your design's base dimensions (adjust these to match your design)
@@ -27,6 +28,7 @@ function scaleToFit() {
     
     // Apply the scale to body
     document.body.style.setProperty('--zoom-level', scale);
+
 }
 
 // Scale on load and resize
@@ -35,6 +37,10 @@ window.addEventListener('load', scaleToFit);
 
 // Initial scale
 scaleToFit();
+
+if (!resetButton) {
+    resetButton = document.getElementById('resetButton');
+}
 
 // ==============================
 // ZOOM FUNCTIONALITY (SAFE ZONE)
@@ -48,6 +54,32 @@ const MAX_ZOOM = 1.6;
 function applyZoom() {
     if (!zoomRoot) return;
     zoomRoot.style.transform = `scale(${zoomLevel})`;
+    
+    if (zoomLevel > 1) {
+        // Enable scrolling when zoomed in
+        document.documentElement.style.overflow = 'auto';
+        document.body.style.overflow = 'visible';
+    } else {
+        // At normal zoom - disable scrolling and reset position
+        document.documentElement.style.overflow = 'hidden';
+        document.body.style.overflow = 'visible';
+        window.scrollTo(0, 0);
+    }
+    
+    // Smoothly recenter as zoom approaches 1.0
+    if (zoomLevel <= 1.5 && zoomLevel > 1) {
+        const currentScrollX = window.scrollX;
+        const currentScrollY = window.scrollY;
+        
+        // Calculate how much to recenter (0 at 1.5x, 1 at 1.0x)
+        const recenterAmount = (1.5 - zoomLevel) / 0.5;
+        
+        // Smoothly scroll toward center
+        window.scrollTo(
+            currentScrollX * (1 - recenterAmount),
+            currentScrollY * (1 - recenterAmount)
+        );
+    }
 }
 
 // Optional: keyboard zoom (Cmd/Ctrl + / -)
