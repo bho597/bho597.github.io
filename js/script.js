@@ -9,6 +9,34 @@ const saveTheDateContainer = document.querySelector('.save-the-date-container');
 const additionalImagesContainer = document.querySelector('.additional-images-container');
 
 // ==============================
+// SCALE-TO-FIT FUNCTIONALITY
+// ==============================
+
+function scaleToFit() {
+    // Your design's base dimensions (adjust these to match your design)
+    const baseWidth = 1024;
+    const baseHeight = 768;
+    
+    // Calculate scale factors
+    const scaleX = window.innerWidth / baseWidth;
+    const scaleY = window.innerHeight / baseHeight;
+    
+    // Use the smaller scale to fit everything in view
+    // Change to just scaleX if you only want width-based scaling
+    const scale = Math.min(scaleX, scaleY);
+    
+    // Apply the scale to body
+    document.body.style.setProperty('--zoom-level', scale);
+}
+
+// Scale on load and resize
+window.addEventListener('resize', scaleToFit);
+window.addEventListener('load', scaleToFit);
+
+// Initial scale
+scaleToFit();
+
+// ==============================
 // ZOOM FUNCTIONALITY (SAFE ZONE)
 // ==============================
 

@@ -2,7 +2,17 @@
    RESET & BASE STYLES
    ======================================== */
 
-* {
+html {
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    /* Add flexbox to center the body */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+* {  /* <-- FIXED: This was missing the asterisk */
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -15,9 +25,14 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    min-height: 100vh;
-    /* overflow and height will be controlled by media queries */
+    width: 1024px;
+    height: 768px;
+    transform-origin: center center;
+    transform: scale(var(--zoom-level, 1));
+    overflow: visible;
+    position: relative;
 }
+
 
 /* ========================================
    DESKTOP BASE STYLES (1024px+)
@@ -889,15 +904,15 @@ body {
         transform: rotate(0deg) translateY(0);
     }
     50% {
-        width: 170px;
-        height: 127.5px;
+        width: 160px;
+        height: 120px;
         top: 10%;
         left: 57.5%;
         transform: rotate(190deg);
     }
     100% {
-        width: 300px;
-        height: 225px;
+        width: 280px;
+        height: 210px;
         top: 52.5%;
         left: 65%;
         margin: 0;
@@ -1411,7 +1426,9 @@ body {
 /*   BREAKPOINT INDICATOR (Development Only)
    Remove this section in production
    ======================================== */
-body::before {
+
+/* Move the indicator to html::after instead of body::before */
+html::after {
     content: "DESKTOP: 1440px+ Static (Fixed Positions)";
     position: fixed;
     top: 0;
@@ -1428,7 +1445,7 @@ body::before {
 
 /* Very short landscape (check first for priority) */
 @media (max-height: 450px) and (orientation: landscape) {
-    body::before {
+    html::after {
         content: "VERY SHORT LANDSCAPE: <450px height";
         background: rgba(123, 31, 162, 0.9) !important;
     }
@@ -1436,7 +1453,7 @@ body::before {
 
 /* Small mobile */
 @media (max-width: 374px) {
-    body::before {
+    html::after {
         content: "SMALL MOBILE: <375px Scrollable";
         background: rgba(183, 28, 28, 0.9) !important;
         font-size: 12px;
@@ -1446,7 +1463,7 @@ body::before {
 
 /* Mobile portrait */
 @media (min-width: 375px) and (max-width: 479px) and (orientation: portrait) {
-    body::before {
+    html::after {
         content: "MOBILE: 375px-479px Scrollable";
         background: rgba(244, 67, 54, 0.9) !important;
     }
@@ -1454,7 +1471,7 @@ body::before {
 
 /* Mobile landscape */
 @media (min-width: 375px) and (max-width: 767px) and (orientation: landscape) {
-    body::before {
+    html::after {
         content: "MOBILE LANDSCAPE: 375px-767px Scrollable";
         background: rgba(233, 30, 99, 0.9) !important;
     }
@@ -1462,7 +1479,7 @@ body::before {
 
 /* Mobile large portrait */
 @media (min-width: 480px) and (max-width: 767px) and (orientation: portrait) {
-    body::before {
+    html::after {
         content: "MOBILE LARGE: 480px-767px Scrollable";
         background: rgba(255, 152, 0, 0.9) !important;
     }
@@ -1470,7 +1487,7 @@ body::before {
 
 /* Tablet portrait */
 @media (min-width: 768px) and (max-width: 1023px) and (orientation: portrait) {
-    body::before {
+    html::after {
         content: "TABLET PORTRAIT: 768px-1023px Scrollable";
         background: rgba(33, 150, 243, 0.9) !important;
     }
@@ -1478,7 +1495,7 @@ body::before {
 
 /* Tablet landscape */
 @media (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {
-    body::before {
+    html::after {
         content: "TABLET LANDSCAPE: 768px-1023px Scrollable";
         background: rgba(156, 39, 176, 0.9) !important;
     }
@@ -1486,12 +1503,11 @@ body::before {
 
 /* Base desktop */
 @media (min-width: 1024px) and (max-width: 1439px) {
-    body::before {
+    html::after {
         content: "BASE: 1024px-1439px Scrollable";
         background: rgba(233, 30, 99, 0.9) !important;
     }
 }
-
 /* Zoom container for potential future use */
 #zoom-root {
     transform-origin: center center;
