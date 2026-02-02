@@ -2,12 +2,31 @@
    RESET & BASE STYLES
    ======================================== */
 
+@font-face {
+    font-family: 'Tan Pearl';
+    src: url('../fonts/TAN - PEARL.woff2') format('woff2'),
+        url('../fonts/TAN - PEARL.woff') format('woff'),
+        url('../fonts/TAN - PEARL.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 html {
     overflow: hidden;
     width: 100vw;
     height: 100vh;
     margin: 0;
     padding: 0;
+    background-image: url('../images/background.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+@media (max-width: 1023px) {
+    html {
+        overflow: visible;
+    }
 }
 
 * {
@@ -29,10 +48,20 @@ body {
     position: relative;
     margin: 0;
     padding: 0;
-    /* Center the zoom-root */
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@media (max-width: 1023px) {
+    body {
+        overflow: visible;
+    }
+}
+
+body.mobile-opened {
+    min-height: 100vh;
+    height: auto;
 }
 
 #zoom-root {
@@ -41,16 +70,20 @@ body {
     height: 768px;
     position: relative;
     transform: scale(var(--zoom-level, 1));
-    flex-shrink: 0; /* Prevent shrinking */
+    flex-shrink: 0;
+    transition: transform 0.3s ease-out;
 }
 
-
-/* ========================================
-   DESKTOP BASE STYLES (1024px+)
-   Static, no-scroll layout
-   ======================================== */
-
-@media (min-width: 1024px) {
+/* Make zoom-root responsive on mobile/tablet */
+@media (max-width: 1023px) {
+    #zoom-root {
+        width: 1024px;
+        height: 768px;
+        max-width: none;
+        max-height: none;
+        overflow: visible;
+        /* Transform handled by JavaScript for smooth continuous scaling */
+    }
 }
 
 /* ========================================
@@ -66,6 +99,74 @@ body {
     position: relative;
     overflow: visible;
     perspective: 2000px;
+}
+
+@media (max-width: 1023px) {
+    .hero {
+        overflow: visible;
+    }
+}
+
+/* ========================================
+   HERO TEXT ELEMENTS
+   ======================================== */
+
+.hero-text {
+    position: absolute;
+    text-align: center;
+    color: #4a3f35;
+    opacity: 0;
+    z-index: 1;
+    pointer-events: none;
+    transition: opacity 0.8s ease-out;
+    /* Changed from animation to transition */
+}
+
+.hero-text h1 {
+    font-family: 'Tan Pearl', serif;
+    margin: 0 0 10px 0;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.hero-text h1 {
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.hero-text p {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.hero-text-1 {
+    top: -15%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: fadeInDown 1s ease-out 0.8s forwards;
+}
+
+/* Hide hero text when envelope flips */
+.envelope-container.flipped .hero-text,
+.envelope-container.opened .hero-text {
+    opacity: 0 !important;
+    animation: none !important;
+    /* This kills any running animations */
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
 }
 
 /* ========================================
@@ -98,7 +199,6 @@ body {
     pointer-events: none;
 }
 
-/* Hover effects */
 .envelope-container:hover {
     transform: scale(1.05);
 }
@@ -139,6 +239,9 @@ body {
    ======================================== */
 
 .envelope-front {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -150,7 +253,7 @@ body {
     background-repeat: no-repeat;
     backface-visibility: hidden;
     z-index: 2;
-    opacity: 0;
+    /* opacity: 0; */
     transition: opacity 0.8s ease-out 0.4s;
 }
 
@@ -158,7 +261,6 @@ body {
     opacity: 1;
 }
 
-/* Front text */
 .envelope-text {
     position: absolute;
     left: 22%;
@@ -183,7 +285,6 @@ body {
     line-height: 1.6;
 }
 
-/* Stamp */
 .stamp {
     position: absolute;
     width: 20%;
@@ -200,7 +301,6 @@ body {
     animation: fadeInStamp 0.6s ease-out 1.2s forwards;
 }
 
-/* Postal wave */
 .postal-wave {
     position: absolute;
     width: 62.5%;
@@ -282,7 +382,6 @@ body {
     transition-delay: 1.5s;
 }
 
-/* Flap inside */
 .envelope-flap-inside {
     position: absolute;
     width: 92.5%;
@@ -329,12 +428,10 @@ body {
     transition: opacity 0.25s ease;
 }
 
-/* Show seal AFTER flip finishes */
 .envelope-container.flipped .seal {
     opacity: 1;
 }
 
-/* Hide again before flap opens */
 .envelope-container.opened .seal {
     opacity: 0;
     transition-delay: 1s;
@@ -375,7 +472,6 @@ body {
     transition: opacity 1s ease-out;
 }
 
-/* Make sure flower-1 is visible initially (before flip) */
 .flower-1-container .flower-1 {
     position: absolute;
     width: 180px;
@@ -400,13 +496,11 @@ body {
     z-index: 10;
 }
 
-/* Flower visibility states */
 .flowers-container.flipped,
 .flower-1-container.flipped {
     opacity: 0;
 }
 
-/* Individual flowers */
 .flowers-container .flowers {
     position: absolute;
     background-size: contain;
@@ -452,11 +546,10 @@ body {
     transition: opacity 0.1s ease;
 }
 
-.envelope-container.opened .photos-container {
+.envelope-container.opened~.photos-container {
     opacity: 1;
 }
 
-/* Base photo styling */
 .photo {
     position: absolute;
     width: 40px;
@@ -480,12 +573,11 @@ body {
     opacity: 1;
 }
 
-/* Individual photo animations */
 .photo:nth-child(1) {
     transition-delay: 3s;
 }
 
-.envelope-container.opened .photos-container .photo:nth-child(1) {
+.envelope-container.opened~.photos-container .photo:nth-child(1) {
     animation: arcMotion1 2s linear 3s forwards;
 }
 
@@ -493,7 +585,7 @@ body {
     transition-delay: 3.2s;
 }
 
-.envelope-container.opened .photos-container .photo:nth-child(2) {
+.envelope-container.opened~.photos-container .photo:nth-child(2) {
     animation: arcMotion2 2s linear 3s forwards;
 }
 
@@ -501,7 +593,7 @@ body {
     transition-delay: 3.4s;
 }
 
-.envelope-container.opened .photos-container .photo:nth-child(3) {
+.envelope-container.opened~.photos-container .photo:nth-child(3) {
     animation: arcMotion3 2s linear 3s forwards;
 }
 
@@ -509,7 +601,7 @@ body {
     transition-delay: 3.6s;
 }
 
-.envelope-container.opened .photos-container .photo:nth-child(4) {
+.envelope-container.opened~.photos-container .photo:nth-child(4) {
     animation: arcMotion4 2s linear 3s forwards;
 }
 
@@ -517,7 +609,7 @@ body {
     transition-delay: 3.8s;
 }
 
-.envelope-container.opened .photos-container .photo:nth-child(5) {
+.envelope-container.opened~.photos-container .photo:nth-child(5) {
     animation: arcMotion5 2s linear 3s forwards;
 }
 
@@ -537,7 +629,7 @@ body {
     transition: opacity 0.1s ease 3s;
 }
 
-.envelope-container.opened .info-card-container {
+.envelope-container.opened~.info-card-container {
     opacity: 1;
 }
 
@@ -559,7 +651,7 @@ body {
     transition-delay: 4s;
 }
 
-.envelope-container.opened .info-card-container .info-card {
+.envelope-container.opened~.info-card-container .info-card {
     opacity: 1;
     animation: arcMotionInfoCard 2s linear 3s forwards;
     transition: none;
@@ -578,16 +670,19 @@ body {
     transform: translate(-50%, -50%);
     pointer-events: none;
     opacity: 0;
+    visibility: hidden;
     z-index: -1;
     transition: opacity 1s ease-out;
 }
 
 .save-the-date-container.flipped {
     opacity: 0;
+    visibility: hidden;
 }
 
 .save-the-date-container.show {
     opacity: 1;
+    visibility: visible;
 }
 
 .save-the-date-image {
@@ -604,6 +699,11 @@ body {
     top: 17%;
     left: 20%;
     background-image: url('../images/save_the_date.png');
+    animation: none;
+    opacity: 0;
+}
+
+.save-the-date-container.show .image-1 {
     animation: fadeInUpFlowers 1.2s ease-out 0s forwards;
 }
 
@@ -671,7 +771,6 @@ body {
    UI ELEMENTS
    ======================================== */
 
-/* Click text */
 .click-text {
     position: absolute;
     bottom: -10%;
@@ -689,7 +788,6 @@ body {
     animation: slowFadeOut 0.5s ease-out forwards;
 }
 
-/* Reset button - completely isolated from all transforms */
 .reset-btn {
     position: fixed !important;
     bottom: 30px !important;
@@ -711,14 +809,11 @@ body {
     transition: opacity 0.3s ease, background 0.3s ease;
     margin: 0 !important;
     padding: 0 !important;
-    /* Critical: Use will-change to create new stacking context */
     will-change: transform;
-    /* Don't inherit any transforms */
     transform: none !important;
 }
 
-/* Ensure button stays at viewport level, not affected by parent transforms */
-html > .reset-btn {
+html>.reset-btn {
     position: fixed !important;
 }
 
@@ -731,7 +826,6 @@ html > .reset-btn {
     background: #6d5a43;
 }
 
-/* Rotate icon on hover instead of button */
 .reset-btn:hover svg {
     transform: rotate(180deg);
     transition: transform 0.3s ease;
@@ -753,6 +847,7 @@ html > .reset-btn {
         opacity: 0;
         transform: translateY(150px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -764,6 +859,7 @@ html > .reset-btn {
         opacity: 0;
         transform: translateY(50px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -775,6 +871,7 @@ html > .reset-btn {
         opacity: 0;
         transform: translateY(-50%) translateX(-20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(-50%) translateX(0);
@@ -786,6 +883,7 @@ html > .reset-btn {
         opacity: 0;
         transform: scale(0.8);
     }
+
     to {
         opacity: 1;
         transform: scale(1);
@@ -796,6 +894,7 @@ html > .reset-btn {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -805,9 +904,11 @@ html > .reset-btn {
     0% {
         transform: rotateX(0deg);
     }
+
     5% {
         transform: rotateX(-10deg);
     }
+
     100% {
         transform: rotateX(-180deg);
     }
@@ -817,15 +918,19 @@ html > .reset-btn {
     0% {
         opacity: 0;
     }
+
     100% {
         opacity: 0.7;
     }
 }
 
 @keyframes pulse {
-    0%, 100% {
+
+    0%,
+    100% {
         opacity: 0.7;
     }
+
     50% {
         opacity: 1;
     }
@@ -835,12 +940,24 @@ html > .reset-btn {
     0% {
         opacity: 0.7;
     }
+
     100% {
         opacity: 0;
     }
 }
 
-/* Photo animations */
+@keyframes simpleFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @keyframes arcMotion1 {
     0% {
         width: 40px;
@@ -850,6 +967,7 @@ html > .reset-btn {
         margin: -30px 0 0 -30px;
         transform: rotate(0deg) translateY(0);
     }
+
     50% {
         width: 145px;
         height: 109px;
@@ -857,6 +975,7 @@ html > .reset-btn {
         left: 44.25%;
         transform: rotate(172.5deg);
     }
+
     100% {
         width: 250px;
         height: 188px;
@@ -876,6 +995,7 @@ html > .reset-btn {
         margin: -30px 0 0 -30px;
         transform: rotate(0deg) translateY(0);
     }
+
     50% {
         width: 195px;
         height: 146.5px;
@@ -883,6 +1003,7 @@ html > .reset-btn {
         left: 33%;
         transform: rotate(180deg);
     }
+
     100% {
         width: 350px;
         height: 263px;
@@ -902,6 +1023,7 @@ html > .reset-btn {
         margin: -30px 0 0 -30px;
         transform: rotate(0deg) translateY(0);
     }
+
     50% {
         width: 180px;
         height: 135px;
@@ -909,6 +1031,7 @@ html > .reset-btn {
         left: 42.5%;
         transform: rotate(175deg);
     }
+
     100% {
         width: 270px;
         height: 203px;
@@ -928,6 +1051,7 @@ html > .reset-btn {
         margin: -30px 0 0 -30px;
         transform: rotate(0deg) translateY(0);
     }
+
     50% {
         width: 160px;
         height: 120px;
@@ -935,6 +1059,7 @@ html > .reset-btn {
         left: 57.5%;
         transform: rotate(190deg);
     }
+
     100% {
         width: 280px;
         height: 210px;
@@ -954,6 +1079,7 @@ html > .reset-btn {
         margin: -30px 0 0 -30px;
         transform: rotate(0deg) translateY(0);
     }
+
     50% {
         width: 185px;
         height: 138.5px;
@@ -961,6 +1087,7 @@ html > .reset-btn {
         left: 57%;
         transform: rotate(180deg);
     }
+
     100% {
         width: 330px;
         height: 247px;
@@ -980,6 +1107,7 @@ html > .reset-btn {
         margin: -30px 0 0 -30px;
         transform: rotate(0deg) translateY(0);
     }
+
     50% {
         width: 345px;
         height: 250px;
@@ -987,6 +1115,7 @@ html > .reset-btn {
         left: -90px;
         transform: rotate(180deg);
     }
+
     100% {
         width: 500px;
         height: 362px;
@@ -997,415 +1126,569 @@ html > .reset-btn {
     }
 }
 
-/* ========================================
-   STRATEGIC RESPONSIVE BREAKPOINTS
-   Mobile: Scrollable Long-Form Layout
-   Desktop: Static No-Scroll Layout
-   
-   Base Design: 1024px+ (Fixed pixel positions)
-   Elements are static and don't scale with browser size
-   Mobile Breakpoints: 480px, 768px
-   ======================================== */
 
 /* ========================================
-   DESKTOP (1024px+)
-   Static, No-Scroll Layout
-   Fixed pixel positions - elements don't scale with browser
+   MOBILE PHASE 1 — LOCKED FULLSCREEN
+   ========================================
+   Envelope only. No scroll. All other
+   containers hidden until .opened fires.
    ======================================== */
 
-@media (min-width: 1024px) {
-    body {
+@media (max-width: 1023px) {
+
+    /* ========================================
+       CAMERA ZOOM APPROACH
+       Handled by JavaScript for smooth continuous scaling
+       ======================================== */
+
+    /* ========================================
+       ORIGINAL MOBILE STYLES CONTINUE BELOW
+       ======================================== */
+
+    /* Let desktop sizes scale via transform - don't override with smaller fixed sizes */
+    .envelope-container {
+        flex-shrink: 0;
+        margin: 0;
+        transition: width 0.5s ease, margin 0.5s ease;
+    }
+
+    /* Remove fixed mobile sizes - let transform handle scaling */
+    .envelope {
+        /* Desktop size (350px) will be scaled by transform */
+    }
+
+    /* Font sizes will scale with transform */
+
+    .seal {
+        /* Desktop size will be scaled by transform */
+    }
+
+    .click-text {
+        position: absolute;
+        bottom: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        /* Font size will scale with transform */
+    }
+
+    .envelope-front {
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+    }
+
+    html {
         overflow: hidden;
         height: 100vh;
     }
 
-    /* All desktop styles use the base CSS values */
-    /* Elements stay at fixed pixel positions regardless of browser size */
-    /* No scaling applied - envelope and decorations maintain exact spacing */
-}
-
-/* ========================================
-   TABLET PORTRAIT & LANDSCAPE (768px - 1023px)
-   Scrollable Layout - Reposition for Vertical Flow
-   Design at: 768px minimum
-   ======================================== */
-
-@media (min-width: 768px) and (max-width: 1023px) {
     body {
-        overflow-y: auto;
-        overflow-x: hidden;
-        height: auto;
-        min-height: 100vh;
-    }
-
-    .hero {
-        min-height: auto;
-        padding: 60px 20px;
-        /* Remove centering for scrollable layout */
-        display: block;
-    }
-
-    .envelope-container {
-        width: 380px;
-        height: 266px;
-        margin: 0 auto 40px;
-    }
-
-    /* Disable hover on touch devices */
-    .envelope-container:hover {
-        transform: none;
-    }
-
-    .envelope {
-        width: 380px;
-        height: 228px;
-    }
-
-    .envelope-text .envelope-title {
-        font-size: 27px;
-        margin-bottom: 12px;
-    }
-
-    .envelope-text .date {
-        font-size: 14px;
-    }
-
-    .click-text {
-        font-size: 18px;
-        bottom: -30px;
-    }
-
-    .seal {
-        width: 68px;
-        height: 68px;
-    }
-
-    /* 
-       FOR MOBILE/TABLET SCROLLABLE LAYOUTS:
-       You'll need to reposition these containers from absolute to relative/static
-       and stack them vertically. This is where you'll do your custom layout.
-       
-       Example approach:
-    */
-    
-    .flowers-container,
-    .flower-1-container,
-    .save-the-date-container,
-    .additional-images-container {
-        /* Change from absolute centering to relative positioning */
-        position: relative;
-        width: 100%;
-        max-width: 600px;
-        height: auto;
-        transform: none;
-        top: auto;
-        left: auto;
-        margin: 40px auto;
-    }
-
-    .photos-container,
-    .info-card-container {
-        /* These might become sections that scroll into view */
-        position: relative;
-        width: 100%;
-        max-width: 600px;
-        height: auto;
-        transform: none;
-        margin: 40px auto;
-    }
-
-    /* Reset photo/card positioning for vertical layout */
-    .photo,
-    .info-card {
-        /* You'll reposition these in your custom mobile layout */
-        position: static;
-        display: inline-block;
-        margin: 20px;
-    }
-
-    .reset-btn {
-        width: 45px;
-        height: 45px;
-        bottom: 20px !important;
-        right: 20px !important;
-    }
-
-    .reset-btn svg {
-        width: 21px;
-        height: 21px;
-    }
-}
-
-/* ========================================
-   MOBILE LANDSCAPE (480px - 767px)
-   Scrollable Layout
-   Design at: 480px minimum
-   ======================================== */
-
-@media (min-width: 480px) and (max-width: 767px) {
-    body {
-        overflow-y: auto;
-        overflow-x: hidden;
-        height: auto;
-        min-height: 100vh;
-    }
-
-    .hero {
-        min-height: auto;
-        padding: 40px 20px;
-        display: block;
-    }
-
-    .envelope-container {
-        width: 320px;
-        height: 224px;
-        margin: 0 auto 30px;
-    }
-
-    .envelope-container:hover {
-        transform: none;
-    }
-
-    .envelope {
-        width: 320px;
-        height: 192px;
-    }
-
-    .envelope-text .envelope-title {
-        font-size: 23px;
-        margin-bottom: 10px;
-    }
-
-    .envelope-text .date {
-        font-size: 12px;
-    }
-
-    .click-text {
-        font-size: 15px;
-        bottom: -25px;
-    }
-
-    .seal {
-        width: 58px;
-        height: 58px;
-    }
-
-    /* Convert to scrollable vertical layout */
-    .flowers-container,
-    .flower-1-container,
-    .save-the-date-container,
-    .additional-images-container,
-    .photos-container,
-    .info-card-container {
-        position: relative;
-        width: 100%;
-        max-width: 450px;
-        height: auto;
-        transform: none;
-        top: auto;
-        left: auto;
-        margin: 30px auto;
-    }
-
-    .reset-btn {
-        width: 40px;
-        height: 40px;
-        bottom: 15px !important;
-        right: 15px !important;
-    }
-
-    .reset-btn svg {
-        width: 18px;
-        height: 18px;
-    }
-}
-
-/* ========================================
-   MOBILE PORTRAIT (320px - 479px)
-   Scrollable Long-Form Layout
-   Design at: 320px minimum
-   ======================================== */
-
-@media (max-width: 479px) {
-    body {
-        overflow-y: auto;
-        overflow-x: hidden;
-        height: auto;
-        min-height: 100vh;
-        /* Mobile gets scrollable background */
+        overflow: hidden;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         background-attachment: scroll;
     }
 
-    .hero {
-        min-height: auto;
-        padding: 30px 15px;
-        display: block;
+    #zoom-root {
+        width: 100%;
+        height: 100%;
+        /* Transform applied by JavaScript - don't override! */
+        position: relative;
     }
 
-    .envelope-container {
-        width: 280px;
-        height: 196px;
-        margin: 0 auto 30px;
+    .hero {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        perspective: none;
     }
 
     .envelope-container:hover {
         transform: none;
     }
 
-    .envelope {
-        width: 280px;
-        height: 168px;
+    .envelope-back-bottom,
+    .envelope-back-top {
+        opacity: 1;
+        transition: opacity 1.5s ease 0.5s;
     }
 
-    .envelope-text .envelope-title {
-        font-size: 20px;
-        margin-bottom: 8px;
+    /* Keep flap-inside hidden on envelope front */
+    .envelope-front .envelope-flap-inside {
+        opacity: 0;
+        visibility: hidden;
     }
 
-    .envelope-text .date {
-        font-size: 10px;
+    /* Show flap-inside ONLY after envelope opens */
+    .envelope.opened .envelope-flap-inside {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.6s ease;
     }
 
-    .click-text {
-        font-size: 13px;
-        bottom: -25px;
+
+    body.envelope-fade-out .envelope-back-bottom,
+    body.envelope-fade-out .envelope-back-top,
+    body.envelope-fade-out .envelope-flap-inside {
+        opacity: 0 !important;
+        transition: opacity 1.2s ease;
     }
 
-    .seal {
-        width: 50px;
-        height: 50px;
+    body.envelope-fade-out .envelope-container {
+        position: fixed !important;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) !important;
+        z-index: 50;
     }
 
-    /* 
-       MOBILE SCROLLABLE LAYOUT
-       Convert all absolute positioned containers to flow vertically
-       This is where you'll build your custom mobile experience
-    */
-    
+    /* Release envelope back into layout after scroll activates */
+    body.mobile-opened .envelope-container {
+        position: static !important;
+        transform: none !important;
+    }
+
+    /* Show decorations on mobile initially (matching desktop intro) */
     .flowers-container,
     .flower-1-container,
-    .save-the-date-container,
+    .save-the-date-container {
+        display: block !important;
+        position: absolute;
+        opacity: 1;
+    }
+
+    /* Hide additional images on mobile - they only appear in scroll layout */
     .additional-images-container {
-        position: relative;
-        width: 100%;
-        max-width: 100%;
-        height: auto;
-        min-height: 200px;
-        transform: none;
-        top: auto;
-        left: auto;
-        margin: 30px auto;
-        padding: 20px;
+        display: none !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
     }
 
-    /* Reposition flowers for vertical mobile layout */
+    /* Make sure individual elements run their animations */
+    .flowers-container .flowers,
     .flower-1-container .flower-1,
-    .flowers-container .flower-2,
-    .flowers-container .flower-3 {
-        position: relative;
-        width: 80%;
-        height: auto;
-        max-width: 200px;
-        top: auto;
-        left: auto;
-        right: auto;
-        margin: 15px auto;
-        display: block;
+    .save-the-date-container .save-the-date-image {
+        opacity: 0;
+        animation-play-state: running !important;
     }
 
-    .save-the-date-container .image-1 {
-        position: relative;
-        width: 70%;
-        max-width: 250px;
-        height: auto;
-        top: auto;
-        left: auto;
-        margin: 20px auto;
-        display: block;
+    /* Additional images stay hidden until mobile-opened */
+    .additional-images-container .additional-image {
+        opacity: 0;
+        animation-play-state: paused !important;
     }
 
-    .additional-images-container .image-1,
-    .additional-images-container .image-2,
-    .additional-images-container .image-3 {
-        position: relative;
-        width: 70%;
-        max-width: 200px;
-        height: auto;
-        top: auto;
-        left: auto;
-        right: auto;
-        bottom: auto;
-        margin: 15px auto;
-        display: block;
+    /* Fade out containers when envelope flips */
+    .envelope-container.flipped~.flowers-container,
+    .envelope-container.flipped~.flower-1-container,
+    .envelope-container.flipped~.save-the-date-container,
+    .envelope-container.flipped~.additional-images-container {
+        opacity: 0;
+        transition: opacity 0.6s ease-out;
     }
 
-    /* Photos section - convert to vertical scroll section */
-    .photos-container {
-        position: relative;
-        width: 100%;
-        max-width: 100%;
-        height: auto;
-        transform: none;
-        margin: 40px auto;
-        padding: 20px 15px;
-    }
-
-    .photo {
-        position: relative;
-        width: 90%;
-        max-width: 300px;
-        height: auto;
-        aspect-ratio: 4/3;
-        top: auto;
-        left: auto;
-        margin: 20px auto;
-        display: block;
-        transform: none !important;
-        /* Disable complex animations on mobile */
-        animation: none !important;
-    }
-
-    .envelope-container.opened .photos-container .photo {
-        /* Simple fade in instead of arc motion */
-        animation: simpleFadeIn 0.8s ease-out forwards !important;
-    }
-
-    .photo:nth-child(1) { animation-delay: 0.2s !important; }
-    .photo:nth-child(2) { animation-delay: 0.4s !important; }
-    .photo:nth-child(3) { animation-delay: 0.6s !important; }
-    .photo:nth-child(4) { animation-delay: 0.8s !important; }
-    .photo:nth-child(5) { animation-delay: 1s !important; }
-
-    /* Info card section */
+    /* Photos and info card stay hidden until envelope opens */
+    .photos-container,
     .info-card-container {
-        position: relative;
-        width: 100%;
-        max-width: 100%;
-        height: auto;
-        transform: none;
-        margin: 40px auto;
-        padding: 20px 15px;
-    }
-
-    .info-card {
-        position: relative;
-        width: 90%;
-        max-width: 350px;
-        height: auto;
-        aspect-ratio: 650/470;
-        top: auto;
-        left: auto;
-        margin: 20px auto;
-        display: block;
-        transform: none !important;
-        animation: simpleFadeIn 0.8s ease-out forwards !important;
+        display: none !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
     }
 
     .reset-btn {
-        width: 36px;
-        height: 36px;
-        bottom: 15px !important;
-        right: 15px !important;
+        width: 42px !important;
+        height: 42px !important;
+        bottom: 18px !important;
+        right: 18px !important;
+    }
+
+    .reset-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+
+
+    /* ========================================
+       MOBILE PHASE 2 — SCROLLABLE LAYOUT
+       ========================================
+       After envelope opens, transition to
+       vertical scrolling grid layout
+       ======================================== */
+
+    /* Unlock scrolling when envelope is opened */
+    body.mobile-opened {
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: auto;
+        min-height: 100vh;
+        align-items: flex-start;
+    }
+
+    body.mobile-opened html {
+        overflow-y: auto;
+    }
+
+    /* Hero becomes a vertical grid container */
+    body.mobile-opened .hero {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 60px 24px 100px;
+        height: auto;
+        min-height: auto;
+        align-content: start;
+    }
+
+    /* Envelope at top of grid - CRITICAL: Use display:contents wrapper */
+    body.mobile-opened .envelope-container {
+        /* Container becomes transparent to grid - children participate directly */
+        display: contents !important;
+    }
+    
+    /* The actual envelope needs to be a grid item */
+    body.mobile-opened .envelope-container > .envelope {
+        position: static !important;
+        grid-column: 1 / -1;
+        width: 560px !important;
+        height: 336px !important;
+        max-width: none !important;
+        display: block;
+        margin: 380px auto 60px auto;
+        pointer-events: none;
+        order: 1;
+        flex-shrink: 0;
+    }
+    
+    /* Click text needs to be positioned relative to envelope */
+    body.mobile-opened .click-text {
+        display: none !important; /* Hide on mobile-opened */
+    }
+    
+    /* Hero text also needs to be hidden or repositioned */
+    body.mobile-opened .hero-text {
+        display: none !important;
+    }
+
+    body.mobile-opened .envelope-flap-inside {
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: auto !important;
+        height: 65% !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        display: block !important;
+        z-index: 999 !important;
+        position: absolute !important;
+        backface-visibility: visible !important;
+        transform: none !important;
+        pointer-events: none;
+        transform: rotateX(180deg) !important;
+        transform-origin: top center !important;
+    }
+
+    body.mobile-opened .envelope-back-bottom,
+    body.mobile-opened .envelope-back-top {
+        opacity: 1 !important;
+        visibility: visible !important;
+        z-index: 2 !important;
+    }
+
+    /* Ensure flap-inside renders ABOVE envelope back */
+    body.mobile-opened .envelope-flap-inside {
+        opacity: 1 !important;
+        visibility: visible !important;
+        display: block !important;
+        z-index: 3 !important;
+        position: absolute !important;
+        inset: 0;
+        backface-visibility: visible !important;
+        pointer-events: none;
+    }
+
+    /* Prevent flap-inside from inheriting flipped 3D state */
+    body.mobile-opened .envelope-flap-inside * {
+        transform: none !important;
+    }
+
+    body.mobile-opened .envelope.opened .envelope-flap-inside {
+        opacity: 1 !important;
+        visibility: visible !important;
+        display: block !important;
+        transition: opacity 0.6s ease;
+    }
+
+
+    /* Make envelope back visible and properly sized */
+    body.mobile-opened .envelope-back-bottom {
+        width: 91.5%;
+        height: 100%;
+    }
+
+    body.mobile-opened .envelope-back-top {
+        width: 92%;
+        height: 100%;
+    }
+
+    body.mobile-opened .envelope-back-bottom,
+    body.mobile-opened .envelope-back-top {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transition: opacity 0.8s ease;
+    }
+
+
+    /* Speed up flap animation on mobile */
+    body.mobile-opened .envelope-container.opened .envelope-flap {
+        transition-delay: 0.6s;
+    }
+
+    body.mobile-opened .envelope-container.opened .envelope-flap-inside {
+        animation-delay: 0.6s;
+    }
+
+    /* Hide original decoration containers and prepare for grid */
+    body.mobile-opened .flowers-container,
+    body.mobile-opened .flower-1-container,
+    body.mobile-opened .additional-images-container {
+        position: static !important;
+        width: 100% !important;
+        height: auto !important;
+        transform: none !important;
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        margin: 0 !important;
+        top: auto !important;
+        left: auto !important;
+    }
+
+    body.mobile-opened .save-the-date-container {
+        position: relative !important;
+        width: 100% !important;
+        height: 0 !important;
+        transform: none !important;
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        margin: 0 !important;
+        order: 1;
+        grid-column: 1 / -1;
+        z-index: 200 !important;
+    }
+
+    /* Container ordering */
+    body.mobile-opened .save-the-date-container {
+        order: 0;
+    }
+
+    body.mobile-opened .flower-1-container {
+        order: 5;
+    }
+
+    body.mobile-opened .flowers-container {
+        order: 7;
+    }
+
+    body.mobile-opened .additional-images-container {
+        order: 6;
+    }
+
+    /* Show photos and info card containers - use display:contents */
+    body.mobile-opened .photos-container,
+    body.mobile-opened .info-card-container {
+        display: contents !important;
+        /* Children will participate directly in grid */
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    /* Force photos to display */
+    body.mobile-opened .photo {
+        display: block !important;
+        visibility: visible !important;
+    }
+
+    /* Base styles for all grid items */
+    body.mobile-opened .flowers,
+    body.mobile-opened .flower-1,
+    body.mobile-opened .save-the-date-image,
+    body.mobile-opened .additional-image,
+    body.mobile-opened .info-card {
+        position: static !important;
+        width: 100% !important;
+        height: auto !important;
+        margin: 0 !important;
+        transform: none !important;
+        opacity: 1 !important;
+        filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.22)) !important;
+        animation: simpleFadeIn 0.6s ease-out forwards !important;
+        animation-play-state: running !important;
+        background-size: contain !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        border-radius: 4px;
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+    }
+
+    body.mobile-opened .photo {
+        position: static !important;
+        width: 100% !important;
+        height: auto !important;
+        margin: 0 !important;
+        transform: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.22)) !important;
+        animation: simpleFadeIn 0.6s ease-out forwards !important;
+        animation-play-state: running !important;
+        background-size: contain !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        border-radius: 4px;
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+    }
+
+    /* ===== MOBILE LAYOUT ORDER ===== */
+
+    /* Row 1: Envelope (order: 1) - already positioned at top */
+    /* Envelope container holds the envelope back visible from animation */
+
+    /* Row 2: Save the date (full width) - order: 2 */
+    body.mobile-opened .save-the-date-image {
+        position: absolute !important;
+        top: 280px !important;
+        left: 5% !important;
+        transform: translateX(-50%) !important;
+        width: 320px !important;
+        height: 320px !important;
+        z-index: 200 !important;
+        grid-column: initial !important;
+        order: initial !important;
+        aspect-ratio: 1 / 1;
+        animation: simpleFadeIn 0.6s ease-out forwards !important;
+        animation-delay: 0.1s !important;
+        opacity: 1 !important;
+        pointer-events: none;
+    }
+
+    /* Row 3: Photo 1 + Photo 5 + Flower 1 (side by side) */
+    body.mobile-opened .photo:nth-child(1) {
+        order: 3;
+        aspect-ratio: 4 / 3;
+        animation-delay: 0.2s !important;
+    }
+
+    body.mobile-opened .photo:nth-child(5) {
+        order: 4;
+        aspect-ratio: 4 / 3;
+        animation-delay: 0.25s !important;
+    }
+
+    body.mobile-opened .flower-1 {
+        order: 5;
+        aspect-ratio: 180 / 225;
+        animation-delay: 0.3s !important;
+    }
+
+    /* Row 4: Additional image 1 (full width) */
+    body.mobile-opened .additional-image:nth-child(1) {
+        grid-column: 1 / -1;
+        order: 6;
+        aspect-ratio: 1 / 1;
+        animation-delay: 0.4s !important;
+    }
+
+    /* Row 5: Flower 2 + Flower 3 (side by side) */
+    body.mobile-opened .flower-2 {
+        order: 7;
+        aspect-ratio: 184 / 203;
+        animation-delay: 0.5s !important;
+    }
+
+    body.mobile-opened .flower-3 {
+        order: 8;
+        aspect-ratio: 405 / 430;
+        animation-delay: 0.55s !important;
+    }
+
+    /* Row 6: Info card + Additional image 3 (side by side) */
+    body.mobile-opened .info-card {
+        order: 9;
+        aspect-ratio: 650 / 470;
+        animation-delay: 0.6s !important;
+    }
+
+    body.mobile-opened .additional-image:nth-child(3) {
+        order: 10;
+        aspect-ratio: 200 / 138;
+        animation-delay: 0.65s !important;
+    }
+
+    /* Row 7: Photo 3 + Photo 4 (side by side) */
+    body.mobile-opened .photo:nth-child(3) {
+        order: 11;
+        aspect-ratio: 4 / 3;
+        animation-delay: 0.7s !important;
+    }
+
+    body.mobile-opened .photo:nth-child(4) {
+        order: 12;
+        aspect-ratio: 4 / 3;
+        animation-delay: 0.75s !important;
+    }
+
+    /* Row 8: Photo 2 (full width) */
+    body.mobile-opened .photo:nth-child(2) {
+        grid-column: 1 / -1;
+        order: 13;
+        aspect-ratio: 4 / 3;
+        animation-delay: 0.8s !important;
+    }
+}
+
+
+/* ========================================
+   SMALL MOBILE (< 480px)
+   ======================================== */
+
+@media (max-width: 479px) {
+    /* Scale handled by JavaScript */
+
+    body.mobile-opened .hero {
+        max-width: 100%;
+        padding: 30px 12px 70px;
+        gap: 12px;
+    }
+
+    body.mobile-opened .envelope-container {
+        width: 400px;
+    }
+
+    body.mobile-opened .envelope {
+        width: 400px;
+        height: 240px;
+    }
+
+    .reset-btn {
+        width: 36px !important;
+        height: 36px !important;
+        bottom: 14px !important;
+        right: 14px !important;
     }
 
     .reset-btn svg {
@@ -1414,122 +1697,87 @@ html > .reset-btn {
     }
 }
 
+
 /* ========================================
-   MOBILE-SPECIFIC ANIMATIONS
-   Simple animations for scrollable layout
+   TABLET (768–1023px)
    ======================================== */
 
-@media (max-width: 1023px) {
-    /* Simple fade-in for mobile instead of complex arcs */
-    @keyframes simpleFadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+@media (min-width: 768px) and (max-width: 1023px) {
+    /* Scale handled by JavaScript */
+
+    .hero-text-1 {
+        top: -25%;
     }
 
-    /* Disable complex desktop animations on mobile */
-    @keyframes arcMotion1,
-    @keyframes arcMotion2,
-    @keyframes arcMotion3,
-    @keyframes arcMotion4,
-    @keyframes arcMotion5,
-    @keyframes arcMotionInfoCard {
-        0%, 100% {
-            /* Keep elements in place on mobile */
-            position: relative;
-        }
+    body.mobile-opened .envelope-container {
+        width: 560px;
+        max-width: 560x;
+    }
+
+    body.mobile-opened .envelope {
+        width: 560px;
+        height: 336px;
+    }
+
+    body.mobile-opened .hero {
+        max-width: 700px;
+        gap: 20px;
+        padding: 80px 20px 80px;
     }
 }
 
 
-
-/*   BREAKPOINT INDICATOR (Development Only)
+/* ========================================
+   BREAKPOINT INDICATOR (Development Only)
    Remove this section in production
    ======================================== */
 
-/* Move the indicator to html::after instead of body::before */
 html::after {
-    content: "DESKTOP: 1440px+ Static (Fixed Positions)";
+    content: "DESKTOP: 1024px+ Static Layout | Scale: " var(--current-scale, "1.000");
     position: fixed;
     top: 0;
     left: 0;
     background: rgba(76, 175, 80, 0.9);
     color: white;
-    padding: 10px 20px;
+    padding: 8px 16px;
     font-family: monospace;
-    font-size: 14px;
+    font-size: 12px;
     z-index: 99999;
     border-radius: 0 0 8px 0;
     pointer-events: none;
 }
 
-/* Very short landscape (check first for priority) */
-@media (max-height: 450px) and (orientation: landscape) {
-    html::after {
-        content: "VERY SHORT LANDSCAPE: <450px height";
-        background: rgba(123, 31, 162, 0.9) !important;
-    }
-}
-
-/* Small mobile */
 @media (max-width: 374px) {
     html::after {
-        content: "SMALL MOBILE: <375px Scrollable";
+        content: "SMALL MOBILE: <375px | Scale: " var(--current-scale, "1.000");
         background: rgba(183, 28, 28, 0.9) !important;
-        font-size: 12px;
-        padding: 8px 16px;
     }
 }
 
-/* Mobile portrait */
-@media (min-width: 375px) and (max-width: 479px) and (orientation: portrait) {
+@media (min-width: 375px) and (max-width: 479px) {
     html::after {
-        content: "MOBILE: 375px-479px Scrollable";
+        content: "MOBILE: 375-479px | Scale: " var(--current-scale, "1.000");
         background: rgba(244, 67, 54, 0.9) !important;
     }
 }
 
-/* Mobile landscape */
-@media (min-width: 375px) and (max-width: 767px) and (orientation: landscape) {
+@media (min-width: 480px) and (max-width: 767px) {
     html::after {
-        content: "MOBILE LANDSCAPE: 375px-767px Scrollable";
-        background: rgba(233, 30, 99, 0.9) !important;
-    }
-}
-
-/* Mobile large portrait */
-@media (min-width: 480px) and (max-width: 767px) and (orientation: portrait) {
-    html::after {
-        content: "MOBILE LARGE: 480px-767px Scrollable";
+        content: "MOBILE LARGE: 480-767px | Scale: " var(--current-scale, "1.000");
         background: rgba(255, 152, 0, 0.9) !important;
     }
 }
 
-/* Tablet portrait */
-@media (min-width: 768px) and (max-width: 1023px) and (orientation: portrait) {
+@media (min-width: 768px) and (max-width: 1023px) {
     html::after {
-        content: "TABLET PORTRAIT: 768px-1023px Scrollable";
+        content: "TABLET: 768-1023px | Scale: " var(--current-scale, "1.000");
         background: rgba(33, 150, 243, 0.9) !important;
     }
 }
 
-/* Tablet landscape */
-@media (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {
-    html::after {
-        content: "TABLET LANDSCAPE: 768px-1023px Scrollable";
-        background: rgba(156, 39, 176, 0.9) !important;
-    }
-}
-
-/* Base desktop */
 @media (min-width: 1024px) and (max-width: 1439px) {
     html::after {
-        content: "BASE: 1024px-1439px Scrollable";
-        background: rgba(233, 30, 99, 0.9) !important;
+        content: "BASE DESKTOP: 1024-1439px";
+        background: rgba(156, 39, 176, 0.9) !important;
     }
 }
