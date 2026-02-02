@@ -546,7 +546,7 @@ body.mobile-opened {
     transition: opacity 0.1s ease;
 }
 
-.envelope-container.opened~.photos-container {
+.envelope-container.opened .photos-container {
     opacity: 1;
 }
 
@@ -577,7 +577,7 @@ body.mobile-opened {
     transition-delay: 3s;
 }
 
-.envelope-container.opened~.photos-container .photo:nth-child(1) {
+.envelope-container.opened .photos-container .photo:nth-child(1) {
     animation: arcMotion1 2s linear 3s forwards;
 }
 
@@ -585,7 +585,7 @@ body.mobile-opened {
     transition-delay: 3.2s;
 }
 
-.envelope-container.opened~.photos-container .photo:nth-child(2) {
+.envelope-container.opened .photos-container .photo:nth-child(2) {
     animation: arcMotion2 2s linear 3s forwards;
 }
 
@@ -593,7 +593,7 @@ body.mobile-opened {
     transition-delay: 3.4s;
 }
 
-.envelope-container.opened~.photos-container .photo:nth-child(3) {
+.envelope-container.opened .photos-container .photo:nth-child(3) {
     animation: arcMotion3 2s linear 3s forwards;
 }
 
@@ -601,7 +601,7 @@ body.mobile-opened {
     transition-delay: 3.6s;
 }
 
-.envelope-container.opened~.photos-container .photo:nth-child(4) {
+.envelope-container.opened .photos-container .photo:nth-child(4) {
     animation: arcMotion4 2s linear 3s forwards;
 }
 
@@ -609,7 +609,7 @@ body.mobile-opened {
     transition-delay: 3.8s;
 }
 
-.envelope-container.opened~.photos-container .photo:nth-child(5) {
+.envelope-container.opened .photos-container .photo:nth-child(5) {
     animation: arcMotion5 2s linear 3s forwards;
 }
 
@@ -629,7 +629,7 @@ body.mobile-opened {
     transition: opacity 0.1s ease 3s;
 }
 
-.envelope-container.opened~.info-card-container {
+.envelope-container.opened .info-card-container {
     opacity: 1;
 }
 
@@ -651,7 +651,7 @@ body.mobile-opened {
     transition-delay: 4s;
 }
 
-.envelope-container.opened~.info-card-container .info-card {
+.envelope-container.opened .info-card-container .info-card {
     opacity: 1;
     animation: arcMotionInfoCard 2s linear 3s forwards;
     transition: none;
@@ -1126,6 +1126,19 @@ html>.reset-btn {
     }
 }
 
+@media (min-width: 1024px) {
+
+    .photos-container,
+    .info-card-container {
+        display: block !important;
+        opacity: 1 !important;
+    }
+
+    .photo {
+        display: block !important;
+        visibility: visible !important;
+    }
+}
 
 /* ========================================
    MOBILE PHASE 1 — LOCKED FULLSCREEN
@@ -1336,10 +1349,10 @@ html>.reset-btn {
     /* Hero becomes a vertical grid container */
     body.mobile-opened .hero {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 24px;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        gap: 20px;
         width: 100%;
-        max-width: 500px;
+        max-width: 650px;
         margin: 0 auto;
         padding: 60px 24px 100px;
         height: auto;
@@ -1352,26 +1365,27 @@ html>.reset-btn {
         /* Container becomes transparent to grid - children participate directly */
         display: contents !important;
     }
-    
+
     /* The actual envelope needs to be a grid item */
-    body.mobile-opened .envelope-container > .envelope {
+    body.mobile-opened .envelope-container>.envelope {
         position: static !important;
         grid-column: 1 / -1;
         width: 560px !important;
         height: 336px !important;
         max-width: none !important;
         display: block;
-        margin: 380px auto 60px auto;
+        margin: 500px auto 0px auto;
         pointer-events: none;
         order: 1;
         flex-shrink: 0;
     }
-    
+
     /* Click text needs to be positioned relative to envelope */
     body.mobile-opened .click-text {
-        display: none !important; /* Hide on mobile-opened */
+        display: none !important;
+        /* Hide on mobile-opened */
     }
-    
+
     /* Hero text also needs to be hidden or repositioned */
     body.mobile-opened .hero-text {
         display: none !important;
@@ -1495,20 +1509,31 @@ html>.reset-btn {
     }
 
     body.mobile-opened .flowers-container {
-        order: 7;
+        display: contents !important;
+        order: 8;
     }
 
     body.mobile-opened .additional-images-container {
-        order: 6;
+        display: contents !important;
+        grid-column: 1 / -1 !important;
+        /* ❌ REMOVED: order: 6 !important; */
     }
 
     /* Show photos and info card containers - use display:contents */
-    body.mobile-opened .photos-container,
+    body.mobile-opened .photos-container {
+        display: contents !important;
+    }
+
+    /* STEP 1 — Info card must KEEP a real box */
     body.mobile-opened .info-card-container {
         display: contents !important;
-        /* Children will participate directly in grid */
+        position: relative !important;
         opacity: 1 !important;
         visibility: visible !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        background: none !important;
+        border: none !important;
     }
 
     /* Force photos to display */
@@ -1563,6 +1588,59 @@ html>.reset-btn {
         bottom: auto !important;
     }
 
+    body.mobile-opened .flowers-container,
+    body.mobile-opened .additional-images-container,
+    body.mobile-opened .info-card-container {
+        display: contents !important;
+    }
+
+    body.mobile-opened .flower-2,
+    body.mobile-opened .flower-3,
+    body.mobile-opened .additional-image.image-3,
+    body.mobile-opened .info-card {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    body.mobile-opened .flower-2,
+    body.mobile-opened .flower-3,
+    body.mobile-opened .additional-image:nth-child(3) {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    body.mobile-opened .flower-2,
+    body.mobile-opened .flower-3 {
+        position: static !important;
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 1 / 1 !important;
+        pointer-events: none !important;
+        left: auto !important;
+        top: auto !important;
+        min-height: 140px !important;
+        transform: none !important;
+    }
+
+    body.mobile-opened .additional-image.image-3 {
+        aspect-ratio: 1 / 1 !important;
+        min-height: 140px !important;
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+    }
+
+    body.mobile-opened .info-card {
+        display: block !important;
+        width: 100% !important;
+        aspect-ratio: 4 / 3 !important;
+        min-height: 220px !important;
+        background-size: contain !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+    }
+
     /* ===== MOBILE LAYOUT ORDER ===== */
 
     /* Row 1: Envelope (order: 1) - already positioned at top */
@@ -1571,14 +1649,11 @@ html>.reset-btn {
     /* Row 2: Save the date (full width) - order: 2 */
     body.mobile-opened .save-the-date-image {
         position: absolute !important;
-        top: 280px !important;
-        left: 5% !important;
-        transform: translateX(-50%) !important;
-        width: 320px !important;
-        height: 320px !important;
+        top: 400px !important;
+        left: -19% !important;
+        width: 360px !important;
+        height: 360px !important;
         z-index: 200 !important;
-        grid-column: initial !important;
-        order: initial !important;
         aspect-ratio: 1 / 1;
         animation: simpleFadeIn 0.6s ease-out forwards !important;
         animation-delay: 0.1s !important;
@@ -1586,81 +1661,142 @@ html>.reset-btn {
         pointer-events: none;
     }
 
-    /* Row 3: Photo 1 + Photo 5 + Flower 1 (side by side) */
-    body.mobile-opened .photo:nth-child(1) {
+    /* Row 3: Photo 5 (2 cols) + Photo 1 (2 cols) + Flower 1 (1 col) = 5 cols total */
+    body.mobile-opened .photo:nth-child(5) {
         order: 3;
+        grid-column: 1 / 3;
         aspect-ratio: 4 / 3;
         animation-delay: 0.2s !important;
+        min-height: 280px !important;
+        max-width: 100% !important;
+        margin-top: -120px !important;
+        margin-left: 170px !important;
+        z-index: 10 !important;
+        transform: rotate(-15deg) !important;
     }
 
-    body.mobile-opened .photo:nth-child(5) {
+    body.mobile-opened .photo:nth-child(1) {
         order: 4;
+        grid-column: 3 / 5;
         aspect-ratio: 4 / 3;
         animation-delay: 0.25s !important;
+        min-height: 250px;
+        margin-top: -60px !important;
+        margin-left: 90px !important;
+        transform: rotate(20deg) !important;
     }
 
     body.mobile-opened .flower-1 {
         order: 5;
+        grid-column: 5 / 6;
         aspect-ratio: 180 / 225;
         animation-delay: 0.3s !important;
+        min-height: 280px;
+        margin-top: -250px !important;
+        margin-left: -30px !important;
     }
 
-    /* Row 4: Additional image 1 (full width) */
+    /* Row 4: Additional image 1 (full width across 5 columns) */
     body.mobile-opened .additional-image:nth-child(1) {
-        grid-column: 1 / -1;
-        order: 6;
+        width: 20% !important;
+        max-width: 300px !important;
+        height: auto !important;
+        margin: 0px auto !important;
+        grid-column: 1 / -1 !important;
+        order: 6 !important;
         aspect-ratio: 1 / 1;
         animation-delay: 0.4s !important;
+        min-height: 120px;
     }
 
-    /* Row 5: Flower 2 + Flower 3 (side by side) */
+    /* Additional image 2 - if you have it, set its order */
+    body.mobile-opened .additional-image:nth-child(2) {
+        order: 7 !important;
+        /* Add other styles if needed */
+    }
+
+    /* ===== ROW 5: FIXED LAYOUT ===== */
+    /* Flower 2 & 3 stack on z-axis in column 1 */
+    /* Info card & additional image 3 stack on z-axis in columns 2-6 */
+
+    /* Flower 2 - base layer in column 1 */
     body.mobile-opened .flower-2 {
-        order: 7;
-        aspect-ratio: 184 / 203;
+        grid-column: 1 / 2 !important;
+        grid-row: 5 !important;
+        order: 20 !important;
+        min-height: 200px !important;
+        aspect-ratio: 1 / 1 !important;
+        z-index: 6 !important;
         animation-delay: 0.5s !important;
     }
 
+    /* Flower 3 - overlaps flower 2 on z-axis in SAME cell */
     body.mobile-opened .flower-3 {
-        order: 8;
-        aspect-ratio: 405 / 430;
+        grid-column: 1 / 2 !important;
+        grid-row: 5 !important;
+        order: 20 !important;
+        min-height: 200px !important;
+        aspect-ratio: 1 / 1 !important;
+        z-index: 7 !important;
         animation-delay: 0.55s !important;
     }
 
-    /* Row 6: Info card + Additional image 3 (side by side) */
+    /* Info card - spans columns 2-6 */
     body.mobile-opened .info-card {
-        order: 9;
-        aspect-ratio: 650 / 470;
-        animation-delay: 0.6s !important;
+        grid-column: 2 / 6 !important;
+        grid-row: 5 !important;
+        order: 21 !important;
+        display: block !important;
+        width: 100% !important;
+        aspect-ratio: 4 / 5 !important;
+        min-height: 350px !important;
+        background-size: contain !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        z-index: 5 !important;
     }
 
+    /* Additional image 3 - overlaps info card on z-axis in SAME cells */
     body.mobile-opened .additional-image:nth-child(3) {
-        order: 10;
-        aspect-ratio: 200 / 138;
-        animation-delay: 0.65s !important;
+        grid-column: 2 / 6 !important;
+        grid-row: 5 !important;
+        order: 21 !important;
+        aspect-ratio: 1 / 1 !important;
+        min-height: 100px !important;
+        width: 25% !important;
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+        z-index: 8 !important;
+        justify-self: end !important;
+        align-self: start !important;
+        margin-top: 10px !important;
+        margin-right: 10px !important;
     }
 
-    /* Row 7: Photo 3 + Photo 4 (side by side) */
+    /* Row 7: Photo 3 + Photo 4 (each span 2-3 columns for balance) */
     body.mobile-opened .photo:nth-child(3) {
-        order: 11;
+        order: 24;
+        grid-column: 1 / 3;
         aspect-ratio: 4 / 3;
         animation-delay: 0.7s !important;
     }
 
     body.mobile-opened .photo:nth-child(4) {
-        order: 12;
+        order: 25;
+        grid-column: 4 / 6;
         aspect-ratio: 4 / 3;
         animation-delay: 0.75s !important;
     }
 
-    /* Row 8: Photo 2 (full width) */
+    /* Row 8: Photo 2 (full width across 5 columns) */
     body.mobile-opened .photo:nth-child(2) {
         grid-column: 1 / -1;
-        order: 13;
+        order: 26;
         aspect-ratio: 4 / 3;
         animation-delay: 0.8s !important;
     }
-}
 
+}
 
 /* ========================================
    SMALL MOBILE (< 480px)
@@ -1727,17 +1863,19 @@ html>.reset-btn {
 }
 
 
+
 /* ========================================
    BREAKPOINT INDICATOR (Development Only)
    Remove this section in production
    ======================================== */
 
+/* Default - no media query needed, will be overridden */
 html::after {
-    content: "DESKTOP: 1024px+ Static Layout | Scale: " var(--current-scale, "1.000");
+    content: "UNKNOWN BREAKPOINT";
     position: fixed;
     top: 0;
     left: 0;
-    background: rgba(76, 175, 80, 0.9);
+    background: rgba(0, 0, 0, 0.9);
     color: white;
     padding: 8px 16px;
     font-family: monospace;
@@ -1779,5 +1917,12 @@ html::after {
     html::after {
         content: "BASE DESKTOP: 1024-1439px";
         background: rgba(156, 39, 176, 0.9) !important;
+    }
+}
+
+@media (min-width: 1440px) {
+    html::after {
+        content: "DESKTOP: 1440px+ Static Layout";
+        background: rgba(76, 175, 80, 0.9) !important;
     }
 }
