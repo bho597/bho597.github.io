@@ -24,6 +24,16 @@ html {
 }
 
 @media (max-width: 1023px) {
+    /* Prevent horizontal scroll */
+    html, body {
+        overflow-x: hidden !important;
+        max-width: 100vw;
+    }
+    
+    body.mobile-opened {
+        overflow-x: hidden !important;
+    }
+
     .hero {
         overflow: visible;
     }
@@ -72,6 +82,16 @@ body {
 body.mobile-opened {
     min-height: 100vh;
     height: auto;
+}
+
+body.mobile-opened #zoom-root {
+    width: 768px !important;
+    /* ← Portrait width */
+    height: auto !important;
+    min-height: 3000px !important;
+    /* Tall enough for scrollable content */
+    transform-origin: top center !important;
+    position: relative;
 }
 
 #zoom-root {
@@ -1185,13 +1205,13 @@ html>.reset-btn {
     }
 
     html {
-        overflow: hidden;
-        height: 100vh;
+        overflow-x: hidden !important;
+        max-width: 100vw;
     }
 
     body {
-        overflow: hidden;
-        height: 100vh;
+        overflow-x: hidden !important;
+        max-width: 100vw;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -1331,9 +1351,8 @@ html>.reset-btn {
     /* Unlock scrolling when envelope is opened */
     body.mobile-opened {
         overflow-y: auto;
-        overflow-x: hidden;
-        height: auto;
-        min-height: 100vh;
+        overflow-x: hidden !important;
+        max-width: 100vw;
         align-items: flex-start;
     }
 
@@ -1346,10 +1365,11 @@ html>.reset-btn {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
         gap: 20px;
-        width: 100%;
-        max-width: 650px;
+        width: 768px !important;
+        /* ← Portrait base width */
+        max-width: none !important;
         margin: 0 auto;
-        padding: 60px 24px 100px;
+        padding: 60px 80px 100px;
         height: auto;
         min-height: auto;
         align-content: start;
@@ -1365,11 +1385,12 @@ html>.reset-btn {
     body.mobile-opened .envelope-container>.envelope {
         position: static !important;
         grid-column: 1 / -1;
-        width: 900px !important;
-        height: 540px !important;
+        width: 700px !important;
+        height: 420px !important;
         max-width: none !important;
         display: block;
-        margin: 15vh 42vh auto auto;
+        margin: 20vh 50px auto 0;
+        justify-self: center;
         pointer-events: none;
         order: 1;
         flex-shrink: 0;
@@ -1644,10 +1665,10 @@ html>.reset-btn {
     /* Row 2: Save the date (full width) - order: 2 */
     body.mobile-opened .save-the-date-image {
         position: absolute !important;
-        top: -5vh !important;
-        left: -29vh !important;
-        width: 600px !important;
-        height: 600px !important;
+        top: 5vh !important;
+        left: -22vh !important;
+        width: 450px !important;
+        height: 450px !important;
         z-index: 200 !important;
         aspect-ratio: 1 / 1;
         animation: simpleFadeIn 0.6s ease-out forwards !important;
@@ -1662,11 +1683,11 @@ html>.reset-btn {
         grid-column: 1 / 3;
         aspect-ratio: 4 / 3;
         animation-delay: 0.2s !important;
-        min-height: 450px !important;
-        max-height: 450px !important;
+        min-height: 330px !important;
+        max-height: 330px !important;
         max-width: 100% !important;
-        margin-top: -20vh !important;
-        margin-left: 24vh !important;
+        margin-top: -21vh !important;
+        margin-left: 14vh !important;
         z-index: 10 !important;
         transform: rotate(-10deg) !important;
     }
@@ -1676,11 +1697,11 @@ html>.reset-btn {
         grid-column: 3 / 5;
         aspect-ratio: 4 / 3;
         animation-delay: 0.25s !important;
-        min-height: 400px;
-        max-height: 400px;
-        margin-top: -10vh !important;
-        margin-left: -5vh !important;
-        transform: rotate(20deg) !important;
+        min-height: 310px;
+        max-height: 310px;
+        margin-top: -5vh !important;
+        margin-left: 3vh !important;
+        transform: rotate(18deg) !important;
     }
 
     body.mobile-opened .flower-1 {
@@ -1688,16 +1709,16 @@ html>.reset-btn {
         grid-column: 5 / 6;
         aspect-ratio: 180 / 225;
         animation-delay: 0.3s !important;
-        min-height: 750px;
-        max-height: 750px;
-        margin-top: -40vh !important;
-        margin-left: -27vh !important;
+        min-height: 500px;
+        max-height: 500px;
+        margin-top: -30vh !important;
+        margin-left: -10vh !important;
     }
 
     /* Row 4: Additional image 1 (full width across 5 columns) */
     body.mobile-opened .additional-image:nth-child(1) {
         width: 20% !important;
-        max-width: 300px !important;
+        max-width: 200px !important;
         height: auto !important;
         margin: 0px auto !important;
         grid-column: 1 / -1 !important;
@@ -1724,14 +1745,14 @@ html>.reset-btn {
         grid-column: 1 / 2 !important;
         grid-row: 5 !important;
         order: 20 !important;
-        min-height: 300px !important;
-        max-height: 300px !important;
+        min-height: 200px !important;
+        max-height: 200px !important;
         aspect-ratio: 1 / 1 !important;
         z-index: 6 !important;
         animation-delay: 0.5s !important;
-        margin-left: 25vh !important;
-        margin-top: -88vh !important;
-        margin-right: -60vh !important;
+        margin-left: 12vh !important;
+        margin-top: -58vh !important;
+        margin-right: -30vh !important;
     }
 
     /* Flower 3 - overlaps flower 2 on z-axis in SAME cell */
@@ -1739,14 +1760,14 @@ html>.reset-btn {
         grid-column: 1 / 2 !important;
         grid-row: 5 !important;
         order: 20 !important;
-        min-height: 800px !important;
-        max-height: 800px !important;
+        min-height: 500px !important;
+        max-height: 500px !important;
         aspect-ratio: 1 / 1 !important;
         z-index: 5 !important;
         animation-delay: 0.55s !important;
-        margin-left: 25vh !important;
-        margin-top: -35vh !important;
-        margin-right: -47vh !important;
+        margin-left: 15vh !important;
+        margin-top: -25vh !important;
+        margin-right: -28vh !important;
     }
 
     /* Info card - spans columns 2-6 */
@@ -1755,7 +1776,7 @@ html>.reset-btn {
         grid-row: 5 !important;
         order: 21 !important;
         display: block !important;
-        width: 70% !important;
+        width: 80% !important;
         aspect-ratio: 4 / 5 !important;
         min-height: 300px !important;
         background-size: contain !important;
@@ -1772,14 +1793,14 @@ html>.reset-btn {
         grid-row: 5 !important;
         order: 21 !important;
         aspect-ratio: 1 / 1 !important;
-        min-height: 700px !important;
-        max-height: 700px !important;
+        min-height: 350px !important;
+        max-height: 350px !important;
         width: 40% !important;
         background-size: contain !important;
         background-repeat: no-repeat !important;
         z-index: 8 !important;
-        margin-top: -80vh !important;
-        margin-left: 0vh !important;
+        margin-top: -70vh !important;
+        margin-left: 5vh !important;
     }
 
     /* Row 7: Photo 3 + Photo 4 (each span 2-3 columns for balance) */
@@ -1789,11 +1810,11 @@ html>.reset-btn {
         aspect-ratio: 4 / 3;
         animation-delay: 0.7s !important;
         z-index: 9 !important;
-        min-height: 450px;
-        max-height: 450px;
-        margin-top: -9vh !important;
-        margin-left: 21vh !important;
-        margin-right: -30vh !important;
+        min-height: 400px;
+        max-height: 400px;
+        margin-top: -5vh !important;
+        margin-left: 15vh !important;
+        margin-right: -20vh !important;
         transform: rotate(-8deg) !important;
     }
 
@@ -1804,10 +1825,10 @@ html>.reset-btn {
         aspect-ratio: 4 / 3;
         animation-delay: 0.75s !important;
         z-index: 10 !important;
-        min-height: 400px;
-        max-height: 400px;
-        margin-top: -9vh !important;
-        margin-left: -35vh !important;
+        min-height: 380px;
+        max-height: 380px;
+        margin-top: -5vh !important;
+        margin-left: -15vh !important;
         transform: rotate(8deg) !important;
     }
 

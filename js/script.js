@@ -37,20 +37,30 @@ function scaleToFit() {
 
     // MOBILE behavior
     if (isMobile()) {
-        let zoomMultiplier = 1.3;
+        // Different base dimensions for different states
+        const baseWidth = document.body.classList.contains('mobile-opened') ? 768 : 1024;
+        const baseHeight = document.body.classList.contains('mobile-opened') ? 1024 : 768;
 
-        if (window.innerWidth <= 479) zoomMultiplier = 1.25;
-        else if (window.innerWidth >= 768) zoomMultiplier = 1.4;
+        const scaleX = viewportWidth / baseWidth;
+        const scaleY = viewportHeight / baseHeight;
+        const mobileScale = Math.min(scaleX, scaleY);
 
-        const finalScale = document.body.classList.contains('mobile-opened')
-            ? fitScale
-            : fitScale * zoomMultiplier;
+        let zoomMultiplier = document.body.classList.contains('mobile-opened') ? 1.0 : 1.3;
+
+        if (!document.body.classList.contains('mobile-opened')) {
+            if (window.innerWidth <= 479) zoomMultiplier = 1.25;
+            else if (window.innerWidth >= 768) zoomMultiplier = 1.4;
+        }
+
+        const finalScale = mobileScale * zoomMultiplier;
 
         zoomRoot.style.transform = `scale(${finalScale})`;
+        zoomRoot.style.transformOrigin = document.body.classList.contains('mobile-opened')
+            ? 'top center'
+            : 'center center';
         document.documentElement.style.setProperty('--zoom-level', finalScale);
         return;
     }
-
     // DESKTOP behavior
     zoomRoot.style.transform = `scale(${fitScale})`;
     document.documentElement.style.setProperty('--zoom-level', fitScale);
