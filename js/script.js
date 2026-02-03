@@ -24,53 +24,41 @@ function scaleToFit() {
     const zoomRoot = document.getElementById('zoom-root');
     if (!zoomRoot) return;
 
-    if (isMobile()) {
-        // Mobile: Calculate scale based on viewport to maintain zoom effect
-        const baseWidth = 1024;
-        const baseHeight = 768;
-        const viewportWidth = window.innerWidth;
-        const viewportHeight = window.innerHeight;
-        
-        // Calculate what scale would fit the viewport
-        const scaleX = viewportWidth / baseWidth;
-        const scaleY = viewportHeight / baseHeight;
-        const fitScale = Math.min(scaleX, scaleY);
-        
-        // Apply a zoom multiplier on top of the fit scale
-        let zoomMultiplier = 1.3; // Default mobile zoom
-        
-        if (window.innerWidth <= 479) {
-            zoomMultiplier = 1.25; // Small mobile
-        } else if (window.innerWidth >= 768) {
-            zoomMultiplier = 1.4; // Tablet
-        }
-        
-        const finalScale = fitScale * zoomMultiplier;
-        
-        // Only apply if not in opened state
-        if (!document.body.classList.contains('mobile-opened')) {
-            zoomRoot.style.transform = `scale(${finalScale})`;
-        } else {
-            zoomRoot.style.transform = `scale(${fitScale})`;
-        }
-        
-        return;
-    }
-
-    // Desktop scaling logic
     const baseWidth = 1024;
     const baseHeight = 768;
 
-    const scaleX = window.innerWidth / baseWidth;
-    const scaleY = window.innerHeight / baseHeight;
-    const scale = Math.min(scaleX, scaleY);
+    // Use visual viewport if available (fixes mobile pinch zoom)
+    const viewportWidth = window.visualViewport?.width || window.innerWidth;
+    const viewportHeight = window.visualViewport?.height || window.innerHeight;
 
-    zoomRoot.style.transform = `scale(${scale})`;
-    document.documentElement.style.setProperty('--zoom-level', scale);
+    const scaleX = viewportWidth / baseWidth;
+    const scaleY = viewportHeight / baseHeight;
+    const fitScale = Math.min(scaleX, scaleY);
+
+    // MOBILE behavior
+    if (isMobile()) {
+        let zoomMultiplier = 1.3;
+
+        if (window.innerWidth <= 479) zoomMultiplier = 1.25;
+        else if (window.innerWidth >= 768) zoomMultiplier = 1.4;
+
+        const finalScale = document.body.classList.contains('mobile-opened')
+            ? fitScale
+            : fitScale * zoomMultiplier;
+
+        zoomRoot.style.transform = `scale(${finalScale})`;
+        document.documentElement.style.setProperty('--zoom-level', finalScale);
+        return;
+    }
+
+    // DESKTOP behavior
+    zoomRoot.style.transform = `scale(${fitScale})`;
+    document.documentElement.style.setProperty('--zoom-level', fitScale);
 }
 
 window.addEventListener('resize', scaleToFit);
 window.addEventListener('load', scaleToFit);
+window.visualViewport?.addEventListener('resize', scaleToFit);
 scaleToFit();
 
 if (!resetButton) {
@@ -89,7 +77,10 @@ const MAX_ZOOM = 1.6;
 function applyZoom() {
     if (!zoomRoot || isMobile()) return;
 
-    const baseScale = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--zoom-level') || 1);
+    const baseScale = parseFloat(
+        getComputedStyle(document.documentElement).getPropertyValue('--zoom-level')
+    ) || 1;
+
     const combinedScale = baseScale * zoomLevel;
     zoomRoot.style.transform = `scale(${combinedScale})`;
 
