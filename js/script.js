@@ -143,10 +143,10 @@ function applyZoom() {
         zoomRoot.style.left = '50%';
         zoomRoot.style.top = '50%';
         
-        document.body.style.paddingLeft = '';
-        document.body.style.paddingRight = '';
-        document.body.style.paddingTop = '';
-        document.body.style.paddingBottom = '';
+        // document.body.style.paddingLeft = '';
+        // document.body.style.paddingRight = '';
+        // document.body.style.paddingTop = '';
+        // document.body.style.paddingBottom = '';
         
         document.documentElement.style.overflow = 'hidden';
         document.body.style.overflow = 'hidden';
@@ -156,11 +156,17 @@ function applyZoom() {
 }
 
 
-// ZOOM DISABLED - Prevent browser zoom
 document.addEventListener('keydown', (e) => {
     if (isMobile()) return;
-    if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '=' || e.key === '-' || e.key === '0')) {
+    if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '=')) {
         e.preventDefault();
+        zoomLevel = Math.min(MAX_ZOOM, zoomLevel + 0.1);
+        applyZoom();
+    }
+    if ((e.ctrlKey || e.metaKey) && e.key === '-') {
+        e.preventDefault();
+        zoomLevel = Math.max(MIN_ZOOM, zoomLevel - 0.1);
+        applyZoom();
     }
 });
 
@@ -168,6 +174,13 @@ window.addEventListener('wheel', (e) => {
     if (isMobile()) return;
     if (e.ctrlKey) {
         e.preventDefault();
+        const ZOOM_STEP = 0.08;
+        if (e.deltaY < 0) {
+            zoomLevel = Math.min(MAX_ZOOM, zoomLevel + ZOOM_STEP);
+        } else {
+            zoomLevel = Math.max(MIN_ZOOM, zoomLevel - ZOOM_STEP);
+        }
+        applyZoom();
     }
 }, { passive: false });
 
