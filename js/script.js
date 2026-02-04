@@ -107,28 +107,19 @@ function applyZoom() {
         contentHeight > window.innerHeight;
 
     if (needsScroll) {
-        // When zoomed, use top-left origin and center horizontally, align to top vertically
+        // When zoomed, use top-left origin
         zoomRoot.style.transformOrigin = 'top left';
         zoomRoot.style.transform = `scale(${combinedScale})`;
-        zoomRoot.style.left = '50%';
+        zoomRoot.style.left = '0';
         zoomRoot.style.top = '0';
-        zoomRoot.style.marginLeft = `${-contentWidth / 2}px`;
-        zoomRoot.style.marginTop = '20px'; // Small top margin for breathing room
+        zoomRoot.style.marginLeft = '0';
+        zoomRoot.style.marginTop = '0';
         
         document.documentElement.style.overflow = 'auto';
         document.body.style.overflow = 'auto';
         
-        // Center horizontally but keep at top on first zoom
-        if (!window._hasScrolledToCenter) {
-            requestAnimationFrame(() => {
-                window.scrollTo({
-                    left: (contentWidth - window.innerWidth) / 2,
-                    top: 0,
-                    behavior: 'auto'
-                });
-                window._hasScrolledToCenter = true;
-            });
-        }
+        // Reset scroll position flag when zoom changes
+        window._hasScrolledToCenter = false;
     } else {
         // When not zoomed, use centered transform
         zoomRoot.style.transformOrigin = 'center center';
@@ -215,13 +206,16 @@ envelope.addEventListener('click', function () {
         // Stage 3: Fade + layout transition synced to flap
         setTimeout(() => {
             document.body.classList.add('envelope-fade-out');
+            
+            // Add mobile-opened immediately but keep fade-out active to maintain position
+            document.body.classList.add('mobile-opened');
+            document.documentElement.style.overflow = 'visible';
 
-            // After fade completes → unlock scroll + mobile layout
+            // After fade completes → remove fade-out to release envelope into grid
             setTimeout(() => {
-                document.body.classList.add('mobile-opened');
-                document.documentElement.style.overflow = 'visible';
+                document.body.classList.remove('envelope-fade-out');
                 resetButton.classList.add('show');
-            }, 1200); // fade duration
+            }, 1400); // slightly longer than fade duration for smooth transition
         }, 3600); // flip (1000ms) + flap (1500ms) + buffer
 
         // Desktop timeline unchanged
