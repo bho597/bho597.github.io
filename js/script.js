@@ -107,31 +107,24 @@ function applyZoom() {
         contentHeight > window.innerHeight;
 
     if (needsScroll) {
-        // When zoomed, remove centering transform and use padding to center
-        zoomRoot.style.transformOrigin = '0 0';
+        // When zoomed, use top-left origin and center horizontally, align to top vertically
+        zoomRoot.style.transformOrigin = 'top left';
         zoomRoot.style.transform = `scale(${combinedScale})`;
-        zoomRoot.style.left = '0';
+        zoomRoot.style.left = '50%';
         zoomRoot.style.top = '0';
-        
-        // Add padding to body to center the content and allow scrolling in all directions
-        const horizontalPadding = Math.max(0, (window.innerWidth - contentWidth) / 2);
-        const verticalPadding = Math.max(0, (window.innerHeight - contentHeight) / 2);
-        
-        document.body.style.paddingLeft = `${horizontalPadding}px`;
-        document.body.style.paddingRight = `${horizontalPadding}px`;
-        document.body.style.paddingTop = `${verticalPadding}px`;
-        document.body.style.paddingBottom = `${verticalPadding}px`;
+        zoomRoot.style.marginLeft = `${-contentWidth / 2}px`;
+        zoomRoot.style.marginTop = '20px'; // Small top margin for breathing room
         
         document.documentElement.style.overflow = 'auto';
         document.body.style.overflow = 'auto';
         
-        // Scroll to center on first zoom
+        // Center horizontally but keep at top on first zoom
         if (!window._hasScrolledToCenter) {
             requestAnimationFrame(() => {
                 window.scrollTo({
                     left: (contentWidth - window.innerWidth) / 2,
-                    top: (contentHeight - window.innerHeight) / 2,
-                    behavior: 'smooth'
+                    top: 0,
+                    behavior: 'auto'
                 });
                 window._hasScrolledToCenter = true;
             });
@@ -142,15 +135,13 @@ function applyZoom() {
         zoomRoot.style.transform = `translate(-50%, -50%) scale(${combinedScale})`;
         zoomRoot.style.left = '50%';
         zoomRoot.style.top = '50%';
-        
-        // document.body.style.paddingLeft = '';
-        // document.body.style.paddingRight = '';
-        // document.body.style.paddingTop = '';
-        // document.body.style.paddingBottom = '';
+        zoomRoot.style.marginLeft = '';
+        zoomRoot.style.marginTop = '';
         
         document.documentElement.style.overflow = 'hidden';
         document.body.style.overflow = 'hidden';
         
+        window.scrollTo(0, 0);
         window._hasScrolledToCenter = false;
     }
 }
