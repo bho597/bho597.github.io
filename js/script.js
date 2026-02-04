@@ -20,9 +20,15 @@ function isMobile() {
 // SCALE-TO-FIT FUNCTIONALITY
 // ==============================
 
+let isUserZooming = false;
+let zoomCheckTimeout = null;
+
 function scaleToFit() {
     const zoomRoot = document.getElementById('zoom-root');
     if (!zoomRoot) return;
+
+    // Don't recalculate scale during user pinch zoom
+    if (isUserZooming) return;
 
     const baseDesktopWidth = 1024;
     const baseDesktopHeight = 768;
@@ -61,17 +67,39 @@ function scaleToFit() {
     document.documentElement.style.setProperty('--zoom-level', fitScale);
 }
 
+// Detect user pinch zoom on mobile
+function detectUserZoom() {
+    if (!isMobile()) return;
+    
+    const currentZoom = window.visualViewport?.scale || 1;
+    
+    // If user is zoomed in (scale > 1), they're pinch zooming
+    if (currentZoom > 1.01) {
+        isUserZooming = true;
+        
+        // Clear existing timeout
+        if (zoomCheckTimeout) clearTimeout(zoomCheckTimeout);
+        
+        // Reset flag after user stops zooming for 500ms
+        zoomCheckTimeout = setTimeout(() => {
+            isUserZooming = false;
+        }, 500);
+    }
+}
+
 window.addEventListener('DOMContentLoaded', () => {
     scaleToFit();
     applyZoom();
 });
 
 window.addEventListener('resize', () => {
+    detectUserZoom();
     scaleToFit();
     applyZoom();
 });
 
 window.visualViewport?.addEventListener('resize', () => {
+    detectUserZoom();
     scaleToFit();
     applyZoom();
 });
