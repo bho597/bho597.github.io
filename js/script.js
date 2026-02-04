@@ -24,20 +24,14 @@ function scaleToFit() {
     const zoomRoot = document.getElementById('zoom-root');
     if (!zoomRoot) return;
 
-    const baseWidth = 1024;
-    const baseHeight = 768;
+    const baseDesktopWidth = 1024;
+    const baseDesktopHeight = 768;
 
-    // Use visual viewport if available (fixes mobile pinch zoom)
     const viewportWidth = window.visualViewport?.width || window.innerWidth;
     const viewportHeight = window.visualViewport?.height || window.innerHeight;
 
-    const scaleX = viewportWidth / baseWidth;
-    const scaleY = viewportHeight / baseHeight;
-    const fitScale = Math.min(scaleX, scaleY);
-
     // MOBILE behavior
     if (isMobile()) {
-        // Different base dimensions for different states
         const baseWidth = document.body.classList.contains('mobile-opened') ? 768 : 1024;
         const baseHeight = document.body.classList.contains('mobile-opened') ? 1024 : 768;
 
@@ -54,22 +48,34 @@ function scaleToFit() {
 
         const finalScale = mobileScale * zoomMultiplier;
 
-        zoomRoot.style.transform = `scale(${finalScale})`;
-        zoomRoot.style.transformOrigin = document.body.classList.contains('mobile-opened')
-            ? 'top center'
-            : 'center center';
+        // ONLY set scale variable — no transform/layout writes
         document.documentElement.style.setProperty('--zoom-level', finalScale);
         return;
     }
+
     // DESKTOP behavior
-    zoomRoot.style.transform = `scale(${fitScale})`;
+    const scaleX = viewportWidth / baseDesktopWidth;
+    const scaleY = viewportHeight / baseDesktopHeight;
+    const fitScale = Math.min(scaleX, scaleY);
+
     document.documentElement.style.setProperty('--zoom-level', fitScale);
 }
 
-window.addEventListener('resize', scaleToFit);
-window.addEventListener('load', scaleToFit);
-window.visualViewport?.addEventListener('resize', scaleToFit);
-scaleToFit();
+window.addEventListener('DOMContentLoaded', () => {
+    scaleToFit();
+    applyZoom();
+});
+
+window.addEventListener('resize', () => {
+    scaleToFit();
+    applyZoom();
+});
+
+window.visualViewport?.addEventListener('resize', () => {
+    scaleToFit();
+    applyZoom();
+});
+
 
 if (!resetButton) {
     resetButton = document.getElementById('resetButton');
@@ -92,58 +98,69 @@ function applyZoom() {
     ) || 1;
 
     const combinedScale = baseScale * zoomLevel;
-    zoomRoot.style.transform = `scale(${combinedScale})`;
 
-    if (zoomLevel > 1) {
+    const contentWidth = 1024 * combinedScale;
+    const contentHeight = 768 * combinedScale;
+
+    const needsScroll =
+        contentWidth > window.innerWidth ||
+        contentHeight > window.innerHeight;
+
+    if (needsScroll) {
+        // When zoomed, remove centering transform and use padding to center
+        zoomRoot.style.transformOrigin = '0 0';
+        zoomRoot.style.transform = `scale(${combinedScale})`;
+        zoomRoot.style.left = '0';
+        zoomRoot.style.top = '0';
+        
+        // Add padding to body to center the content and allow scrolling in all directions
+        const horizontalPadding = Math.max(0, (window.innerWidth - contentWidth) / 2);
+        const verticalPadding = Math.max(0, (window.innerHeight - contentHeight) / 2);
+        
+        document.body.style.paddingLeft = `${horizontalPadding}px`;
+        document.body.style.paddingRight = `${horizontalPadding}px`;
+        document.body.style.paddingTop = `${verticalPadding}px`;
+        document.body.style.paddingBottom = `${verticalPadding}px`;
+        
         document.documentElement.style.overflow = 'auto';
-        document.body.style.overflow = 'visible';
-        document.body.style.display = 'block';
-        document.body.style.position = 'relative';
-
-        const windowWidth = window.innerWidth;
-        const windowHeight = window.innerHeight;
-        const contentWidth = 1024 * combinedScale;
-        const contentHeight = 768 * combinedScale;
-
-        const leftOffset = Math.max(0, (windowWidth - contentWidth) / 2);
-        const topOffset = Math.max(0, (windowHeight - contentHeight) / 2);
-
-        zoomRoot.style.position = 'absolute';
-        zoomRoot.style.left = `${leftOffset}px`;
-        zoomRoot.style.top = `${topOffset}px`;
+        document.body.style.overflow = 'auto';
+        
+        // Scroll to center on first zoom
+        if (!window._hasScrolledToCenter) {
+            requestAnimationFrame(() => {
+                window.scrollTo({
+                    left: (contentWidth - window.innerWidth) / 2,
+                    top: (contentHeight - window.innerHeight) / 2,
+                    behavior: 'smooth'
+                });
+                window._hasScrolledToCenter = true;
+            });
+        }
     } else {
+        // When not zoomed, use centered transform
+        zoomRoot.style.transformOrigin = 'center center';
+        zoomRoot.style.transform = `translate(-50%, -50%) scale(${combinedScale})`;
+        zoomRoot.style.left = '50%';
+        zoomRoot.style.top = '50%';
+        
+        document.body.style.paddingLeft = '';
+        document.body.style.paddingRight = '';
+        document.body.style.paddingTop = '';
+        document.body.style.paddingBottom = '';
+        
         document.documentElement.style.overflow = 'hidden';
         document.body.style.overflow = 'hidden';
-        document.body.style.display = 'flex';
-        document.body.style.position = 'relative';
-
-        zoomRoot.style.position = 'relative';
-        zoomRoot.style.left = 'auto';
-        zoomRoot.style.top = 'auto';
-
-        window.scrollTo(0, 0);
-    }
-
-    if (zoomLevel <= 1.5 && zoomLevel > 1) {
-        const recenterAmount = (1.5 - zoomLevel) / 0.5;
-        window.scrollTo(
-            window.scrollX * (1 - recenterAmount),
-            window.scrollY * (1 - recenterAmount)
-        );
+        
+        window._hasScrolledToCenter = false;
     }
 }
 
+
+// ZOOM DISABLED - Prevent browser zoom
 document.addEventListener('keydown', (e) => {
     if (isMobile()) return;
-    if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '=')) {
+    if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '=' || e.key === '-' || e.key === '0')) {
         e.preventDefault();
-        zoomLevel = Math.min(MAX_ZOOM, zoomLevel + 0.1);
-        applyZoom();
-    }
-    if ((e.ctrlKey || e.metaKey) && e.key === '-') {
-        e.preventDefault();
-        zoomLevel = Math.max(MIN_ZOOM, zoomLevel - 0.1);
-        applyZoom();
     }
 });
 
@@ -151,13 +168,6 @@ window.addEventListener('wheel', (e) => {
     if (isMobile()) return;
     if (e.ctrlKey) {
         e.preventDefault();
-        const ZOOM_STEP = 0.08;
-        if (e.deltaY < 0) {
-            zoomLevel = Math.min(MAX_ZOOM, zoomLevel + ZOOM_STEP);
-        } else {
-            zoomLevel = Math.max(MIN_ZOOM, zoomLevel - ZOOM_STEP);
-        }
-        applyZoom();
     }
 }, { passive: false });
 

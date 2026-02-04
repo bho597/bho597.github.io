@@ -48,9 +48,7 @@ body {
     position: relative;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: block;
 }
 
 @media (max-width: 1023px) {
@@ -64,14 +62,16 @@ body.mobile-opened {
     height: auto;
 }
 
+
 #zoom-root {
-    transform-origin: center center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
     width: 1024px;
     height: 768px;
-    position: relative;
-    transform: scale(var(--zoom-level, 1));
-    flex-shrink: 0;
-    transition: transform 0.3s ease-out;
+    transform-origin: center center;
+    transform: translate(-50%, -50%) scale(var(--zoom-level, 1));
+    will-change: transform;
 }
 
 /* Make zoom-root responsive on mobile/tablet */
