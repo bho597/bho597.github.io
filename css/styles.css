@@ -1357,7 +1357,7 @@ html>.reset-btn {
         /* ← Portrait base width */
         max-width: none !important;
         margin: 0 auto;
-        padding: 60px 80px 100px;
+        padding: 60px 80px 600px; /* Increased bottom padding from 100px to 300px */
         height: auto;
         min-height: auto;
         align-content: start;
@@ -1834,7 +1834,7 @@ html>.reset-btn {
 
     body.mobile-opened .hero {
         max-width: 100%;
-        padding: 30px 12px 70px;
+        padding: 30px 12px 300px; /* Increased bottom padding from 70px to 150px */
         gap: 12px;
     }
 
@@ -1885,7 +1885,7 @@ html>.reset-btn {
     body.mobile-opened .hero {
         max-width: 700px;
         gap: 20px;
-        padding: 80px 20px 80px;
+        padding: 80px 20px 480px; /* Increased bottom padding from 80px to 200px */
     }
 }
 
