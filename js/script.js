@@ -70,16 +70,16 @@ function scaleToFit() {
 // Detect user pinch zoom on mobile
 function detectUserZoom() {
     if (!isMobile()) return;
-    
+
     const currentZoom = window.visualViewport?.scale || 1;
-    
+
     // If user is zoomed in (scale > 1), they're pinch zooming
     if (currentZoom > 1.01) {
         isUserZooming = true;
-        
+
         // Clear existing timeout
         if (zoomCheckTimeout) clearTimeout(zoomCheckTimeout);
-        
+
         // Reset flag after user stops zooming for 500ms
         zoomCheckTimeout = setTimeout(() => {
             isUserZooming = false;
@@ -142,10 +142,10 @@ function applyZoom() {
         zoomRoot.style.top = '0';
         zoomRoot.style.marginLeft = '0';
         zoomRoot.style.marginTop = '0';
-        
+
         document.documentElement.style.overflow = 'auto';
         document.body.style.overflow = 'auto';
-        
+
         // Reset scroll position flag when zoom changes
         window._hasScrolledToCenter = false;
     } else {
@@ -156,10 +156,10 @@ function applyZoom() {
         zoomRoot.style.top = '50%';
         zoomRoot.style.marginLeft = '';
         zoomRoot.style.marginTop = '';
-        
+
         document.documentElement.style.overflow = 'hidden';
         document.body.style.overflow = 'hidden';
-        
+
         window.scrollTo(0, 0);
         window._hasScrolledToCenter = false;
     }
@@ -234,7 +234,7 @@ envelope.addEventListener('click', function () {
         // Stage 3: Fade + layout transition synced to flap
         setTimeout(() => {
             document.body.classList.add('envelope-fade-out');
-            
+
             // Add mobile-opened immediately but keep fade-out active to maintain position
             document.body.classList.add('mobile-opened');
             document.documentElement.style.overflow = 'visible';
@@ -457,6 +457,22 @@ resetButton.addEventListener('click', function () {
                 envelope.style.animation = '';
                 envelope.style.opacity = '';
                 envelope.classList.add('ready');
+
+                const envelopeFlapFix = document.querySelector('.envelope-flap');
+
+                if (envelopeFlapFix) {
+                    // Remove inline fade-out styles that hide flap
+                    envelopeFlapFix.style.transition = '';
+                    envelopeFlapFix.style.opacity = '1';
+                    envelopeFlapFix.style.visibility = 'visible';
+                    envelopeFlapFix.style.display = '';
+
+                    // Reset flap animation state so it can open again
+                    envelopeFlapFix.classList.remove('opened');
+
+                    // Force reflow so browser re-registers closed state
+                    void envelopeFlapFix.offsetWidth;
+                }
             }, 800);
 
             if (envelopeFront) {
