@@ -1234,6 +1234,9 @@ html>.reset-btn {
     }
 
     .envelope-flap {
+        backface-visibility: hidden !important;
+        transform-style: preserve-3d !important;
+        will-change: transform, opacity;
         opacity: 1 !important;
         visibility: visible !important;
         display: block !important;

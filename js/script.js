@@ -16,6 +16,28 @@ function isMobile() {
     return window.innerWidth <= 1023;
 }
 
+function forceMobileRepaint(el) {
+    if (!el || !isMobile()) return;
+
+    // Force GPU layer rebuild
+    el.style.willChange = 'transform, opacity';
+    el.style.transform = 'translateZ(0)';
+    el.style.webkitTransform = 'translateZ(0)';
+    el.style.opacity = '1';
+    el.style.display = 'block';
+    el.style.visibility = 'visible';
+
+    // Force layout flush
+    void el.offsetHeight;
+
+    // Release back to CSS
+    setTimeout(() => {
+        el.style.transform = '';
+        el.style.webkitTransform = '';
+        el.style.willChange = '';
+    }, 20);
+}
+
 // ==============================
 // SCALE-TO-FIT FUNCTIONALITY
 // ==============================
@@ -225,7 +247,7 @@ envelope.addEventListener('click', function () {
         if (flower1Container) flower1Container.classList.add('flipped');
         if (saveTheDateContainer) saveTheDateContainer.classList.add('flipped');
         if (additionalImagesContainer) additionalImagesContainer.classList.add('flipped');
-        
+
         // CRITICAL: When envelope flips, flap maintains rotateY(180deg) - CSS will handle this
         // No need to manually change flap styles here - the .flipped class triggers CSS transitions
 
@@ -359,33 +381,43 @@ resetButton.addEventListener('click', function () {
         envelope.removeAttribute('style');
         void envelope.offsetWidth;
         envelope.style.opacity = '0';
-        
+
         // Reset flap to default state - FIXED FOR MOBILE
         if (envelopeFlap) {
-            // Remove all inline styles first
             envelopeFlap.removeAttribute('style');
             envelopeFlap.classList.remove('hidden', 'flipped', 'opened');
-            
-            // Force reflow to ensure classes are removed
-            void envelopeFlap.offsetWidth;
-            
-            // CRITICAL: Briefly set initial transform, then remove it so CSS can animate
-            envelopeFlap.style.transform = 'rotateY(180deg)';
-            envelopeFlap.style.webkitTransform = 'rotateY(180deg)';
-            
+
             // Force reflow
-            void envelopeFlap.offsetWidth;
-            
-            // Remove inline transform after a tick - let CSS handle everything
-            setTimeout(() => {
-                if (envelopeFlap) {
-                    envelopeFlap.style.transform = '';
-                    envelopeFlap.style.webkitTransform = '';
-                }
-            }, 10);
-            
-            console.log('Flap reset - isMobile:', isMobile());
+            void envelopeFlap.offsetHeight;
+
+            // Mobile Chrome + Safari repaint fix
+            forceMobileRepaint(envelopeFlap);
         }
+        // if (envelopeFlap) {
+        //     // Remove all inline styles first
+        //     envelopeFlap.removeAttribute('style');
+        //     envelopeFlap.classList.remove('hidden', 'flipped', 'opened');
+
+        //     // Force reflow to ensure classes are removed
+        //     void envelopeFlap.offsetWidth;
+
+        //     // CRITICAL: Briefly set initial transform, then remove it so CSS can animate
+        //     envelopeFlap.style.transform = 'rotateY(180deg)';
+        //     envelopeFlap.style.webkitTransform = 'rotateY(180deg)';
+
+        //     // Force reflow
+        //     void envelopeFlap.offsetWidth;
+
+        //     // Remove inline transform after a tick - let CSS handle everything
+        //     setTimeout(() => {
+        //         if (envelopeFlap) {
+        //             envelopeFlap.style.transform = '';
+        //             envelopeFlap.style.webkitTransform = '';
+        //         }
+        //     }, 10);
+
+        //     console.log('Flap reset - isMobile:', isMobile());
+        // }
 
         // Reset photos via DOM removal/reinsertion to clear animations
         if (photosContainer) {
@@ -491,43 +523,55 @@ resetButton.addEventListener('click', function () {
             setTimeout(() => {
                 envelope.style.animation = '';
                 envelope.style.opacity = '';
-                
-                // Ensure envelope-flap is reset to default state before ready - FIXED FOR MOBILE
                 let flapEl = document.querySelector('.envelope-flap');
-                
-                // If flap doesn't exist, we have a bigger problem - log it
-                if (!flapEl) {
-                    console.error('CRITICAL: envelope-flap element is missing from DOM!');
-                    console.log('Envelope HTML:', envelope.innerHTML.substring(0, 500));
-                } else {
-                    console.log('Before final reset - flap classes:', flapEl.className);
-                    console.log('Before final reset - flap inline style:', flapEl.getAttribute('style'));
-                    
-                    // Clear everything including classes
+
+                if (flapEl) {
                     flapEl.removeAttribute('style');
                     flapEl.classList.remove('hidden', 'flipped', 'opened');
-                    
+
                     // Force reflow
-                    void flapEl.offsetWidth;
-                    
-                    // CRITICAL: Briefly set initial transform, then remove so CSS can animate
-                    flapEl.style.transform = 'rotateY(180deg)';
-                    flapEl.style.webkitTransform = 'rotateY(180deg)';
-                    
-                    // Force reflow
-                    void flapEl.offsetWidth;
-                    
-                    // Remove inline transform after a tick - let CSS handle everything
-                    setTimeout(() => {
-                        if (flapEl) {
-                            flapEl.style.transform = '';
-                            flapEl.style.webkitTransform = '';
-                        }
-                    }, 10);
-                    
-                    console.log('After final reset - ready for CSS animations');
+                    void flapEl.offsetHeight;
+
+                    // Mobile Chrome + Safari repaint fix
+                    forceMobileRepaint(flapEl);
                 }
-                
+
+                // Ensure envelope-flap is reset to default state before ready - FIXED FOR MOBILE
+                // let flapEl = document.querySelector('.envelope-flap');
+
+                // // If flap doesn't exist, we have a bigger problem - log it
+                // if (!flapEl) {
+                //     console.error('CRITICAL: envelope-flap element is missing from DOM!');
+                //     console.log('Envelope HTML:', envelope.innerHTML.substring(0, 500));
+                // } else {
+                //     console.log('Before final reset - flap classes:', flapEl.className);
+                //     console.log('Before final reset - flap inline style:', flapEl.getAttribute('style'));
+
+                //     // Clear everything including classes
+                //     flapEl.removeAttribute('style');
+                //     flapEl.classList.remove('hidden', 'flipped', 'opened');
+
+                //     // Force reflow
+                //     void flapEl.offsetWidth;
+
+                //     // CRITICAL: Briefly set initial transform, then remove so CSS can animate
+                //     flapEl.style.transform = 'rotateY(180deg)';
+                //     flapEl.style.webkitTransform = 'rotateY(180deg)';
+
+                //     // Force reflow
+                //     void flapEl.offsetWidth;
+
+                //     // Remove inline transform after a tick - let CSS handle everything
+                //     setTimeout(() => {
+                //         if (flapEl) {
+                //             flapEl.style.transform = '';
+                //             flapEl.style.webkitTransform = '';
+                //         }
+                //     }, 10);
+
+                //     console.log('After final reset - ready for CSS animations');
+                // }
+
                 envelope.classList.add('ready');
             }, 800);
 
