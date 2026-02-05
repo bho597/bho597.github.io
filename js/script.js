@@ -319,9 +319,15 @@ resetButton.addEventListener('click', function () {
         if (el) el.style.cssText = 'transition: opacity 0.8s ease-out !important; opacity: 0 !important;';
     });
 
-    [envelopeBackBottom, envelopeBackTop, envelopeFlapInside, envelopeFlap, seal].forEach(el => {
+    // Fade out envelope parts but keep them visible first
+    [envelopeBackBottom, envelopeBackTop, envelopeFlapInside, seal].forEach(el => {
         if (el) el.style.cssText = 'transition: opacity 0.8s ease-out !important; opacity: 0 !important;';
     });
+    
+    // Handle envelope-flap separately to ensure it fades from visible state
+    if (envelopeFlap) {
+        envelopeFlap.style.cssText = 'transition: opacity 0.8s ease-out !important; opacity: 0 !important; visibility: visible !important; display: block !important;';
+    }
 
     if (envelopeFront) envelopeFront.classList.remove('visible');
 
@@ -430,9 +436,18 @@ resetButton.addEventListener('click', function () {
             heroText.style.opacity = '';
         }
 
-        [envelopeBackBottom, envelopeBackTop, envelopeFlapInside, envelopeFlap, seal].forEach(el => {
+        // Reset envelope parts - ensure flap is explicitly visible
+        [envelopeBackBottom, envelopeBackTop, envelopeFlapInside, seal].forEach(el => {
             if (el) el.style.cssText = '';
         });
+        
+        // Explicitly reset envelope-flap to ensure it's visible
+        if (envelopeFlap) {
+            envelopeFlap.style.cssText = '';
+            envelopeFlap.style.opacity = '1';
+            envelopeFlap.style.visibility = 'visible';
+            envelopeFlap.style.display = 'block';
+        }
 
         if (saveTheDateContainer) {
             saveTheDateContainer.classList.remove('flipped', 'show');
@@ -458,14 +473,19 @@ resetButton.addEventListener('click', function () {
                 envelope.style.opacity = '';
                 envelope.classList.add('ready');
 
-                // FIXED: Simplified mobile flap reset - just remove inline styles and let CSS take over
-                if (isMobile()) {
-                    const flapEl = document.querySelector('.envelope-flap');
-                    if (flapEl) {
-                        // Remove all inline styles
-                        flapEl.removeAttribute('style');
-                        // Force reflow
-                        void flapEl.offsetWidth;
+                // FIXED: Ensure envelope-flap is fully reset and visible after ready state
+                const flapEl = document.querySelector('.envelope-flap');
+                if (flapEl) {
+                    // Remove all inline styles first
+                    flapEl.removeAttribute('style');
+                    // Force reflow
+                    void flapEl.offsetWidth;
+                    
+                    // On mobile, explicitly ensure visibility (CSS should handle this but we force it)
+                    if (isMobile()) {
+                        flapEl.style.opacity = '1';
+                        flapEl.style.visibility = 'visible';
+                        flapEl.style.display = 'block';
                     }
                 }
             }, 800);
