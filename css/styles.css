@@ -1730,7 +1730,7 @@ html>.reset-btn {
         aspect-ratio: 1 / 1 !important;
         z-index: 6 !important;
         animation-delay: 0.5s !important;
-        margin-left: 92px !important; /* 12% of 768px */
+        margin-left: 70px !important; /* 12% of 768px */
         margin-top: -461px !important; /* 60% of 768px */
         margin-right: -230px !important; /* 30% of 768px */
     }
@@ -1745,7 +1745,7 @@ html>.reset-btn {
         aspect-ratio: 1 / 1 !important;
         z-index: 5 !important;
         animation-delay: 0.55s !important;
-        margin-left: 115px !important; /* 15% of 768px */
+        margin-left: 70px !important; /* 15% of 768px */
         margin-top: -207px !important; /* 27% of 768px */
         margin-right: -215px !important; /* 28% of 768px */
     }
@@ -1763,7 +1763,7 @@ html>.reset-btn {
         background-position: center !important;
         background-repeat: no-repeat !important;
         z-index: 7 !important;
-        margin-left: -100px !important; /* 5% of 768px */
+        margin-left: -130px !important; /* 5% of 768px */
         margin-right: 77px !important; /* 10% of 768px */
     }
 
