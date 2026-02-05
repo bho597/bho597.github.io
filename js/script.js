@@ -458,30 +458,14 @@ resetButton.addEventListener('click', function () {
                 envelope.style.opacity = '';
                 envelope.classList.add('ready');
 
-                if (window.innerWidth <= 1023) {
-                    const envelopeEl = document.querySelector('.envelope');
-                    const oldFlap = document.querySelector('.envelope-flap');
-
-                    if (envelopeEl && oldFlap) {
-                        // Clone a fresh flap (removes bad transform / opacity state)
-                        const newFlap = oldFlap.cloneNode(true);
-
-                        // Reset any bad inline styles
-                        newFlap.removeAttribute('style');
-
-                        // Force correct base visibility
-                        newFlap.style.opacity = '1';
-                        newFlap.style.visibility = 'visible';
-                        newFlap.style.display = 'block';
-                        newFlap.style.transform = 'rotateX(0deg)';
-                        newFlap.style.transformOrigin = 'top center';
-
-                        // Replace DOM node
-                        oldFlap.replaceWith(newFlap);
-
-                        // Ensure envelope is reset to CLOSED
-                        envelopeEl.classList.remove('opened', 'flipped');
-                        void envelopeEl.offsetWidth;
+                // FIXED: Simplified mobile flap reset - just remove inline styles and let CSS take over
+                if (isMobile()) {
+                    const flapEl = document.querySelector('.envelope-flap');
+                    if (flapEl) {
+                        // Remove all inline styles
+                        flapEl.removeAttribute('style');
+                        // Force reflow
+                        void flapEl.offsetWidth;
                     }
                 }
             }, 800);
