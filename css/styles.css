@@ -1730,8 +1730,8 @@ html>.reset-btn {
         aspect-ratio: 1 / 1 !important;
         z-index: 6 !important;
         animation-delay: 0.5s !important;
-        margin-left: 70px !important; /* 12% of 768px */
-        margin-top: -461px !important; /* 60% of 768px */
+        margin-left: 50px !important; /* 12% of 768px */
+        margin-top: -620px !important; /* 60% of 768px */
         margin-right: -230px !important; /* 30% of 768px */
     }
 
@@ -1746,7 +1746,7 @@ html>.reset-btn {
         z-index: 5 !important;
         animation-delay: 0.55s !important;
         margin-left: 70px !important; /* 15% of 768px */
-        margin-top: -207px !important; /* 27% of 768px */
+        margin-top: -250px !important; /* 27% of 768px */
         margin-right: -215px !important; /* 28% of 768px */
     }
 
