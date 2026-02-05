@@ -1233,6 +1233,12 @@ html>.reset-btn {
         transition: opacity 1.5s ease 0.5s;
     }
 
+    .envelope-flap {
+        opacity: 1 !important;
+        visibility: visible !important;
+        display: block !important;
+    }
+
     /* Keep flap-inside hidden on envelope front */
     .envelope-front .envelope-flap-inside {
         opacity: 0;
@@ -1357,7 +1363,8 @@ html>.reset-btn {
         /* ← Portrait base width */
         max-width: none !important;
         margin: 0 auto;
-        padding: 60px 80px 600px; /* Increased bottom padding from 100px to 300px */
+        padding: 60px 80px 600px;
+        /* Increased bottom padding from 100px to 300px */
         height: auto;
         min-height: auto;
         align-content: start;
@@ -1377,7 +1384,8 @@ html>.reset-btn {
         height: 360px !important;
         max-width: none !important;
         display: block;
-        margin: 600px 50px auto 0; /* Changed from 60vh */
+        margin: 600px 50px auto 0;
+        /* Changed from 60vh */
         justify-self: center;
         pointer-events: none;
         order: 1;
@@ -1649,8 +1657,10 @@ html>.reset-btn {
     /* Row 2: Save the date (full width) - order: 2 */
     body.mobile-opened .save-the-date-image {
         position: absolute !important;
-        top: 450px !important; /* 45% of 768px */
-        left: -200px !important; /* 20% of 768px */
+        top: 450px !important;
+        /* 45% of 768px */
+        left: -200px !important;
+        /* 20% of 768px */
         width: 400px !important;
         height: 400px !important;
         z-index: 200 !important;
@@ -1670,8 +1680,10 @@ html>.reset-btn {
         min-height: 280px !important;
         max-height: 280px !important;
         max-width: 100% !important;
-        margin-top: -160px !important; /* 21% of 768px */
-        margin-left: 120px !important; /* 14% of 768px */
+        margin-top: -160px !important;
+        /* 21% of 768px */
+        margin-left: 120px !important;
+        /* 14% of 768px */
         z-index: 10 !important;
         transform: rotate(-10deg) !important;
     }
@@ -1683,8 +1695,10 @@ html>.reset-btn {
         animation-delay: 0.25s !important;
         min-height: 260px;
         max-height: 260px;
-        margin-top: -50px !important; /* 5% of 768px */
-        margin-left: -20px !important; /* 3% of 768px */
+        margin-top: -50px !important;
+        /* 5% of 768px */
+        margin-left: -20px !important;
+        /* 3% of 768px */
         transform: rotate(18deg) !important;
     }
 
@@ -1695,8 +1709,10 @@ html>.reset-btn {
         animation-delay: 0.3s !important;
         min-height: 450px;
         max-height: 450px;
-        margin-top: -250px !important; /* 30% of 768px */
-        margin-left: -150px !important; /* 10% of 768px */
+        margin-top: -250px !important;
+        /* 30% of 768px */
+        margin-left: -150px !important;
+        /* 10% of 768px */
     }
 
     /* Row 4: Additional image 1 (full width across 5 columns) */
@@ -1710,8 +1726,10 @@ html>.reset-btn {
         aspect-ratio: 1 / 1;
         animation-delay: 0.4s !important;
         min-height: 120px;
-        margin-top: 38px !important; /* 5% of 768px */
-        margin-bottom: 38px !important; /* 5% of 768px */
+        margin-top: 38px !important;
+        /* 5% of 768px */
+        margin-bottom: 38px !important;
+        /* 5% of 768px */
     }
 
     /* Additional image 2 */
@@ -1730,9 +1748,12 @@ html>.reset-btn {
         aspect-ratio: 1 / 1 !important;
         z-index: 6 !important;
         animation-delay: 0.5s !important;
-        margin-left: 50px !important; /* 12% of 768px */
-        margin-top: -620px !important; /* 60% of 768px */
-        margin-right: -230px !important; /* 30% of 768px */
+        margin-left: 50px !important;
+        /* 12% of 768px */
+        margin-top: -620px !important;
+        /* 60% of 768px */
+        margin-right: -230px !important;
+        /* 30% of 768px */
     }
 
     /* Flower 3 - overlaps flower 2 on z-axis in SAME cell */
@@ -1745,9 +1766,12 @@ html>.reset-btn {
         aspect-ratio: 1 / 1 !important;
         z-index: 5 !important;
         animation-delay: 0.55s !important;
-        margin-left: 70px !important; /* 15% of 768px */
-        margin-top: -250px !important; /* 27% of 768px */
-        margin-right: -215px !important; /* 28% of 768px */
+        margin-left: 70px !important;
+        /* 15% of 768px */
+        margin-top: -250px !important;
+        /* 27% of 768px */
+        margin-right: -215px !important;
+        /* 28% of 768px */
     }
 
     /* Info card - spans columns 2-6 */
@@ -1763,8 +1787,10 @@ html>.reset-btn {
         background-position: center !important;
         background-repeat: no-repeat !important;
         z-index: 7 !important;
-        margin-left: -130px !important; /* 5% of 768px */
-        margin-right: 77px !important; /* 10% of 768px */
+        margin-left: -130px !important;
+        /* 5% of 768px */
+        margin-right: 77px !important;
+        /* 10% of 768px */
     }
 
     /* Additional image 3 - overlaps info card on z-axis in SAME cells */
@@ -1779,8 +1805,10 @@ html>.reset-btn {
         background-size: contain !important;
         background-repeat: no-repeat !important;
         z-index: 8 !important;
-        margin-top: -538px !important; /* 70% of 768px */
-        margin-left: 54px !important; /* 7% of 768px */
+        margin-top: -538px !important;
+        /* 70% of 768px */
+        margin-left: 54px !important;
+        /* 7% of 768px */
     }
 
     /* Row 7: Photo 3 + Photo 4 */
@@ -1792,9 +1820,12 @@ html>.reset-btn {
         z-index: 9 !important;
         min-height: 330px;
         max-height: 330px;
-        margin-top: -60px !important; /* 5% of 768px */
-        margin-left: 115px !important; /* 15% of 768px */
-        margin-right: -154px !important; /* 20% of 768px */
+        margin-top: -60px !important;
+        /* 5% of 768px */
+        margin-left: 115px !important;
+        /* 15% of 768px */
+        margin-right: -154px !important;
+        /* 20% of 768px */
         transform: rotate(-8deg) !important;
     }
 
@@ -1806,8 +1837,10 @@ html>.reset-btn {
         z-index: 10 !important;
         min-height: 300px;
         max-height: 300px;
-        margin-top: -60px !important; /* 5% of 768px */
-        margin-left: -150px !important; /* 15% of 768px */
+        margin-top: -60px !important;
+        /* 5% of 768px */
+        margin-left: -150px !important;
+        /* 15% of 768px */
         transform: rotate(8deg) !important;
     }
 
@@ -1820,7 +1853,8 @@ html>.reset-btn {
         z-index: 110 !important;
         min-height: 300px;
         max-height: 300px;
-        margin-top: -69px !important; /* 9% of 768px */
+        margin-top: -69px !important;
+        /* 9% of 768px */
     }
 
 }
@@ -1834,7 +1868,8 @@ html>.reset-btn {
 
     body.mobile-opened .hero {
         max-width: 100%;
-        padding: 30px 12px 300px; /* Increased bottom padding from 70px to 150px */
+        padding: 30px 12px 300px;
+        /* Increased bottom padding from 70px to 150px */
         gap: 12px;
     }
 
@@ -1885,7 +1920,7 @@ html>.reset-btn {
     body.mobile-opened .hero {
         max-width: 700px;
         gap: 20px;
-        padding: 80px 20px 480px; /* Increased bottom padding from 80px to 200px */
+        padding: 80px 20px 480px;
+        /* Increased bottom padding from 80px to 200px */
     }
 }
-
