@@ -361,6 +361,11 @@ resetButton.addEventListener('click', function () {
         envelope.removeAttribute('style');
         void envelope.offsetWidth;
         envelope.style.opacity = '0';
+        
+        // Immediately restore flap visibility after envelope reset
+        if (envelopeFlap) {
+            envelopeFlap.style.cssText = 'opacity: 1 !important; visibility: visible !important; display: block !important;';
+        }
 
         // Reset photos via DOM removal/reinsertion to clear animations
         if (photosContainer) {
@@ -438,15 +443,20 @@ resetButton.addEventListener('click', function () {
 
         // Reset envelope parts - ensure flap is explicitly visible
         [envelopeBackBottom, envelopeBackTop, envelopeFlapInside, seal].forEach(el => {
-            if (el) el.style.cssText = '';
+            if (el) {
+                el.removeAttribute('style');
+                el.style.cssText = '';
+            }
         });
         
-        // Explicitly reset envelope-flap to ensure it's visible
+        // Explicitly reset envelope-flap to ensure it's visible - CRITICAL FIX
         if (envelopeFlap) {
-            envelopeFlap.style.cssText = '';
-            envelopeFlap.style.opacity = '1';
-            envelopeFlap.style.visibility = 'visible';
-            envelopeFlap.style.display = 'block';
+            // Remove all styles
+            envelopeFlap.removeAttribute('style');
+            // Force reflow
+            void envelopeFlap.offsetWidth;
+            // Set explicit visibility
+            envelopeFlap.style.cssText = 'opacity: 1 !important; visibility: visible !important; display: block !important;';
         }
 
         if (saveTheDateContainer) {
@@ -471,23 +481,21 @@ resetButton.addEventListener('click', function () {
             setTimeout(() => {
                 envelope.style.animation = '';
                 envelope.style.opacity = '';
-                envelope.classList.add('ready');
-
-                // FIXED: Ensure envelope-flap is fully reset and visible after ready state
+                
+                // CRITICAL: Ensure envelope-flap is visible BEFORE adding ready class
                 const flapEl = document.querySelector('.envelope-flap');
                 if (flapEl) {
-                    // Remove all inline styles first
+                    // Clear everything
                     flapEl.removeAttribute('style');
                     // Force reflow
                     void flapEl.offsetWidth;
-                    
-                    // On mobile, explicitly ensure visibility (CSS should handle this but we force it)
-                    if (isMobile()) {
-                        flapEl.style.opacity = '1';
-                        flapEl.style.visibility = 'visible';
-                        flapEl.style.display = 'block';
-                    }
+                    // Set to visible state with !important to override any lingering styles
+                    flapEl.style.cssText = 'opacity: 1 !important; visibility: visible !important; display: block !important;';
+                    // Force another reflow
+                    void flapEl.offsetWidth;
                 }
+                
+                envelope.classList.add('ready');
             }, 800);
 
             if (envelopeFront) {
