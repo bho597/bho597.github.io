@@ -225,6 +225,9 @@ envelope.addEventListener('click', function () {
         if (flower1Container) flower1Container.classList.add('flipped');
         if (saveTheDateContainer) saveTheDateContainer.classList.add('flipped');
         if (additionalImagesContainer) additionalImagesContainer.classList.add('flipped');
+        
+        // CRITICAL: When envelope flips, flap maintains rotateY(180deg) - CSS will handle this
+        // No need to manually change flap styles here - the .flipped class triggers CSS transitions
 
         // Stage 2: Open flap
         setTimeout(() => {
@@ -319,15 +322,10 @@ resetButton.addEventListener('click', function () {
         if (el) el.style.cssText = 'transition: opacity 0.8s ease-out !important; opacity: 0 !important;';
     });
 
-    // Fade out envelope parts but keep them visible first
-    [envelopeBackBottom, envelopeBackTop, envelopeFlapInside, seal].forEach(el => {
+    // Fade out envelope parts
+    [envelopeBackBottom, envelopeBackTop, envelopeFlapInside, envelopeFlap, seal].forEach(el => {
         if (el) el.style.cssText = 'transition: opacity 0.8s ease-out !important; opacity: 0 !important;';
     });
-    
-    // Handle envelope-flap separately to ensure it fades from visible state
-    if (envelopeFlap) {
-        envelopeFlap.style.cssText = 'transition: opacity 0.8s ease-out !important; opacity: 0 !important; visibility: visible !important; display: block !important;';
-    }
 
     if (envelopeFront) envelopeFront.classList.remove('visible');
 
@@ -451,17 +449,26 @@ resetButton.addEventListener('click', function () {
             }
         });
         
-        // Reset envelope-flap to default state - let CSS control visibility
+        // Reset envelope-flap to default state - PRESERVE initial transform
         if (envelopeFlap) {
-            // Remove all inline styles and let CSS handle visibility based on envelope state
+            // Remove all inline styles
             envelopeFlap.removeAttribute('style');
             envelopeFlap.classList.remove('hidden', 'flipped', 'opened');
+            
+            // CRITICAL: Restore the initial rotateY(180deg) transform so flap is hidden on front
+            envelopeFlap.style.transform = 'rotateY(180deg)';
+            envelopeFlap.style.webkitTransform = 'rotateY(180deg)';
+            
+            // Ensure backface-visibility is set correctly
+            envelopeFlap.style.backfaceVisibility = 'hidden';
+            envelopeFlap.style.webkitBackfaceVisibility = 'hidden';
+            
             // Force reflow
             void envelopeFlap.offsetWidth;
             
-            console.log('Flap reset - opacity:', window.getComputedStyle(envelopeFlap).opacity);
-            console.log('Flap reset - visibility:', window.getComputedStyle(envelopeFlap).visibility);
-            console.log('Flap reset - display:', window.getComputedStyle(envelopeFlap).display);
+            console.log('Flap reset - isMobile:', isMobile());
+            console.log('Flap reset - transform:', window.getComputedStyle(envelopeFlap).transform);
+            console.log('Flap reset - backface-visibility:', window.getComputedStyle(envelopeFlap).backfaceVisibility);
         }
 
         if (saveTheDateContainer) {
@@ -497,19 +504,22 @@ resetButton.addEventListener('click', function () {
                 } else {
                     console.log('Before final reset - flap classes:', flapEl.className);
                     console.log('Before final reset - flap inline style:', flapEl.getAttribute('style'));
-                    console.log('Before final reset - flap parent:', flapEl.parentElement?.className);
                     
-                    // Clear everything including classes - let CSS control visibility
+                    // Clear everything including classes
                     flapEl.removeAttribute('style');
                     flapEl.classList.remove('hidden', 'flipped', 'opened');
+                    
+                    // CRITICAL: Restore initial rotateY(180deg) so flap is hidden on front
+                    flapEl.style.transform = 'rotateY(180deg)';
+                    flapEl.style.webkitTransform = 'rotateY(180deg)';
+                    flapEl.style.backfaceVisibility = 'hidden';
+                    flapEl.style.webkitBackfaceVisibility = 'hidden';
                     
                     // Force reflow
                     void flapEl.offsetWidth;
                     
-                    console.log('After final reset - computed opacity:', window.getComputedStyle(flapEl).opacity);
-                    console.log('After final reset - computed visibility:', window.getComputedStyle(flapEl).visibility);
-                    console.log('After final reset - computed display:', window.getComputedStyle(flapEl).display);
-                    console.log('After final reset - computed transform:', window.getComputedStyle(flapEl).transform);
+                    console.log('After final reset - transform:', window.getComputedStyle(flapEl).transform);
+                    console.log('After final reset - backface-visibility:', window.getComputedStyle(flapEl).backfaceVisibility);
                 }
                 
                 envelope.classList.add('ready');
