@@ -459,34 +459,29 @@ resetButton.addEventListener('click', function () {
                 envelope.classList.add('ready');
 
                 if (window.innerWidth <= 1023) {
-                    const flap = document.querySelector('.envelope-flap');
                     const envelopeEl = document.querySelector('.envelope');
+                    const oldFlap = document.querySelector('.envelope-flap');
 
-                    if (flap && envelopeEl) {
+                    if (envelopeEl && oldFlap) {
+                        // Clone a fresh flap (removes bad transform / opacity state)
+                        const newFlap = oldFlap.cloneNode(true);
 
-                        // Remove flipped/opened states fully
+                        // Reset any bad inline styles
+                        newFlap.removeAttribute('style');
+
+                        // Force correct base visibility
+                        newFlap.style.opacity = '1';
+                        newFlap.style.visibility = 'visible';
+                        newFlap.style.display = 'block';
+                        newFlap.style.transform = 'rotateX(0deg)';
+                        newFlap.style.transformOrigin = 'top center';
+
+                        // Replace DOM node
+                        oldFlap.replaceWith(newFlap);
+
+                        // Ensure envelope is reset to CLOSED
                         envelopeEl.classList.remove('opened', 'flipped');
-                        flap.classList.remove('opened');
-
-                        // Clear inline styles that may hide it
-                        flap.removeAttribute('style');
-
-                        // Force visibility + stacking
-                        flap.style.opacity = '1';
-                        flap.style.visibility = 'visible';
-                        flap.style.display = 'block';
-                        flap.style.transform = 'rotateX(0deg)';
-                        flap.style.transformOrigin = 'top center';
-                        flap.style.zIndex = '5';
-
-                        // Force browser to register the reset state
-                        void flap.offsetWidth;
-
-                        // Release control back to CSS after reflow
-                        setTimeout(() => {
-                            flap.style.transform = '';
-                            flap.style.zIndex = '';
-                        }, 30);
+                        void envelopeEl.offsetWidth;
                     }
                 }
             }, 800);
