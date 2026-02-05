@@ -362,13 +362,11 @@ resetButton.addEventListener('click', function () {
         void envelope.offsetWidth;
         envelope.style.opacity = '0';
         
-        // Immediately restore flap visibility after envelope reset
+        // Reset flap to default state - let CSS control visibility
         if (envelopeFlap) {
-            envelopeFlap.style.setProperty('opacity', '1', 'important');
-            envelopeFlap.style.setProperty('visibility', 'visible', 'important');
-            envelopeFlap.style.setProperty('display', 'block', 'important');
-            envelopeFlap.style.setProperty('transform', 'rotateX(0deg)', 'important');
-            console.log('After envelope reset - flap visibility restored');
+            envelopeFlap.removeAttribute('style');
+            void envelopeFlap.offsetWidth;
+            console.log('After envelope reset - flap reset to default');
         }
 
         // Reset photos via DOM removal/reinsertion to clear animations
@@ -445,7 +443,7 @@ resetButton.addEventListener('click', function () {
             heroText.style.opacity = '';
         }
 
-        // Reset envelope parts - ensure flap is explicitly visible
+        // Reset envelope parts - ensure flap is reset to default state
         [envelopeBackBottom, envelopeBackTop, envelopeFlapInside, seal].forEach(el => {
             if (el) {
                 el.removeAttribute('style');
@@ -453,19 +451,13 @@ resetButton.addEventListener('click', function () {
             }
         });
         
-        // Explicitly reset envelope-flap to ensure it's visible - CRITICAL FIX
+        // Reset envelope-flap to default state - let CSS control visibility
         if (envelopeFlap) {
-            // Remove all styles and classes that might hide it
+            // Remove all inline styles and let CSS handle visibility based on envelope state
             envelopeFlap.removeAttribute('style');
             envelopeFlap.classList.remove('hidden', 'flipped', 'opened');
             // Force reflow
             void envelopeFlap.offsetWidth;
-            // Set explicit visibility with maximum specificity
-            envelopeFlap.style.setProperty('opacity', '1', 'important');
-            envelopeFlap.style.setProperty('visibility', 'visible', 'important');
-            envelopeFlap.style.setProperty('display', 'block', 'important');
-            envelopeFlap.style.setProperty('transform', 'rotateX(0deg)', 'important');
-            envelopeFlap.style.setProperty('transform-origin', 'top center', 'important');
             
             console.log('Flap reset - opacity:', window.getComputedStyle(envelopeFlap).opacity);
             console.log('Flap reset - visibility:', window.getComputedStyle(envelopeFlap).visibility);
@@ -495,7 +487,7 @@ resetButton.addEventListener('click', function () {
                 envelope.style.animation = '';
                 envelope.style.opacity = '';
                 
-                // CRITICAL: Ensure envelope-flap is visible BEFORE adding ready class
+                // Ensure envelope-flap is reset to default state before ready
                 let flapEl = document.querySelector('.envelope-flap');
                 
                 // If flap doesn't exist, we have a bigger problem - log it
@@ -507,21 +499,11 @@ resetButton.addEventListener('click', function () {
                     console.log('Before final reset - flap inline style:', flapEl.getAttribute('style'));
                     console.log('Before final reset - flap parent:', flapEl.parentElement?.className);
                     
-                    // Clear everything including classes
+                    // Clear everything including classes - let CSS control visibility
                     flapEl.removeAttribute('style');
                     flapEl.classList.remove('hidden', 'flipped', 'opened');
                     
                     // Force reflow
-                    void flapEl.offsetWidth;
-                    
-                    // Set to visible state with maximum specificity
-                    flapEl.style.setProperty('opacity', '1', 'important');
-                    flapEl.style.setProperty('visibility', 'visible', 'important');
-                    flapEl.style.setProperty('display', 'block', 'important');
-                    flapEl.style.setProperty('transform', 'rotateX(0deg)', 'important');
-                    flapEl.style.setProperty('transform-origin', 'top center', 'important');
-                    
-                    // Force another reflow
                     void flapEl.offsetWidth;
                     
                     console.log('After final reset - computed opacity:', window.getComputedStyle(flapEl).opacity);
