@@ -360,11 +360,31 @@ resetButton.addEventListener('click', function () {
         void envelope.offsetWidth;
         envelope.style.opacity = '0';
         
-        // Reset flap to default state - let CSS control visibility
+        // Reset flap to default state - FIXED FOR MOBILE
         if (envelopeFlap) {
+            // Remove all inline styles first
             envelopeFlap.removeAttribute('style');
+            envelopeFlap.classList.remove('hidden', 'flipped', 'opened');
+            
+            // Force reflow to ensure classes are removed
             void envelopeFlap.offsetWidth;
-            console.log('After envelope reset - flap reset to default');
+            
+            // CRITICAL: Briefly set initial transform, then remove it so CSS can animate
+            envelopeFlap.style.transform = 'rotateY(180deg)';
+            envelopeFlap.style.webkitTransform = 'rotateY(180deg)';
+            
+            // Force reflow
+            void envelopeFlap.offsetWidth;
+            
+            // Remove inline transform after a tick - let CSS handle everything
+            setTimeout(() => {
+                if (envelopeFlap) {
+                    envelopeFlap.style.transform = '';
+                    envelopeFlap.style.webkitTransform = '';
+                }
+            }, 10);
+            
+            console.log('Flap reset - isMobile:', isMobile());
         }
 
         // Reset photos via DOM removal/reinsertion to clear animations
@@ -448,28 +468,6 @@ resetButton.addEventListener('click', function () {
                 el.style.cssText = '';
             }
         });
-        
-        // Reset envelope-flap to default state - PRESERVE initial transform
-        if (envelopeFlap) {
-            // Remove all inline styles
-            envelopeFlap.removeAttribute('style');
-            envelopeFlap.classList.remove('hidden', 'flipped', 'opened');
-            
-            // CRITICAL: Restore the initial rotateY(180deg) transform so flap is hidden on front
-            envelopeFlap.style.transform = 'rotateY(180deg)';
-            envelopeFlap.style.webkitTransform = 'rotateY(180deg)';
-            
-            // Ensure backface-visibility is set correctly
-            envelopeFlap.style.backfaceVisibility = 'hidden';
-            envelopeFlap.style.webkitBackfaceVisibility = 'hidden';
-            
-            // Force reflow
-            void envelopeFlap.offsetWidth;
-            
-            console.log('Flap reset - isMobile:', isMobile());
-            console.log('Flap reset - transform:', window.getComputedStyle(envelopeFlap).transform);
-            console.log('Flap reset - backface-visibility:', window.getComputedStyle(envelopeFlap).backfaceVisibility);
-        }
 
         if (saveTheDateContainer) {
             saveTheDateContainer.classList.remove('flipped', 'show');
@@ -494,7 +492,7 @@ resetButton.addEventListener('click', function () {
                 envelope.style.animation = '';
                 envelope.style.opacity = '';
                 
-                // Ensure envelope-flap is reset to default state before ready
+                // Ensure envelope-flap is reset to default state before ready - FIXED FOR MOBILE
                 let flapEl = document.querySelector('.envelope-flap');
                 
                 // If flap doesn't exist, we have a bigger problem - log it
@@ -509,17 +507,25 @@ resetButton.addEventListener('click', function () {
                     flapEl.removeAttribute('style');
                     flapEl.classList.remove('hidden', 'flipped', 'opened');
                     
-                    // CRITICAL: Restore initial rotateY(180deg) so flap is hidden on front
+                    // Force reflow
+                    void flapEl.offsetWidth;
+                    
+                    // CRITICAL: Briefly set initial transform, then remove so CSS can animate
                     flapEl.style.transform = 'rotateY(180deg)';
                     flapEl.style.webkitTransform = 'rotateY(180deg)';
-                    flapEl.style.backfaceVisibility = 'hidden';
-                    flapEl.style.webkitBackfaceVisibility = 'hidden';
                     
                     // Force reflow
                     void flapEl.offsetWidth;
                     
-                    console.log('After final reset - transform:', window.getComputedStyle(flapEl).transform);
-                    console.log('After final reset - backface-visibility:', window.getComputedStyle(flapEl).backfaceVisibility);
+                    // Remove inline transform after a tick - let CSS handle everything
+                    setTimeout(() => {
+                        if (flapEl) {
+                            flapEl.style.transform = '';
+                            flapEl.style.webkitTransform = '';
+                        }
+                    }, 10);
+                    
+                    console.log('After final reset - ready for CSS animations');
                 }
                 
                 envelope.classList.add('ready');
