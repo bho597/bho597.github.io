@@ -458,20 +458,36 @@ resetButton.addEventListener('click', function () {
                 envelope.style.opacity = '';
                 envelope.classList.add('ready');
 
-                const envelopeFlapFix = document.querySelector('.envelope-flap');
+                if (window.innerWidth <= 1023) {
+                    const flap = document.querySelector('.envelope-flap');
+                    const envelopeEl = document.querySelector('.envelope');
 
-                if (envelopeFlapFix) {
-                    // Remove inline fade-out styles that hide flap
-                    envelopeFlapFix.style.transition = '';
-                    envelopeFlapFix.style.opacity = '1';
-                    envelopeFlapFix.style.visibility = 'visible';
-                    envelopeFlapFix.style.display = '';
+                    if (flap && envelopeEl) {
 
-                    // Reset flap animation state so it can open again
-                    envelopeFlapFix.classList.remove('opened');
+                        // Remove flipped/opened states fully
+                        envelopeEl.classList.remove('opened', 'flipped');
+                        flap.classList.remove('opened');
 
-                    // Force reflow so browser re-registers closed state
-                    void envelopeFlapFix.offsetWidth;
+                        // Clear inline styles that may hide it
+                        flap.removeAttribute('style');
+
+                        // Force visibility + stacking
+                        flap.style.opacity = '1';
+                        flap.style.visibility = 'visible';
+                        flap.style.display = 'block';
+                        flap.style.transform = 'rotateX(0deg)';
+                        flap.style.transformOrigin = 'top center';
+                        flap.style.zIndex = '5';
+
+                        // Force browser to register the reset state
+                        void flap.offsetWidth;
+
+                        // Release control back to CSS after reflow
+                        setTimeout(() => {
+                            flap.style.transform = '';
+                            flap.style.zIndex = '';
+                        }, 30);
+                    }
                 }
             }, 800);
 
