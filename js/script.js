@@ -364,7 +364,11 @@ resetButton.addEventListener('click', function () {
         
         // Immediately restore flap visibility after envelope reset
         if (envelopeFlap) {
-            envelopeFlap.style.cssText = 'opacity: 1 !important; visibility: visible !important; display: block !important;';
+            envelopeFlap.style.setProperty('opacity', '1', 'important');
+            envelopeFlap.style.setProperty('visibility', 'visible', 'important');
+            envelopeFlap.style.setProperty('display', 'block', 'important');
+            envelopeFlap.style.setProperty('transform', 'rotateX(0deg)', 'important');
+            console.log('After envelope reset - flap visibility restored');
         }
 
         // Reset photos via DOM removal/reinsertion to clear animations
@@ -451,12 +455,21 @@ resetButton.addEventListener('click', function () {
         
         // Explicitly reset envelope-flap to ensure it's visible - CRITICAL FIX
         if (envelopeFlap) {
-            // Remove all styles
+            // Remove all styles and classes that might hide it
             envelopeFlap.removeAttribute('style');
+            envelopeFlap.classList.remove('hidden', 'flipped', 'opened');
             // Force reflow
             void envelopeFlap.offsetWidth;
-            // Set explicit visibility
-            envelopeFlap.style.cssText = 'opacity: 1 !important; visibility: visible !important; display: block !important;';
+            // Set explicit visibility with maximum specificity
+            envelopeFlap.style.setProperty('opacity', '1', 'important');
+            envelopeFlap.style.setProperty('visibility', 'visible', 'important');
+            envelopeFlap.style.setProperty('display', 'block', 'important');
+            envelopeFlap.style.setProperty('transform', 'rotateX(0deg)', 'important');
+            envelopeFlap.style.setProperty('transform-origin', 'top center', 'important');
+            
+            console.log('Flap reset - opacity:', window.getComputedStyle(envelopeFlap).opacity);
+            console.log('Flap reset - visibility:', window.getComputedStyle(envelopeFlap).visibility);
+            console.log('Flap reset - display:', window.getComputedStyle(envelopeFlap).display);
         }
 
         if (saveTheDateContainer) {
@@ -483,16 +496,38 @@ resetButton.addEventListener('click', function () {
                 envelope.style.opacity = '';
                 
                 // CRITICAL: Ensure envelope-flap is visible BEFORE adding ready class
-                const flapEl = document.querySelector('.envelope-flap');
-                if (flapEl) {
-                    // Clear everything
+                let flapEl = document.querySelector('.envelope-flap');
+                
+                // If flap doesn't exist, we have a bigger problem - log it
+                if (!flapEl) {
+                    console.error('CRITICAL: envelope-flap element is missing from DOM!');
+                    console.log('Envelope HTML:', envelope.innerHTML.substring(0, 500));
+                } else {
+                    console.log('Before final reset - flap classes:', flapEl.className);
+                    console.log('Before final reset - flap inline style:', flapEl.getAttribute('style'));
+                    console.log('Before final reset - flap parent:', flapEl.parentElement?.className);
+                    
+                    // Clear everything including classes
                     flapEl.removeAttribute('style');
+                    flapEl.classList.remove('hidden', 'flipped', 'opened');
+                    
                     // Force reflow
                     void flapEl.offsetWidth;
-                    // Set to visible state with !important to override any lingering styles
-                    flapEl.style.cssText = 'opacity: 1 !important; visibility: visible !important; display: block !important;';
+                    
+                    // Set to visible state with maximum specificity
+                    flapEl.style.setProperty('opacity', '1', 'important');
+                    flapEl.style.setProperty('visibility', 'visible', 'important');
+                    flapEl.style.setProperty('display', 'block', 'important');
+                    flapEl.style.setProperty('transform', 'rotateX(0deg)', 'important');
+                    flapEl.style.setProperty('transform-origin', 'top center', 'important');
+                    
                     // Force another reflow
                     void flapEl.offsetWidth;
+                    
+                    console.log('After final reset - computed opacity:', window.getComputedStyle(flapEl).opacity);
+                    console.log('After final reset - computed visibility:', window.getComputedStyle(flapEl).visibility);
+                    console.log('After final reset - computed display:', window.getComputedStyle(flapEl).display);
+                    console.log('After final reset - computed transform:', window.getComputedStyle(flapEl).transform);
                 }
                 
                 envelope.classList.add('ready');
