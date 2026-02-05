@@ -1324,17 +1324,17 @@ html>.reset-btn {
         pointer-events: none !important;
     }
 
-    .reset-btn {
-        width: 42px !important;
-        height: 42px !important;
-        bottom: 18px !important;
-        right: 18px !important;
+    .reset-btn,
+    #resetButton {
+        display: none !important;
+        pointer-events: none !important;
+        opacity: 0 !important;
     }
 
-    .reset-btn svg {
+    /* .reset-btn svg {
         width: 20px;
         height: 20px;
-    }
+    } */
 
 
     /* ========================================
@@ -1885,17 +1885,17 @@ html>.reset-btn {
         height: 240px;
     }
 
-    .reset-btn {
-        width: 36px !important;
-        height: 36px !important;
-        bottom: 14px !important;
-        right: 14px !important;
+    .reset-btn,
+    #resetButton {
+        display: none !important;
+        pointer-events: none !important;
+        opacity: 0 !important;
     }
 
-    .reset-btn svg {
+    /* .reset-btn svg {
         width: 17px;
         height: 17px;
-    }
+    } */
 }
 
 
